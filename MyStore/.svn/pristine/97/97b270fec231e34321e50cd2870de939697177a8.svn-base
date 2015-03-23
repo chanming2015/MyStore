@@ -1,0 +1,145 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.dao.service;
+
+import java.util.List;
+
+import com.dyr.entity.Discuss;
+import com.dyr.util.ServiceUtil;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.dao.service
+ *FileName:DiscussService.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-22 上午10:24:26
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+public class DiscussService {
+	
+	
+	public List<Discuss> getAllDiscuss(int dGId){
+
+		return ServiceUtil.discussDao.getAllDiscuss(dGId);
+	}
+	
+	public List<Discuss> getAllDiscussByPage(int page,int rows){
+		return ServiceUtil.discussDao.getAllDiscussbyPage(page,rows);
+	}
+	
+	public int getdiscussCount(){
+		return ServiceUtil.discussDao.selectdiscussCount();
+	}
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:18:57
+	 *Description: 总评论条数
+	 *@param dGId
+	 *@return
+	 */
+	public int getCountBygId(int dGId){
+		return ServiceUtil.discussDao.getCountBygId(dGId);
+	}
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:19:14
+	 *Description: 待审核条数
+	 *@param dGId
+	 *@return
+	 */
+	public int getCountByDsh(int dGId){
+		return ServiceUtil.discussDao.getCountByDsh(dGId);
+	}
+	
+	public List<Discuss> getAllDiscussInfoBydGId(int dGId,int page,int rows){
+		return ServiceUtil.discussDao.getAllDiscussInfobyPage(dGId, page, rows);
+	}
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:19:28
+	 *Description: 通过审核
+	 *@param dId
+	 *@return
+	 */
+	public int updateDsh(int dId){
+		
+		int row = ServiceUtil.discussDao.updateDsh(dId);
+		ServiceUtil.commit();
+		return row;
+	}
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:27:51
+	 *Description: 根据商品ID分组显示分页
+	 *@return
+	 */
+	public List<Integer> getdGIdgroupBydGId(int page,int rows){
+		return ServiceUtil.discussDao.getdGIdgroupBydGId(page, rows);
+	}
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:20:14
+	 *Description: 根据商品编号查评论表
+	 *@param dGId
+	 *@return
+	 */
+	public List<Discuss> getDiscussList(int dGId){
+		return ServiceUtil.discussDao.getDiscussList(dGId);
+	}
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 下午2:10:56
+	 *Description: 根据订单编号查订单
+	 *@param dId
+	 *@return
+	 */
+	public Discuss selectDiscussBydId(int dId){
+		return ServiceUtil.discussDao.selectDiscussBydId(dId);
+	}
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 下午3:35:25
+	 *Description: 根据评论编号删除评论
+	 *@param dId
+	 *@return
+	 */
+	public int deleteDiscuss(int dId){
+		int row = ServiceUtil.discussDao.deleteDiscuss(dId);
+		ServiceUtil.commit();
+		return row;
+	}
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-27 下午2:55:21
+	 *Description: 添加评价
+	 *@param discuss
+	 *@return
+	 */
+	public int addNewdiscuss(Discuss discuss){
+		int row = ServiceUtil.discussDao.addNewdiscuss(discuss);
+		ServiceUtil.commit();
+		return row;
+	}
+}

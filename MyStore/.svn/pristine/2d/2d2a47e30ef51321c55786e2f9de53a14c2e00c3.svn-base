@@ -1,0 +1,67 @@
+//注册表单验证
+
+//用户名验证
+$().ready(function(){
+	//验证规则
+	$("#personRegForm").validate({
+		//验证规则
+		rules:{
+			//用户名不能为空，为6位数到20位数之间
+			uName:{
+				required:true,
+				rangelength:[6,20]
+			},
+			//密码验证,长度为6-20；非空
+			uPassword:{
+				required:true,
+				rangelength:[4,20]
+			},
+			pwdRepeat:{
+				required:true,
+				rangelength:[6,20],
+				equalTo:"#uPassword"
+			},
+			uEmail:{
+				//邮箱验证
+				required:true,
+				email:true
+			},
+			uRealName:{
+				required:true
+			},
+			uIdCard:{
+				required:true,
+				rangelength:[18,18]
+			}
+		},
+		messages:{
+			//用户名提示
+			uName:{
+				required:"请输入用户名",
+				rangelength:$.validator.format("用户名长度为4-20,可由字母、数字组成")
+			},
+			//密码提示
+			uPassword:{
+				required:"请输入密码",
+				rangelength:$.validator.format("密码长度为4-20,可由字母、数字组成")
+			},
+			pwdRepeat:{
+				required:"请再次确认密码",
+				rangelength:$.validator.format("密码长度为4-20,可由字母、数字组成"),
+				equalTo:"俩次输入的密码不一样，请重新输入"
+			},
+			uEmail:{
+				//邮箱验证
+				required:"请输入邮箱地址",
+				email:"请输入正确的邮箱地址。如893911152@qq.com"
+			},
+			uRealName:{
+				required:"请输入你的姓名"
+			},
+			uIdCard:{
+				required:"请输入身份证号码",
+				rangelength:$.validator.format("请输入正确的18位身份证号码")
+			}
+		}
+	});
+});

@@ -1,0 +1,25 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao.service;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao.service
+ * FileName:YCityService.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-21 下午6:33:24
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class YCityService {
+
+}

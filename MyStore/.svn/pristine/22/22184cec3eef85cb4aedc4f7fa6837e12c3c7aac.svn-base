@@ -1,0 +1,622 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>商品详情</title>
+    	<link rel="stylesheet" type="text/css" href="/${projectName }/css/user/goodInfo.css"/>
+    	<link rel="stylesheet" type="text/css" href="/${projectName }/css/user/style.css"/>
+    	<script type="text/javascript" src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+        <link rel="shortcut icon" href="/static/common/img/favicon.ico" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, no-store, must-revalidate">
+        <!--[if IE 6]>
+        <![endif]-->
+        </head>
+        <body>
+        <my:bottomtag></my:bottomtag>
+        <div style="margin-top:185px;">
+        <div id="j-go-top" alog-alias="bainuo-detail-go-top-and-add-favorite" alog-group="bainuo-detail-go-top-and-add-favorite">
+            <a class="go-top " mon="area=rightFuc&element=toTop&element_type=nav"></a>
+            <a class="add-favorite " mon="area=rightFuc&element=collect&element_type=nav"></a>
+            <a class="questionnaire " target="_blank" href=""></a>
+        </div>
+        <div class="mobile-upload-entry " id="mobile-upload-entry" mon="area=layerAds&element_type=nav">
+            <span class="close-btn"></span>
+            <span class="erweima detail"><a target="_blank" href=""></a></span></span>
+        </div>
+        <div class="w-header">
+            <div class="w-header-bar clearfix" alog-alias="bainuo-order-headerbar" alog-group="bainuo-order-headerbar">
+                <div class="wrap  max-wrap">
+                    <div class="city-area fl">
+                        <span class="city-name">重庆</span>
+                        <a href="" class="link"></a>
+                    </div>
+                    <div class="fr">
+                        <div class="uc-order-status" id="j-ucOrderStatus">
+                            <ul>
+                                <li>
+                                    <span></span>个可使用的红包<a href="" id="j-ucStatusLink-f">查看</a>
+                                </li>
+                                <li>
+                                    	有打折商品？<a href="" id="j-ucStatusLink-b">查看</a>
+                                </li>
+                                <li>
+                                    <span></span>笔订单未评价<a href="" id="j-ucStatusLink-c">去评价</a>
+                                </li>
+                                <li>
+                                    <span></span>笔订单未付款<a href="" id="j-ucStatusLink-d">去付款</a>
+                                </li>
+                                <li>
+                                    <span></span>条新的商家回复<a href="" id="j-ucStatusLink-e">查看</a>
+                                </li>
+                            </ul>
+                            <a href="javascript:;" title="关闭消息框" class="close-button" id="j-ucStatusLink-a"></a>
+                        </div>
+                        <ul class="uc-login-list clearfix" id="j-ucLoginList">
+                            <li class="welcome-text">
+                                <span class="line-sprite"></span>
+                                <span class="welcome-tag" id="j-welcomeTag"></span>
+                            </li>
+                            <li>
+                                <a href="" class="link mm-link">我的订单</a>
+                                <span class="line-sprite"></span>
+                            </li>
+                            <li>
+                                <div class="uc-area" id="j-ucArea">
+                                    <div class="uc-link-wrap" id="j-uc-link-wrap">
+                                        <a href="main.html" class="link uc-link">我的商城</a>
+                                    </div>
+                                    <div class="uc-list">
+                                        <a href="" class="link">我的订单</a>
+                                        <a href="" class="link">查看订单</a>
+                                        <a href="" class="link">我的收藏</a>
+                                        <a href="" class="link">我的评价</a>
+                                        <a href="" class="link" target="_blank" style="display:none;">帐户余额</a>
+                                        <a href="" class="link">帐户余额</a>
+                                        <a href="" class="link"></a>
+                                        <a href="" class="link">我的红包</a>
+                                        <a href="" class="link">帐户设置</a>
+                                        <a href="" class="link" target="_blank">我的百度</a>
+                                    </div>
+                                </div>
+                                <span class="line-sprite"></span>
+                            </li>
+                            <li class="login">
+                                <span class="line-sprite"></span>
+                                <a href="long.html" id="j-barLoginBtn" class="link mm-link">登录</a>
+                            </li>
+                            <li class="reg">
+                                <a href="regiest" class="link mm-link" id="j-barRegBtn">注册</a>
+                            </li>
+                            <li class="logout">
+                                <a id="j-logout" href="main.html" class="link mm-link">退出</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="nav-area " id="j-nav-area" alog-alias="bainuo-user-nav-area" alog-group="bainuo-user-nav-area">
+                <div class="wrap clearfix   max-wrap">
+                    
+                    <div class="sep">
+                        <div class="sep-wrap">
+                        </div>
+                        <span class="triangle"></span>
+                    </div>
+                    <div class="nav topcity" mon="area=nav&element_type=nav" alog-alias="bainuo-header-nav" alog-group="bainuo-header-nav">
+                        <a href="main.html" target="_top" class="item first " mon="element=首页">首页</a>
+                        <a href="" target="_top" class="item " mon="element=电影">电影<span class="tip-dingzuo"></span></a>
+                        <a href="" target="_top" class="item " mon="element=酒店">酒店</a>
+                        <a href="" target="_top" class="item " mon="element=今日新单">今日新单</a>
+                        <a href="" target="_top" class="item " mon="element=购物">购物</a>
+                    </div>
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-detail">
+            <div data-huodong="有多少人购买？">
+            </div>
+            <div class="p-bread-crumb" mon="deal_id=1472205" alog-alias="bainuo-detail-bread-crumb" alog-group="bainuo-detail-bread-crumb">
+               
+            <div class="p-item-info" mon="deal_id=1472205">
+                <div class="w-item-info clearfix">
+                    <h2>文胸大卖</h2>
+                    <div class="item-title">
+                       文胸只卖119啦！！<span class="hot hide"></span>
+                    </div>
+                    <div class="ii-images clearfix">
+                        <div class="w-item-images">
+                        	
+                            <div id="j-images-board" class="images-board">
+                                <img src="../../../../img/user/sub3.jpg">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="ii-intro">
+                        <div class="w-item-intro">
+                            <div class="promotion-area">
+                            </div>
+                            <div class="price-area clearfix">
+                                <div class="match-price-area">
+                                    <span class="unit">&yen;</span>178
+                                </div>
+                                <div class="market-price-area">
+                                    <div class="price">
+                                        &yen;208
+                                    </div>
+                                    <div class="name">
+                                        价值
+                                    </div>
+                                </div>
+                                <div class="current-price-area discount">
+                                    <div class="price">
+                                        8.4折
+                                    </div>
+                                    <div class="name">
+                                        折扣
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="ugc-strategy-area clearfix " mon="area=promoteBuy&element_type=function"alog-alias="bainuo-detail-item-intro-more" alog-group="bainuo-detail-item-intro-more">
+                                <li class="item-bought">
+                                    <div class="item-bought-num">
+                                        <span class="intro-strong">0</span>人已团购
+                                    </div>
+                                </li>
+                                <li id="j-ugc-grade" class="ugc-grade">
+                                    <div class="ugc-star clearfix" mon="element=findComment">
+                                        <div class="us-star">
+                                            <div class="star ugc-star-wrap ">
+                                                <div class="star ugc-star-grade" style="width:62.9524px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="us-grade">
+                                            4.5
+                                        </div>
+                                    </div>
+                                    <div class="ug-num">
+                                        <span class="intro-strong">0</span>条评论
+                                    </div>
+                                </li>
+                                <li class="item-strategy">
+                                    <a href="" target="_blank" class="refund-all" mon="element=refund">退货渠道</a>
+                                </li>
+                            </ul>
+                            <div class="validdate-buycount-area">
+                                <div class="item-countdown-row clearfix">
+                                    <span class="name">打折时限</span>
+                                    <span class="value">2015-01-15</span>
+                                </div>
+                                <div class="item-buycount-row j-item-buycount-row clearfix"data-stock="20000"data-personmax="50"data-min="1"data-max="50">
+                                    <div class="name">
+                                        数量
+                                    </div>
+                                    <div class="buycount-ctrl">
+                                        <a href="javascript:;" class="j-ctrl ctrl minus disabled"><span class="horizontal"></span></a>
+                                        <input type="text" value="1" maxlength="10" autocomplete="off"><a href="javascript:;" class="ctrl j-ctrl plus "><span class="horizontal"></span><span class="vertical"></span></a>
+                                    </div>
+                                    <span class="err-wrap j-err-wrap"></span>
+                                </div>
+                            </div>
+                            <div class="item-buy-area clearfix">
+                                <a href=""class="btn-buy btn-buy-l j-btn-buy"mon="area=buy&element=buyTop&element_type=nav">立即抢购</a>
+                                <ul class="item-option clearfix" mon="area=dealCollect&element_type=nav" alog-alias="bainuo-detail-item-option"alog-group="bainuo-detail-item-option">
+                                    <li>
+                                        <a href="###" id="j-item-collect"class="item-collect "mon="element=collect">收藏</a>
+                                        <div id="j-collect-success" class="collect-success">
+                                            <p>
+                                                收藏成功！
+                                            </p>
+                                            <a href="">去看看我的收藏</a>
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="p-item-info-more" mon="deal_id=1472205">
+                <div class="iim-wrapper clearfix">
+                    <div class="info-detail">
+                        <div class="w-shop-groupon">
+                            <div class="w-shop-groupon">
+                                <div class="sg-header">
+                                    <h3>商品其他热卖中</h3>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="w-buy-2-buy-list"mon="area=recomBottom&s=c1ed60903a2f48a77833e48a6d563b85"bn_box="recomBottom&position"alog-alias="bainuo-detail-bye2bye"alog-group="bainuo-detail-bye2bye">
+                            <div id="j-cellingRecent" class="clearfix">
+                                <div class="rcmd-title clearfix">
+                                    <h3>看一看</h3>
+                                    <a href="javascript:;" mon="element=Buy2BuyChange" id="j-change-btn" class="change-btn">换一换<span>&nbsp;</span><span class="icon"></span></a>
+                                </div>
+                                <div>
+                                    <div class="j-buy2buy-page buy2buy-page show" index="0">
+                                        <div class="buy2buy-item first">
+                                            
+                                        </div>
+                                        <div class="buy2buy-item ">
+                                            <div class="w-goods-item-b2b">
+                                                <a mon="element=1344273&position=2&element_type=item"href=""data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'target="_blank"><img class="goods-img" src="" alt="卡丁车！"></a><a mon="element=1344273&position=2&element_type=item" class="title"href="http://cq.nuomi.com/deal/p3ghpgbg.html"data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'>卡丁车</a>
+                                                <div class="price-sold clearfix">
+                                                    <div class="price">
+                                                        <span class="current">&yen;89</span>
+                                                    </div>
+                                                    <div class="sold">
+                                                        <span class="name">已售</span>
+                                                        <span class="current">0</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="buy2buy-item ">
+                                            <div class="w-goods-item-b2b">
+                                                <a mon="element=1344273&position=2&element_type=item"href=""data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'target="_blank"><img class="goods-img" src="" alt="卡丁车！"></a><a mon="element=1344273&position=2&element_type=item" class="title"href="http://cq.nuomi.com/deal/p3ghpgbg.html"data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'>卡丁车</a>
+                                                <div class="price-sold clearfix">
+                                                    <div class="price">
+                                                        <span class="current">&yen;118</span>
+                                                    </div>
+                                                    <div class="sold">
+                                                        <span class="name">已售</span>
+                                                        <span class="current">0</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="buy2buy-item ">
+                                            <div class="w-goods-item-b2b">
+                                                <a mon="element=1074651&position=4&element_type=item"href=""data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'target="_blank"><img class="goods-img" src="" alt="帝豪KTV下午场"></a><a mon="element=1074651&position=4&element_type=item" class="title"href=""data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'>哈哈哈哈！</a>
+                                                <div class="price-sold clearfix">
+                                                    <div class="price">
+                                                        <span class="current">&yen;39</span>
+                                                    </div>
+                                                    <div class="sold">
+                                                        <span class="name">已售</span>
+                                                        <span class="current">0</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+										
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-score">
+                            <div class="w-user-score">
+                                <div class="title clearfix">
+                                    <span class="fl">会员评分</span>
+                                    <a id="j-ugc-view-more" class="more fr" href="###">查看全部评价<span>&nbsp;</span></a>
+                                </div>
+                                <div class="detail clearfix">
+                                    <div class="score fl">
+                                        0
+                                    </div>
+                                    <div class="score-star fl">
+                                        <div class="star ugc-star-wrap ">
+                                            <div class="star ugc-star-grade" style="width:62.9524px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text fl">
+                                        有很多人评论<span>0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spec-nav">
+                            <div id="nav-bar" class="nav-bar">
+                            </div>
+                            <div id="j-sn-ceiling" class="w-spec-nav clearfix">
+                                <ul id="j-sn-list" class="sn-list" mon="area=detailTab&element_type=nav" alog-alias="bainuo-detail-sn-list" alog-group="bainuo-detail-sn-list">
+                                    <li>
+                                        <a href="#j-info-all" data-rel-content="all" class="spec-nav-current" mon="element=本单详情"><span>本单详情</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#j-info-intro" data-rel-content="intro" mon="element=商家介绍"><span>商家介绍</span></a>
+                                    </li>
+                                    <li>
+                                        <a id="j-nav-ugc" href="#j-info-ugc" data-rel-content="ugc" class="spec-nav-last" mon="element=会员评价"><span>会员评价</span></a>
+                                    </li>
+                                </ul>
+                                <div class="ceiling-buy clearfix">
+                                    <div class="cb-price">
+                                        <span>￥</span>158
+                                    </div>
+                                    <a mon="area=buyCell" href="" class="btn-buy btn-buy-s j-btn-buy" mon="area=buy&element=buyCell&element_type=nav"> 立即抢购</a>
+                                </div>
+                            </div>
+                        </div>
+                        <ul id="j-info-all">
+                            <li class="item-info-detail j-item-content">
+                               
+                                <div class="info-buy-content">
+                                    <div class="w-rich-text">
+                                        <h3 class="w-section-header"> 套餐内容</h3>
+                                        <div class="rt-content">
+                                            	穿起来会让人经不住诱惑哦！
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-buy-content">
+                                    <div class="w-rich-text">
+                                        <h3 class="w-section-header"> 消费提示</h3>
+                                        <div class="rt-content">
+                                            <div>
+                                                <ul>
+                                                    
+                                                    <li style='list-style: square outside none;margin-left:15px'>
+                                                        	消费者买才卖
+                                                    </li>
+                                                    <li style='list-style: square outside none;margin-left:15px'>
+                                                        	可以打折
+                                                    </li>
+                                                    <li style='list-style: square outside none;margin-left:15px'>
+                                                        	前20名购买者才可以打折哦！
+                                                        <br>
+                                                        
+                                                    </li>
+                                                    <b>其他补充:</b>
+                                                    <br/>
+                                                    <li style='list-style: square outside none;margin-left:15px'>
+                                                        	速度来买
+                                                    </li>
+                                                    <li style='list-style: square outside none;margin-left:15px'>
+                                                        	请以实物为准！不要买到次货哦！
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-buy-content">
+                                    <div class="w-rich-text">
+                                        <h3 class="w-section-header"> 商品详情</h3>
+                                        <div class="rt-content">
+                                            <p class='wrap-img'>
+                                                <img src="../../../../img/user/good.png" style="float:none;border:0px solid #000" title="图片" border="0" />
+                                            </p>
+                                            <br/>
+											<p class='wrap-img'>
+                                                <img src="../../../../img/user/good.png" style="float:none;border:0px solid #000" title="图片" border="0" />
+                                            </p>
+                                            <br/>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="j-info-intro" class="item-info-detail j-item-content">
+                                <div class="info-buy-content">
+                                    <div class="w-rich-text">
+                                        <h3 class="w-section-header"> 商家介绍</h3>
+                                        <div class="rt-content">
+                                            
+              									手感极好！！
+                                            <br/>
+                                            
+                                            <img src="../../../../img/user/good.png" style="float:none;" title="图片" />
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="j-info-ugc" class="item-info-detail j-item-content">
+                                <div id="shop-ugc" class="info-bar">
+                                </div>
+                                <div class="user-comment">
+                                    <div class="w-user-comment" id="j-user-comment">
+                                        <div class="title">
+                                            会员评分
+                                        </div>
+                                        <div class="detail clearfix">
+                                            <div class="score clearfix">
+                                                <div class="number">
+                                                    4.5
+                                                </div>
+                                                <div class="list clearfix">
+                                                    <div class="star ugc-star-wrap-19 ">
+                                                        <div class="star ugc-star-grade" style="width:85.4354px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="status">
+                                                <div class="mt20 mb10">
+                                                    我在xxx店买的此商品
+                                                </div>
+                                                <a mon="area=comment&element=btn&element_type=nav" class="button" href="javascript:;" id="j-add-comment">我要评价</a>
+                                            </div>
+                                        </div>
+                                        <div class="impression-area">
+                                            <div class="w-impression">
+                                                <div class="impression-title">
+                                                    大家都在说：
+                                                </div>
+                                                <div class="label-container">
+                                                    
+                                                    <a class="more-label open-status hide-arrow" id="j-more-label" href="###"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="all-comment-area">
+                                            <div class="w-comment-content" id="nextComment">
+                                                <div mon="area=filterComment" class="header clearfix">
+                                                    <div class="header-title">
+                                                        全部评价
+                                                    </div>
+                                                    <div class="filter" id="j-comment-filter" alog-alias="bainuo-detail-comment-content-filter" alog-group="bainuo-detail-comment-content-filter">
+                                                        <div class="filter-pic-content" alog-alias="bainuo-detail-comment-content-filter-pic" alog-group="bainuo-detail-comment-content-filter-pic">
+                                                            <a mon="element=有图片&element_type=filter" class="pic" href="###">有图片</a>
+                                                            <a mon="element=有内容&element_type=filter" class="content content-clicked" href="###">有内容</a>
+                                                        </div>
+                                                        <div class="sort-default-time" alog-alias="bainuo-detail-comment-content-filter-time" alog-group="bainuo-detail-comment-content-filter-time">
+                                                            <a mon="element=默认&element_type=filter" class="default default-clicked" id="j-default-sort" href="###">默认</a>
+                                                            <a mon="element=按时间&element_type=filter" class="time" id="j-time-sort" href="###">按时间</a>
+                                                        </div>
+														
+                                                    </div>
+                                                </div>
+                                                <div class="comment-area" id="j-comment-list">
+                                                	
+                                                <div class="paging">	
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="bottom-recommend" id="j-bottomRecommend">
+                            <div class="user-bought clearfix" id="ajax-recent-recommend">
+                               
+                            </div>
+                        </div>
+                        <div class="bottom-recommend" id="j-bottomHistory">
+                            <div class="user-bought clearfix" id="ajax-recent-view">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommend-area">
+                        <div class="recommend-ad" id="detail-right-ad-first" mon="area=adsRight&element_type=nav" bn_box="ads_right&position">
+                        </div>
+                        <div class="recommend-ad" id="detail-right-ad" mon="area=adsRight&element_type=nav" bn_box="ads_right&position">
+                        </div>
+                        <div id="ajax-see2see" class="w-see-2-see">
+                            <div mon="area=recomRight&s=7d066e05b4212efb784537cb43a2d806"bn_box="recomRight&position" id="j-see2see" class="other-user"alog-alias="bainuo-detail-see2see" alog-group="bainuo-detail-see2see">
+                                <div class="recommend-title clearfix">
+                                    看了又看<a href="javascript:;" mon="element=See2SeeChange" id="j-change-btn—s" class="change-btn">换一换<span>&nbsp;</span><span class="icon"></span></a>
+                                </div>
+                                <div class="j-see2see-page see2see-page show  "index="0">
+                                    <div class="w-goods-item-b">
+                                        <a mon="element=1472123&position=1&element_type=item" href="" data-item-st='{"s":"7d066e05b4212efb784537cb43a2d806"}' class="clearfix" data-item-st='{"s":"<%=s%>"}'><img class="goods-img" src="" alt="文胸特卖">
+                                            <div class="goods-info">
+                                                <p class="goods-title">
+                                                   文胸特卖
+                                                </p>
+                                                <p class="goods-price">
+                                                    <span class="goods-price-groupon"> &yen;178</span>
+                                                    <span class="goods-price-origin"> &yen;208</span>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+								<div class="j-see2see-page see2see-page show  "index="0">
+                                    <div class="w-goods-item-b">
+                                        <a mon="element=1472123&position=1&element_type=item" href="" data-item-st='{"s":"7d066e05b4212efb784537cb43a2d806"}' class="clearfix" data-item-st='{"s":"<%=s%>"}'><img class="goods-img" src="" alt="文胸特卖">
+                                            <div class="goods-info">
+                                                <p class="goods-title">
+                                                   文胸特卖
+                                                </p>
+                                                <p class="goods-price">
+                                                    <span class="goods-price-groupon"> &yen;178</span>
+                                                    <span class="goods-price-origin"> &yen;208</span>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+								<div class="j-see2see-page see2see-page show  "index="0">
+                                    <div class="w-goods-item-b">
+                                        <a mon="element=1472123&position=1&element_type=item" href="" data-item-st='{"s":"7d066e05b4212efb784537cb43a2d806"}' class="clearfix" data-item-st='{"s":"<%=s%>"}'><img class="goods-img" src="" alt="文胸特卖">
+                                            <div class="goods-info">
+                                                <p class="goods-title">
+                                                   文胸特卖
+                                                </p>
+                                                <p class="goods-price">
+                                                    <span class="goods-price-groupon"> &yen;178</span>
+                                                    <span class="goods-price-origin"> &yen;208</span>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+								<div class="j-see2see-page see2see-page show  "index="0">
+                                    <div class="w-goods-item-b">
+                                        <a mon="element=1472123&position=1&element_type=item" href="" data-item-st='{"s":"7d066e05b4212efb784537cb43a2d806"}' class="clearfix" data-item-st='{"s":"<%=s%>"}'><img class="goods-img" src="" alt="文胸特卖">
+                                            <div class="goods-info">
+                                                <p class="goods-title">
+                                                   文胸特卖
+                                                </p>
+                                                <p class="goods-price">
+                                                    <span class="goods-price-groupon"> &yen;178</span>
+                                                    <span class="goods-price-origin"> &yen;208</span>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+								<div class="j-see2see-page see2see-page show  "index="0">
+                                    <div class="w-goods-item-b">
+                                        <a mon="element=1472123&position=1&element_type=item" href="" data-item-st='{"s":"7d066e05b4212efb784537cb43a2d806"}' class="clearfix" data-item-st='{"s":"<%=s%>"}'><img class="goods-img" src="" alt="文胸特卖">
+                                            <div class="goods-info">
+                                                <p class="goods-title">
+                                                   文胸特卖
+                                                </p>
+                                                <p class="goods-price">
+                                                    <span class="goods-price-groupon"> &yen;178</span>
+                                                    <span class="goods-price-origin"> &yen;208</span>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+								<div class="j-see2see-page see2see-page show  "index="0">
+                                    <div class="w-goods-item-b">
+                                        <a mon="element=1472123&position=1&element_type=item" href="" data-item-st='{"s":"7d066e05b4212efb784537cb43a2d806"}' class="clearfix" data-item-st='{"s":"<%=s%>"}'><img class="goods-img" src="" alt="文胸特卖">
+                                            <div class="goods-info">
+                                                <p class="goods-title">
+                                                   文胸特卖
+                                                </p>
+                                                <p class="goods-price">
+                                                    <span class="goods-price-groupon"> &yen;178</span>
+                                                    <span class="goods-price-origin"> &yen;208</span>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+		<my:bottomtag></my:bottomtag>
+
+	</div>
+   </body>
+    
+   
+    
+
+</html>
+

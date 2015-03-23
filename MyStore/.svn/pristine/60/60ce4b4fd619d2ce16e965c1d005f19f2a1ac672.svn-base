@@ -1,0 +1,82 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.entity;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.entity
+ *FileName:InfoOrderGoods.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2014-12-31 上午11:32:14
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Description:订单-商品映射实体
+ *Version
+ */
+public class InfoOrderGoods {
+	/**
+	 * 订单详情表编号
+	 */
+	private int iId;
+	/**
+	 * 购买数量
+	 */
+	private int iNum;
+	/**
+	 * 商品对象
+	 */
+	private Goods goods;
+	/**
+	 * 订单对象
+	 */
+	private OrderUser orderUser;
+	
+	public Goods getGoods() {
+		return goods;
+	}
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+	/**
+	 * @return the iId
+	 */
+	public int getiId() {
+		return iId;
+	}
+	/**
+	 * @param iId the iId to set
+	 */
+	public void setiId(int iId) {
+		this.iId = iId;
+	}
+	public OrderUser getOrderUser() {
+		return orderUser;
+	}
+	public void setOrderUser(OrderUser orderUser) {
+		this.orderUser = orderUser;
+	}
+	/**
+	 * @return the iNum
+	 */
+	public int getiNum() {
+		return iNum;
+	}
+	/**
+	 * @param iNum the iNum to set
+	 */
+	public void setiNum(int iNum) {
+		this.iNum = iNum;
+	}
+	
+	public InfoOrderGoods() {
+	}
+}

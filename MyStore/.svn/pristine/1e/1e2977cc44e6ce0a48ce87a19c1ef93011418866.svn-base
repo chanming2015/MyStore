@@ -1,0 +1,41 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package test;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:test
+ *FileName:daotest.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-4 上午9:54:11
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+public class daotest {
+	public static void main(String[] args) {
+//		UserInfoService userInfoService=new UserInfoService();
+//		UserInfo userInfo = userInfoService.login("admin", "123456");
+//		System.out.println(userInfo.getuName()+"!!!"+userInfo.getuPassword());
+//		UserInfo userInfo = new UserInfo();
+//		userInfo.setuName("newblush");
+//		userInfo.setuPassword("123456");
+//		userInfo.setuSex("女");
+//		userInfo.setuEmail("123@qq.com");
+//		userInfo.setuIdCard("500107199602157312");
+//		userInfo.setuPermission(1);
+//		int row = userInfoService.register(userInfo);
+//		System.out.println(row);
+//		int row = userInfoService.modifyUpdate("123456", "newblush");
+		System.out.println();
+	}
+}

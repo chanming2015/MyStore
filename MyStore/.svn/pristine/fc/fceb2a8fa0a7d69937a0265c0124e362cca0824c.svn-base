@@ -1,0 +1,33 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.util;
+
+import org.apache.ibatis.session.SqlSession;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.util
+ * FileName:ServletUtil.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-14 下午4:21:54
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class ServletUtil {
+	
+	/**
+	 * 获取SqlSession
+	 */
+	private SqlSession sqlSession=SqlSessionUtil.getSqlSession();
+	
+
+}

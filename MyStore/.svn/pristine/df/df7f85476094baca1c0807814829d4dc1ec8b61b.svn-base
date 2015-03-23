@@ -1,0 +1,229 @@
+//登录的JS
+/*$(function() {
+ // 跳回首页
+ $("#loginsubmit").click(function() {
+ location.href = "UserInfoServlet?op=userlogin";
+ });
+ });
+
+ // 注册的JS
+ $(function() {
+ // 跳回首页
+ $("#registsubmit").click(function() {
+ location.href = "main.html";
+ });
+ });
+ */
+/*// 搜索的JS
+ $(function() {
+ $("#sousuo").click(function() {
+ $("#mainFrame").parent.location.href = "mainframe/goodShow.html";
+ //		$("#mainFrame").src = "mainframe/goodShow.html";
+ window.parent.location.href = "mainframe/goodShow.html";
+ window.target = "mainFrame";
+
+ });
+ });*/
+
+
+
+
+
+
+// 滚动出现导航
+(function() {
+	$(window)
+			.scroll(
+					function() {
+						var scTop = $(window).scrollTop(), $scS = $(".scroll-search"), $frS = $(".fix-right-sub"), rW;
+						rW = ($(window).width() - 1190) / 2;
+
+						scTop >= 200 ? $scS.slideDown(200) : $scS.slideUp(200);
+						if (scTop >= 2700 && scTop < 4400) {
+							$frS.css({
+								position : 'fixed',
+								top : '-541px',
+								right : rW,
+								marginTop : ''
+							});
+						} else if (scTop >= 4400) {
+							$frS.css({
+								position : '',
+								marginTop : 1728
+							});
+						} else {
+							$frS.css({
+								position : ''
+							});
+						}
+					});
+})(jQuery);
+// 侧边栏展开效果
+$(function() {
+	var scTop = 0, beginH = 138, wW = $(window).width(), classN, num;
+	$(window).scroll(function() {
+		scTop = $(window).scrollTop();
+		beginH = 138;
+		switch (scTop) {
+		case 600:
+			beginH -= 45;
+			break;
+		case 500:
+			beginH -= 50;
+			break;
+		case 400:
+			beginH -= 55;
+			break;
+		case 300:
+			beginH -= 60;
+			break;
+		case 200:
+			beginH -= 65;
+			break;
+		default:
+			beginH = 138;
+			break;
+		}
+	});
+	$(".side-li > li").hover(function() {
+		$(this).find("h3").css({
+			border : 'none'
+		}).end().find("span").css({
+			color : "#F40"
+		});
+		classN = $(this).attr("class");
+		num = classN.substring(2, classN.length);
+
+		switch (scTop) {
+		case 0:
+			if (num > 14) {
+				beginH += 120;
+			} else if (num >= 12) {
+				beginH += 41;
+			}
+			;
+			break;
+		case 100:
+			if (num == 1) {
+				beginH -= 27;
+			} else if (num == 16) {
+				beginH += 7;
+			}
+			;
+			break;
+		case 200:
+			num < 5 ? beginH -= 60 : beginH -= 30;
+			break;
+		case 300:
+			num < 8 ? beginH -= 60 : beginH -= 40;
+			break;
+		case 400:
+			num <= 11 ? beginH -= 50 : beginH += 10;
+			break;
+		case 500:
+			num < 14 ? beginH -= 50 : '';
+			break;
+		case 600:
+			num <= 16 ? beginH -= 50 : '';
+			break;
+		default:
+			beginH = 138;
+			break;
+		}
+
+		$(".hiden-box").show().css({
+			left : ((wW - 1190) / 2 + 149),
+			top : 205
+		}).animate({
+			width : '729px'
+		}, 300);
+		$(".hiden-box > li").hide();
+		$("#hiden-" + num).fadeIn(200);
+		beginH = 138;
+	}, function() {
+		$(this).find('h3').css({
+			border : ''
+		}).end().find('span').css({
+			color : ""
+		});
+		$(".hiden-box").hide().css({
+			width : '0'
+		});
+	});
+	$(".hiden-box").hover(function() {
+		$(".s_" + num).css({
+			border : "1px solid #F40",
+			borderRight : '1px solid #fff'
+		}).find("h3").css({
+			border : 'none'
+		}).end().find('span').css({
+			color : "#F40"
+		});
+		$(this).show().css({
+			width : '729px'
+		});
+	}, function() {
+		$(".s_" + num).css({
+			border : '',
+			"borderRight" : "none"
+		}).find("h3").css({
+			border : ''
+		}).end().find("span").css({
+			color : ""
+		});
+		$(this).animate({
+			width : 0
+		}, 200).hide(200);
+	});
+
+});
+
+/* 数字加减 */
+$(function(){ 
+	$(".add").click(function(){ 
+	var t=$(this).parent().find('input[class=text_box]'); 
+
+	if(isNaN(parseInt(t.val()))){
+		t.val(0);
+	}
+	t.val(parseInt(t.val())+1) ;
+//	var j=$(this).parent().find('span[class*=price]');
+//	alert(j.val());
+	setTotal(); 
+	}) ;
+	$(".min").click(function(){ 
+	var t=$(this).parent().find('input[class=text_box]');
+	if(parseInt(t.val())==1){
+		t.val(1);
+		return;
+	}
+	if(isNaN(parseInt(t.val()))){
+		t.val(2);
+	}
+	if(parseInt(t.val())<0){ 
+	t.val(1); 
+	} 
+	t.val(parseInt(t.val())-1) ;
+	setTotal(); 	
+}) ;
+	function setTotal(){ 
+		var s=0; 
+		$("#tab td").each(function(){ 
+		s+=parseInt($(this).find('input[class=text_box]').val())*parseFloat($(this).find('span[class=price]').text()); 
+		
+		}); 
+		$("#total").html(s.toFixed(2));  
+		} 
+		setTotal(); 
+
+		}) ;
+
+/*图片边框*/
+$(function() {
+	$(".border_animation").mouseenter(function() {
+		$(this).addClass("hover");
+	});
+	$(".border_animation").mouseleave(function() {
+		$(this).removeClass("hover");
+	});
+});

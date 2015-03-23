@@ -1,0 +1,47 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.entity;
+
+import java.util.List;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.entity
+ * FileName:GoodsList.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-26 下午6:26:51
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Description:商品-图片集映射实体
+ * Version:
+ */
+public class GoodsIamgeList {
+	
+	private Goods goods;
+	private List<ImageGoods> imageList;
+	
+	public Goods getGoods() {
+		return goods;
+	}
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+	public List<ImageGoods> getImageList() {
+		return imageList;
+	}
+	public void setImageList(List<ImageGoods> imageList) {
+		this.imageList = imageList;
+	}
+	public GoodsIamgeList(Goods goods, List<ImageGoods> imageList) {
+		this.goods = goods;
+		this.imageList = imageList;
+	}
+}

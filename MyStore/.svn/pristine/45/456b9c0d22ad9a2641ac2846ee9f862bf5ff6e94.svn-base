@@ -1,0 +1,297 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+        <title>注册-个人用户</title>
+        <link type="text/css" rel="stylesheet" href="/${projectName}/css/user/regest.css"/>
+        <link type="text/css" rel="stylesheet" href="/${projectName}/css/user/regiest.css"/>
+        <script type="text/javascript" src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+   	 	<script type="text/javascript" src="/${projectName}/js/user/main.js"></script>
+    </head>
+    <body>
+        <div id="shortcut-2013">
+            <div class="w">
+                <ul class="fl lh">
+                    <li class="fore1 ld">
+                        <b></b>
+                        <a href="javascript:addToFavorite()" rel="nofollow">收藏商城</a>
+                    </li>
+                </ul>
+                <ul class="fr lh">
+                    <li class="fore1" id="loginbar">
+                        您好！欢迎来到商城！<a href="login.html">[登录]</a>&nbsp;<a href="regiest.html">[免费注册]</a>
+                    </li>
+                    <li class="fore2 ld">
+                        <s>
+                        </s>
+                        <a href="" rel="nofollow">我的订单</a>
+                    </li>
+                    <li class="fore3 ld">
+                        <s>
+                        </s>
+                        <a href="http://app.jd.com/" target="_blank">手机商城</a>
+                    </li>
+                    <li class="fore4 ld menu" id="biz-service" data-widget="dropdown">
+                        <s>
+                        </s>
+                        <span class="outline"></span>
+                        <span class="blank"></span>
+                        客户服务<b></b>
+                        <div class="dd">
+                            <div>
+                                <a href="" target="_blank">常见问题</a>
+                            </div>
+                            <div>
+                                <a href="" target="_blank" rel="nofollow">售后服务</a>
+                            </div>
+                            <div>
+                                <a href="" target="_blank" rel="nofollow">在线客服</a>
+                            </div>
+                            <div>
+                                <a href="" target="_blank" rel="nofollow">投诉中心</a>
+                            </div>
+                            <div>
+                                <a href="" target="_blank">客服邮箱</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fore5 ld menu" id="site-nav" data-widget="dropdown">
+                        <s>
+                        </s>
+                        <span class="outline"></span>
+                        <span class="blank"></span>
+                        网站导航<b></b>
+                        <div class="dd lh">
+                            <dl class="item fore1">
+                                <dt>
+                                    特色栏目
+                                </dt>
+                                <dd>
+                                    <div>
+                                        <a target="_blank" href="">为我推荐</a>
+                                    </div>
+                                    <div>
+                                        <a target="_blank" href="">视频购物</a>
+                                    </div>
+                                    <div>
+                                        <a target="_blank" href="">京东社区</a>
+                                    </div>
+                                    <div>
+                                        <a target="_blank" href="">校园频道</a>
+                                    </div>
+                                    <div>
+                                        <a target="_blank" href="">在线读书</a>
+                                    </div>
+                                    <div>
+                                        <a target="_blank" href="">装机大师</a>
+                                    </div>
+                                    <div>
+                                        <a target="_blank" href="">礼品卡</a>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                </ul>
+                <span class="clr"></span>
+            </div>
+        </div>
+        <div class="w" id="logo">
+            <div>
+                <a href="main.html"><img src="/${projectName}/img/user/logo.png" alt="商城名字" width="170" height="60"/></a><span style="font-size:40px;">|欢迎注册</span>
+            </div>
+        </div>
+        <div class="w" id="regist">
+            <div class="mt">
+                <ul class="tab">
+                    <li class="curr">
+                        个人用户
+                    </li>
+                    
+                   
+                </ul>
+                <div class="extra">
+                    <span style="text-align: right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="flk13"  href="#">注册</a></span>
+                    <span>我已经注册，现在就&nbsp;<a href="login.html" class="flk13">登录</a></span>
+                </div>
+            </div>
+            <div class="mc">
+                <form id="personRegForm" method="POST" action="UserInfoServlet?op=register" onsubmit="return false;">
+                    <input type="hidden" name="regType" id="regType" value="person"/><input type="hidden" name="uuid" id="uuid" value="${uuid}"/><input type="hidden" name="verifymc" id="verifymc" value=""/><input type="hidden" name="emailMg" id="emailMg"/><input type="hidden" name="authcodeMg" id="authcodeMg"/><input type="hidden" name="state" id="state" value=""/><input type="hidden" name="tgKey" id="tgKey" value=""/>
+                    <div class="form" onselectstart="return false;">
+                    	
+						
+						<!--用户名 -->
+                        <div class="item" id="select-regName">
+                            <span class="label"><b class="ftx04">*</b>用户名：</span>
+                            <div class="fl item-ifo">
+                                <div class="o-intelligent-regName">
+                                    <input type="text" id="uName" name="uName" placeholder="请输入用户名" maxlength="20" class="text" tabindex="1" autoComplete="off" onpaste="return false;" value="">
+                                    <ul id="intelligent-regName" class="hide">
+                                    </ul>
+                                    <label id="regName_succeed" class="blank">
+                                    </label>
+                                    <label id="regName_error" class="hide">
+                                    </label>
+                                </div>
+                                <div class="intelligent-error hide" id="morePinDiv">
+                                    <h5>推荐您使用：</h5>
+                                    <div class="groom" id="morePinGroom">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="SwpUkFekrO" value="HlnFm"/><input type="hidden" value="-1" id="hnschool" class="hide"/><input type="hidden" id="schoolid" name="schoolid" class="hide"/><input type="hidden" id="hnseli" class="hide"/>
+                            </div>
+                        </div>
+						
+						<!-- 设置密码-->
+                        <div id="capslock">
+                            <i></i>
+                            <s>
+                            </s>键盘大写锁定已打开，请注意大小写
+                        </div>
+                        <div id="o-password">
+                            <div class="item">
+                                <span class="label"><b class="ftx04">*</b>请设置密码：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uPassword" name="uPassword" placeholder="请设置密码" maxlength="20" class="text" tabindex="2" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwd_succeed" class="blank">
+                                    </label>
+                                    <label id="pwd_error">
+                                    </label>
+                                    <span class="clr"></span>
+                                    <label class="hide" id="pwdstrength">
+                                        <span class="fl">安全程度：</span>
+                                        <b></b>
+                                    </label>
+                                </div>
+                            </div>
+							
+							<!--确认密码 -->
+                            <div class="item">
+                                <span class="label"><b class="ftx04">*</b>请确认密码：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="pwdRepeat" name="pwdRepeat" placeholder="请输入密码" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+                                </div>
+                            </div>
+							
+							<!-- 性别-->
+							<div class="">
+								<span class="label"><b class="ftx04">*</b>选择性别：</span>
+								<div class="">
+									<label><input type="radio" id="uSex1" name="uSex" class=""/>男</label><input type="radio" id="uSex" name="uSex" class=""/>女
+									<label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+								</div>
+							</div>
+							
+							<!--邮箱 -->
+							 <div class="item">
+                                <span class="label"><b class="ftx04">*</b>邮箱：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uEmail" name="uEmail" placeholder="请输入邮箱"  maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+                                </div>
+                            </div>
+							
+							<!--密保问题 -->
+							<div class="item">
+                                <span class="label">密保问题：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uSafeQuestion" name="uSafeQuestion" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+                                </div>
+                            </div>
+							<!--密保答案 -->
+							<div class="item">
+                                <span class="label">密保问题：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uSafeAnswer" name="uSafeAnswer" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+                                </div>
+                            </div>
+							
+							<!-- 真实姓名-->
+							<div class="item">
+                                <span class="label">真实姓名：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uRealName" name="uRealName" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+                                </div>
+                            </div>
+							
+							<!--身份证-->
+							<div class="item">
+                                <span class="label">身份证号码：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uRealName" name="uRealName" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+                                </div>
+                            </div>
+							
+                             
+                        <div class="item item-new">
+                            <span class="label">&nbsp;</span>
+                            <div class="fl item-ifo">
+                                <input type="checkbox" class="checkbox" checked="checked" id="readme" onclick="agreeonProtocol();">
+                                <label for="protocol">
+                                    我已阅读并同意<a href="#" class="blue" id="protocol">《商城用户注册协议》</a>
+                                </label>
+                                <span class="clr"></span>
+                                <label id="protocol_error" class="error hide">
+                                    请接受服务条款
+                                </label>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <span class="label">&nbsp;</span>
+                            <input type="button" class="btn-img btn-regist" id="registsubmit" value="立即注册" tabindex="8" clstag="regist|keycount|personalreg|07" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+      
+        <div class="w">
+            <div id="footer-2013">
+                <div class="links">
+                    <a rel="nofollow" target="_blank" href="">关于我们</a>|<a rel="nofollow" target="_blank" href="">联系我们</a>|<a rel="nofollow" target="_blank" href="">人才招聘</a>|<a rel="nofollow" target="_blank" href="">商家入驻</a>|<a rel="nofollow" target="_blank" href="">广告服务</a>|<a rel="nofollow" target="_blank" href="">手机商城</a>|<a target="_blank" href="">友情链接</a>|<a target="_blank" href="">销售联盟</a>|<a href="" target="_blank">商城社区</a>|<a href="" target="_blank">商城介绍</a>
+                </div>
+                <div class="copyright">
+                    Copyright&copy;2004-2014&nbsp;&nbsp;商城&nbsp;版权所有
+                </div>
+            </div>
+        
+     
+            
+        </div>
+     </body>
+   </html>
+

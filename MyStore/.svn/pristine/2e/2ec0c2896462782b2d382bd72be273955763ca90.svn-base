@@ -1,0 +1,84 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.entity;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.entity
+ *FileName:DisGoods.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-23 上午10:36:28
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Description:商品评论统计实体
+ *Version
+ */
+public class DisGoods {
+	private int goodsId;
+	private String uName;
+	private int disCount;
+	private int dshCount;
+	/**
+	 * @return the goodsId
+	 */
+	public int getGoodsId() {
+		return goodsId;
+	}
+	/**
+	 * @param goodsId the goodsId to set
+	 */
+	public void setGoodsId(int goodsId) {
+		this.goodsId = goodsId;
+	}
+	/**
+	 * @return the uName
+	 */
+	public String getuName() {
+		return uName;
+	}
+	/**
+	 * @param uName the uName to set
+	 */
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+	/**
+	 * @return the disCount
+	 */
+	public int getDisCount() {
+		return disCount;
+	}
+	/**
+	 * @param disCount the disCount to set
+	 */
+	public void setDisCount(int disCount) {
+		this.disCount = disCount;
+	}
+	/**
+	 * @return the dshCount
+	 */
+	public int getDshCount() {
+		return dshCount;
+	}
+	/**
+	 * @param dshCount the dshCount to set
+	 */
+	public void setDshCount(int dshCount) {
+		this.dshCount = dshCount;
+	}
+	/**
+	 * 
+	 */
+	public DisGoods() {
+	}
+	
+}

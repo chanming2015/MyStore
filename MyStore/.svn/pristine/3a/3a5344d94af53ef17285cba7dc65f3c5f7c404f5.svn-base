@@ -1,0 +1,137 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import com.dyr.entity.Goods;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:GoodsDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:23:20
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface GoodsDao {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午9:44:30
+	 * Description
+	 * @param cateId
+	 * @param rowsCount 
+	 * @param page 
+	 * @return
+	 */
+	@Select("select top (#{rows}) * from Goods where GId not in (select top ((#{page}-1)*#{rows}) GId from Goods) and GCId=#{cateId}")
+	@Results({
+		@Result(column="GCId",property="cate",one=@One(select="com.dyr.dao.CategoryDao.selectCategoryByCateId"))
+	})
+	List<Goods> selectGoodsListByCateId(@Param("cateId")int cateId, @Param("page")int page, @Param("rows")int rows);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午9:57:03
+	 * Description
+	 * @param goodsId
+	 * @return
+	 */
+	@Select("select * from Goods where GId=#{goodsId}")
+	@Results({
+		@Result(column="GCId",property="cate",one=@One(select="com.dyr.dao.CategoryDao.selectCategoryByCateId"))
+	})
+	Goods selectGoodsInfoByGoodsId(int goodsId);
+	
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午10:49:33
+	 * Description
+	 * @param goods
+	 * @return
+	 */
+	@Insert("insert into Goods values(#{gName},#{gCid},#{gMoney},#{gBuy},#{gBody},default,#{gWeight})")
+	int insertNewGoods(Goods goods);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 下午2:07:12
+	 * Description
+	 * @param keyWord
+	 * @return
+	 */
+	@Select("select top (#{rows}) * from Goods where GId not in (select top ((#{page}-1)*#{rows}) GId from Goods) and GName like #{keyWord}")
+	@Results({
+		@Result(column="GCId",property="cate",one=@One(select="com.dyr.dao.CategoryDao.selectCategoryByCateId"))
+	})
+	List<Goods> selectGoodsListByKeyWord(@Param("keyWord")String keyWord, @Param("page")int page, @Param("rows")int rows);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-5 上午9:46:33
+	 * Description
+	 * @param cateId
+	 * @return
+	 */
+	@Select("select COUNT(GId) from Goods where GCId=#{cateId}")
+	int selectGoodsCount(int cateId);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 上午9:58:30
+	 * Description
+	 * @return
+	 */
+	@Select("select MAX(GId) from Goods")
+	int selectGoodsMaxNum();
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 下午3:46:17
+	 * Description
+	 * @param goods
+	 * @return
+	 */
+	@Update("update Goods set GName=#{gName},GCId=#{gCid},GMoney=#{gMoney},GBuy=#{gBuy},GBody=#{gBody},Gweight=#{gWeight} where GId=#{gId}")
+	int updateGoodsInfo(Goods goods);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 下午4:21:56
+	 * Description 下架商品
+	 * @param goodsId
+	 * @return
+	 */
+	@Update("update Goods set GBuy=0 where GId=#{gId}")
+	int deleteGoods(int goodsId);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 下午4:43:20
+	 * Description
+	 * @param goodsId
+	 * @return
+	 */
+	@Update("update Goods set GBuy=1 where GId=#{gId}")
+	int salesGoods(int goodsId);
+
+}

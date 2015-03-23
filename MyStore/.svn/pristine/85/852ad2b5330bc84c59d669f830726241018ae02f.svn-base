@@ -1,0 +1,189 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+        <title>注册-个人用户</title>
+        <link type="text/css" rel="stylesheet" href="/${projectName}/css/user/regest.css"/>
+        <link type="text/css" rel="stylesheet" href="/${projectName}/css/user/regiest.css"/>
+        <link type="text/css" rel="stylesheet" href="/${projectName}/css/user/style.css"/>
+        <script type="text/javascript" src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+   	 	<script type="text/javascript" src="/${projectName}/js/user/main.js"></script>
+    </head>
+    <body>
+		<my:toptag></my:toptag>
+    	<div style="margin-top: 185px;">
+        <div class="w" id="regist">
+            <div class="mt">
+               
+                <div class="extra">
+                    <span class="biaoqian" style="text-align: right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="flk13 biaoqian"  href="regiest.jsp"><font color="red">注册</font></a></span>
+                    <span>我已经注册，现在就&nbsp;<a href="login.jsp" class="flk13 biaoqian"><font color="red">登录</font></a></span>
+                </div>
+            </div>
+            <div class="mc">
+                <form id="personRegForm" method="POST" onsubmit="return false;">
+                    <input type="hidden" name="regType" id="regType" value="person"/>
+                    <input type="hidden" name="uuid" id="uuid" value="${uuid}"/><input type="hidden" name="verifymc" id="verifymc" value=""/>
+                    <input type="hidden" name="emailMg" id="emailMg"/><input type="hidden" name="authcodeMg" id="authcodeMg"/>
+                    <input type="hidden" name="state" id="state" value=""/><input type="hidden" name="tgKey" id="tgKey" value=""/>
+                    <div class="form" onselectstart="return false;">
+                    	
+						
+						<!--用户名 -->
+                        <div class="item" id="select-regName">
+                            <span class="label"><b class="ftx04">*</b>用户名：</span>
+                            <div class="fl item-ifo">
+                                <div class="o-intelligent-regName">
+                                    <input type="text" id="uName" name="uName" placeholder="请输入用户名" maxlength="20" class="text" tabindex="1" autoComplete="off" onpaste="return false;" value="">
+                                    <ul id="intelligent-regName" class="hide">
+                                    </ul>
+                                    <label id="regName_succeed" class="blank">
+                                    </label>
+                                    <label id="regName_error" class="hide">
+                                    </label>
+                                </div>
+                                <div class="intelligent-error hide" id="morePinDiv">
+                                    <h5>推荐您使用：</h5>
+                                    <div class="groom" id="morePinGroom">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="SwpUkFekrO" value="HlnFm"/><input type="hidden" value="-1" id="hnschool" class="hide"/><input type="hidden" id="schoolid" name="schoolid" class="hide"/><input type="hidden" id="hnseli" class="hide"/>
+                            </div>
+                        </div>
+						
+						<!-- 设置密码-->
+                        <div id="capslock">
+                            <i></i>
+                            <s>
+                            </s>键盘大写锁定已打开，请注意大小写
+                        </div>
+                        <div id="o-password">
+                            <div class="item">
+                                <span class="label"><b class="ftx04">*</b>请设置密码：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uPassword" name="uPassword" placeholder="请设置密码" maxlength="20" class="text" tabindex="2" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwd_succeed" class="blank">
+                                    </label>
+                                    <label id="pwd_error">
+                                    </label>
+                                    <span class="clr"></span>
+                                    <label class="hide" id="pwdstrength">
+                                        <span class="fl">安全程度：</span>
+                                        <b></b>
+                                    </label>
+                                </div>
+                            </div>
+							
+							<!--确认密码 -->
+                            <div class="item">
+                                <span class="label"><b class="ftx04">*</b>请确认密码：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="pwdRepeat" name="pwdRepeat" placeholder="请输入密码" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+                                </div>
+                            </div>
+							
+							<!-- 性别-->
+							<div class="">
+								<span class="label"><b class="ftx04">*</b>选择性别：</span>
+								<div class="">
+									<label><input type="radio" id="uSex1" name="uSex" class=""/>男</label><input type="radio" id="uSex" name="uSex" class=""/>女
+								
+								</div>
+							</div>
+							
+							<!--邮箱 -->
+							 <div class="item">
+                                <span class="label"><b class="ftx04">*</b>邮箱：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uEmail" name="uEmail" placeholder="请输入邮箱"  maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                   
+                                </div>
+                            </div>
+							
+							<!--密保问题 -->
+							<div class="item">
+                                <span class="label">密保问题：</span>
+                                <div class="fl item-ifo">
+                                  	<select id="uSafeQuestion" name="uSafeQuestion" maxlength="20" class="text">
+                                  		<option>您父亲的生日？</option>
+                                  		<option>您母亲的生日？</option>
+                                  		<option>您配偶的生日？</option>
+                                  		<option>您父亲的姓名？</option>
+                                  		<option>您母亲的姓名？</option>
+                                  		<option>您配偶的姓名？</option>
+                                  		<option>您的学号？</option>
+                                  		<option>您的工号？</option>
+                                  		<option>您高中班主任的名字？</option>
+                                  		<option>您初中班主任的名字？</option>
+                                  		<option>您小学班主任的名字？</option>
+                                  	</select>
+                                </div>
+                            </div>
+							<!--密保答案 -->
+							<div class="item">
+                                <span class="label">密保答案：</span>
+                                <div class="fl item-ifo">
+                                    <input type="text" id="uSafeAnswer" name="uSafeAnswer" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                
+                                    </label>
+                                </div>
+                            </div>
+							
+							<!-- 真实姓名-->
+							<div class="item">
+                                <span class="label">真实姓名：</span>
+                                <div class="fl item-ifo">
+                                    <input type="text" id="uRealName" name="uRealName" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    
+                                </div>
+                            </div>
+							
+							<!--身份证-->
+							<div class="item">
+                                <span class="label">身份证号码：</span>
+                                <div class="fl item-ifo">
+                                    <input type="text" id="uRealName" name="uRealName" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    
+                                </div>
+                            </div>
+							
+                             
+                        <div class="item item-new">
+                            <span class="label">&nbsp;</span>
+                            <div class="fl item-ifo">
+                                <input type="checkbox" class="checkbox" checked="checked" id="readme" onclick="agreeonProtocol();">
+                                <label for="protocol">
+                                    我已阅读并同意<a href="#" class="blue" id="protocol">《商城用户注册协议》</a>
+                                </label>
+                                <span class="clr"></span>
+                                <label id="protocol_error" class="error hide">
+                                    请接受服务条款
+                                </label>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <span class="label">&nbsp;</span>
+                            <input type="button" class="btn-img btn-regist" id="registsubmit" value="立即注册" tabindex="8" clstag="regist|keycount|personalreg|07" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+      
+        
+        <my:bottomtag></my:bottomtag>
+        </div>
+     </body>
+   </html>
+

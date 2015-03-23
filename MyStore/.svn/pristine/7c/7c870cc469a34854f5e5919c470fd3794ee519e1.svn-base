@@ -1,0 +1,37 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import org.apache.ibatis.annotations.Select;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:VipCartDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:24:01
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface VipCartDao {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午3:25:10
+	 * Description
+	 * @param userName
+	 * @return 
+	 */
+	@Select("select * from VipCart where VUName=#{userName}")
+	int selectCartIdByUserId(String userName);
+
+}

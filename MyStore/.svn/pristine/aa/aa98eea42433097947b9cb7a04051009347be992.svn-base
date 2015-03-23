@@ -1,0 +1,279 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="default">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>服务条款</title>
+        <meta name="keywords" content="本网站属于私人财产" />
+        <meta name="description" content="服务条款" />
+        <link type="image/x-icon" rel="shortcut icon" href="" media="screen"/>
+        <link href="/${projectName}/css/user/faq.css" type="text/css" rel="stylesheet"/>
+        <link href="/${projectName}/css/user/style.css" type="text/css" rel="stylesheet"/>
+        |<!--<script type="text/javascript" src="../../../../js/user/faq1.js">-->
+        </script>
+        <script type="text/javascript" src="">
+        </script>
+        <script type="text/javascript" src="">
+        </script>
+        <script type="text/javascript" src="">
+        </script>
+        <script type="text/javascript" src="">
+        </script>
+    </head>
+    <body>
+    <my:toptag></my:toptag>
+    <div style="margin-top:185px;">
+        
+        <div class="toolbar">
+            <div class="toolbar_c area">
+                <div class="fr flow d5">
+                    <a href="" class="contractkf" target="_blank">联系客服</a>
+                    |<a href="" target="_blank">卖家中心</a>
+                </div>
+                <div class="login_type fr d5">
+                    <em><!--登录前-->|<a href="login.jsp">登录</a>|<a href="regiest.jsp">免费注册</a><span></span><!--登录后--></em>
+                    <div class="hidden">
+                    </div>
+                </div>
+                <div class="fl d5">
+                    <a href="main.jsp" target="_blank">商城优惠，划算商城</a>
+                    |<a href="goodShow.jsp" target="_blank">商品信息</a>
+                </div>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        <script type="text/javascript">
+            //签到选项卡
+            $(".deopdown").mouseenter(function(){
+                $(this).find(".dropdown_menu").show();
+            })
+            $(".deopdown").mouseleave(function(){
+                $(this).find(".dropdown_menu").hide();
+            })
+        </script>
+        <div class="header">
+            <div class="area">
+                <h1 class="fl"><a href="main.jsp"><img src="../../../../img/user/logo.png" width="243px" height="47px"/></a></h1>
+                <div class="search fr">
+                    <form action="../main.html" method="GET">
+                        <input type="text" name="keyword" class="txt fl" placeholder="搜索你想要的宝贝" value="" title=""><input type="hidden" name="mod" value="index"><input type="hidden" name="ac" value="index"><input type="submit" class="smt fl" value="&nbsp;">
+                    </form>
+                </div>
+                <div class="links fr">
+                    <i class="fl tmall"></i>
+                    <i class="fl lowest"></i>
+                    <i class="fl check"></i>
+                </div>
+            </div>
+        </div>
+        <div class="head_nav">
+            <div class="head_nav_c area">
+                <div class="fl nav_list">
+                    <a class="fl " href="main.jsp">首页<i></i></a>
+                    <a class="fl " href="goodShow.jsp">服饰<i></i></a>
+                    <a class="fl " href="goodShow.jsp">办公<i></i></a>
+                    <a class="fl " href="goodShow.jsp">运动<i></i></a>
+                    <a class="fl " href="goodShow.jsp">品牌热卖<i></i></a>
+                    <a class="fl " href="goodShow.jsp" target="_blank">喜欢的<i></i></a>
+                </div>
+                <div class="r_con fr">
+                    <div class="yg_wrap fl">
+                        <a href="" class="yg">精选预告<i class="icon_mini"></i><i class="line"></i></a>
+                    </div>
+                    <div class="deopdown singn_panel fl">
+                        <a class="singin" href="javascript:void(0);"></a>
+                        <div class="dropdown_menu hidden">
+                            <div class="login_board">
+                                <div class="con">
+                                    <p>
+                                        每天最多可赚：<b>30</b>
+                                        积分
+                                    </p>
+                                    <p>
+                                        <a target="_blank" href="login.jsp">登录</a>才能购买
+                                    </p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+        <script type="text/javascript">
+            $(window).scroll(function(){
+                var scrollTop = 0;
+                if (typeof window.pageYOffset != 'undefined') {
+                    scrollTop = window.pageYOffset; //Netscape
+                }
+                else 
+                    if (typeof document.compatMode != 'undefined' &&
+                    document.compatMode != 'BackCompat') {
+                        scrollTop = document.documentElement.scrollTop; //Firefox、Chrome
+                    }
+                    else 
+                        if (typeof document.body != 'undefined') {
+                            scrollTop = document.body.scrollTop; //IE
+                        }
+                if (scrollTop >= 180) {
+                    $(".side_nav").addClass("flutter");
+                }
+                else 
+                    if (scrollTop <= 106) {
+                        $(".side_nav").removeClass("flutter");
+                    }
+            })
+        </script>
+        <link href="" type="text/css" rel="stylesheet"/>
+        <div class="area baockP">
+            <div class="fl leftb">
+                <dl>
+                    <dt>
+                        关于我们
+                    </dt>
+                    <dd>
+                        <a href="faq.jsp">服务条款</a>
+                    </dd>
+                    <dd>
+                        <a href="faqframe.jsp">关于我们</a>
+                    </dd>
+                    <dd>
+                        <a href=".faq.jsp">诚聘英才</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        帮助中心
+                    </dt>
+                    <dd>
+                        <a href="faqframe.jsp">建议反馈</a>
+                    </dd>
+                    <dd>
+                        <a href="faqFrame.jsp">新手上路</a>
+                    </dd>
+                    
+                </dl>
+
+            </div>
+            <div class="fr rightb">
+                <div class="bp">
+                    <div class="tit">
+                        <h2 class="fl">关于我们</h2>
+                    </div>
+                    <div class="blockBL">
+                        <p style="margin-top:0px;margin-bottom:20px;padding:0px;border:0px;line-height:22px;color:#666666;font-family:Simsun;white-space:normal;background-color:#FFFFFF;">
+                            <strong>网站名字：xx商城</strong>
+                        </p>
+                        <p style="margin-top:0px;margin-bottom:20px;padding:0px;border:0px;line-height:22px;color:#666666;font-family:Simsun;white-space:normal;background-color:#FFFFFF;">
+                            	致力为用户打造一个安全舒适的购物环境。
+                            <br/>
+                            	寻找打折商品，为用户省钱。
+                            <br/>
+                            	专业编辑选商品，职业砍价。
+                            <br/>
+                            	希望用户买到自己喜欢的宝贝时能有小幸福的赶脚。
+                        </p>
+                        <p style="margin-top:0px;margin-bottom:20px;padding:0px;border:0px;line-height:22px;color:#666666;font-family:Simsun;white-space:normal;background-color:#FFFFFF;">
+                            <strong>公司信息：</strong>
+                            <br/>
+                            	公司全称：重庆大渝仁科技有限公司		
+                            <br/>
+                            	地址：重庆九龙坡石桥铺二郎科园路D栋9-2
+                        </p>
+                        
+                            
+                      
+                      
+                     
+                      
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--//提示框-->
+        <div class="show_box_msg">
+            <div class="outer">
+                <h3 class="title">
+                    <div class="close">
+                        <a href="javascript:;" onclick="close_wait();"></a>
+                    </div>
+                    <span class="msg_title">系统提示</span></h3>
+                <div class="inner">
+                </div>
+                <div class="msg_footer">
+                </div>
+            </div>
+        </div>
+        <div class="wait" onclick="close_wait();">
+            <img src="">
+        </div>
+        <script type="text/javascript">
+            function report(id, goods){
+                report_gid = id;
+                report_goods = goods;
+                show_msg('<div class="inner_report">\
+            				<form method="post" id="reportform" onsubmit="return formreport();">\
+            				<select name="report[report]" class="selectClass" onchange="setreport()">\
+            					<option value="">请选择</option>\
+            										<option value="商品价格大于10元">商品价格大于10元</option>\
+            										<option value="商品已下架">商品已下架</option>\
+            										<option value="商品不包邮">商品不包邮</option>\
+            										<option value="商品要求两件起拍，一件不发货">商品要求两件起拍，一件不发货</option>\
+            										<option value="卖家拒绝发货">卖家拒绝发货</option>\
+            										<option value="商品价格与活动价格不符合">商品价格与活动价格不符合</option>\
+            										<option value="商品分类错误">商品分类错误</option>\
+            										<option value="-1">其它原因</option>\
+            				</select><br />\
+            				<label class="reportother\" style="display:none">\
+            					其它原因： <input type="text" name="report[otherReasons]" class="other_text" id="otherReasons"><br>\
+            				</label>\
+            				<input type="submit" value="提交" class="sub_btn" />\
+            				</form>\
+            			</div>');
+            }
+        </script>
+        <link href="" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="">
+        </script>
+        <div style="display: none;" class="rightnfixd rf_het" id="rocket-to-top">
+            <span><a href="" class="rfixedico rightnfixda1"></a><a class="rfixedico rightnfixda2"></a><a href="javascript:;" onclick="addfavorite({'href':'http://www.ihuiduo.com','title':'惠多网——聚优惠，一折网官网，全场商品一折起！'});" class="rfixedico rightnfixda3"></a></span>
+            
+        </div>
+        <!--
+        <link href="./home/template/default/static/plugins/totop/css/common.css" type="text/css" rel="stylesheet"/>
+        <div style="display: none;" id="rocket-to-top">
+        <div style="opacity:0;display: block;" class="level-2"></div>
+        <div class="level-3"></div>
+        </div>
+        <script type="text/javascript" src="./home/template/default/static/plugins/totop/js/common.js"></script>
+        -->
+        <script type="text/javascript" src="">
+        </script>
+        <script type="text/javascript">
+            //图片异步加载
+            $("img.lazy").lazyload({
+                threshold: 200,
+                failure_limit: 30
+            });
+        </script>
+       <my:bottomtag></my:bottomtag>
+       </div>
+    </body>
+</html>
+<!---->
+<div style="display:none">
+    <script language="javascript" type="text/javascript" src="">
+    </script>
+</div>
+
+
+

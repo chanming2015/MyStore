@@ -1,0 +1,56 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.dao.service;
+
+import java.util.List;
+import com.dyr.entity.Category;
+import com.dyr.util.ServiceUtil;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.dao.service
+ *FileName:CategoryService.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-13 上午10:39:44
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+public class CategoryService {
+	
+	public int addnewCategory(Category category){
+		int row = ServiceUtil.categoryDao.insertCategory(category);
+		ServiceUtil.commit();
+		return row;
+	}
+	public int deleteCategiry(int cId){
+		int row = ServiceUtil.categoryDao.deleteCategoryById(cId);
+		ServiceUtil.commit();
+		return row;
+	}
+	public List<Category> showCategory(){
+		List<Category> categorylist = ServiceUtil.categoryDao.selectAllCategory();
+		return categorylist;
+	}
+	public int updateCategory(String cName,String cAbout,int cId){
+		int row = ServiceUtil.categoryDao.updateCategoryById(cName,cAbout, cId);
+		ServiceUtil.commit();
+		return row;
+	}
+	public List<Category> showCategoryBycRoot(int root){
+		List<Category> categoryList = ServiceUtil.categoryDao.selectCategoryByRoot(root);
+		return categoryList;
+	}
+	public Category getCategoryByCateId(int cateId) {
+		return ServiceUtil.categoryDao.selectCategoryByCateId(cateId);
+	}
+}

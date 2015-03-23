@@ -1,0 +1,176 @@
+//登录的JS
+/*$(function() {
+	// 跳回首页
+	$("#loginsubmit").click(function() {
+		location.href = "UserInfoServlet?op=userlogin";
+	});
+});
+
+// 注册的JS
+$(function() {
+	// 跳回首页
+	$("#registsubmit").click(function() {
+		location.href = "main.html";
+	});
+});
+*/
+/*// 搜索的JS
+$(function() {
+	$("#sousuo").click(function() {
+		$("#mainFrame").parent.location.href = "mainframe/goodShow.html";
+//		$("#mainFrame").src = "mainframe/goodShow.html";
+		window.parent.location.href = "mainframe/goodShow.html";
+		window.target = "mainFrame";
+		
+	});
+});*/
+
+
+/*图片轮播*/
+window.onload = function() {
+	var projectName=document.getElementById("projectName").value;
+	var imgPath = "/"+projectName+"/img/user/";
+	var imgs = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
+	var imgIndex = 0;
+	var isMouseOver = false;
+	var tmr;
+	//生成广告图片数字编号
+	var divAdCtrl = document.getElementById("divAdCtrl");
+	var table = "<table align='right' width='" + imgs.length*25 + "'>";
+	table += "<tr align='center'>";
+	for (var i=0; i<imgs.length; i++) {
+		table += "<td id='td_"+i+"' style='color:#ffffff;font-size:18px;font-weight:bold;' bgColor='#f40'>" + (i+1) + "</td>";
+	}
+	table += "</tr>";
+	table += "</table>";
+	divAdCtrl.innerHTML = table;
+	
+	function showImgAd() {
+	var imgAd = document.getElementById("imgAd");
+	
+	imgAd.src = imgPath + imgs[imgIndex];
+	
+	
+	for (var i=0; i<imgs.length; i++) {
+		var td = document.getElementById("td_"+i);
+		td.bgColor = i==imgIndex ? "red" : "#dddddd";
+	}
+	
+	
+	imgIndex = (imgIndex + 1) % imgs.length;
+	
+	if (!isMouseOver) {
+		tmr = setTimeout("showImgAd()", 2000);
+	}
+	}
+
+	//绑定鼠标事件
+	for (var i=0; i<imgs.length; i++) {
+		var td = document.getElementById("td_"+i);
+		td.onmouseover = function() {
+			clearTimeout(tmr);
+			isMouseOver = true;
+			imgIndex = parseInt( this.innerHTML )-1;
+			showImgAd();
+		};
+		td.onmouseout = function() {
+			isMouseOver = false;
+			tmr = setTimeout("showImgAd()", 2000);
+		};
+	}
+
+	showImgAd();
+};
+
+
+
+//滚动出现导航
+(function(){
+    $(window).scroll(function(){
+        var scTop = $(window).scrollTop(),
+            $scS = $(".scroll-search"),
+            $frS = $(".fix-right-sub"),
+            rW;
+        rW = ($(window).width() - 1190)/2;
+
+        scTop >= 200 ? $scS.slideDown(200) : $scS.slideUp(200);
+        if(scTop >= 2700 && scTop < 4400){
+            $frS.css({position: 'fixed', top: '-541px', right: rW, marginTop: ''});
+        }
+        else if(scTop >= 4400){
+            $frS.css({position: '', marginTop: 1728});
+        }
+        else{
+            $frS.css({position: ''});
+        }
+    });
+})(jQuery);
+//侧边栏展开效果
+$(function(){
+    var scTop = 0,
+        beginH = 138,
+        wW = $(window).width(),
+        classN,
+        num;
+    $(window).scroll(function(){
+        scTop = $(window).scrollTop();
+        beginH = 138;
+        switch (scTop){
+            case 600: beginH -= 45;break;
+            case 500: beginH -= 50;break;
+            case 400: beginH -= 55;break;
+            case 300: beginH -= 60;break;
+            case 200: beginH -= 65;break;
+            default : beginH = 138;break;
+        }
+    });
+    $(".side-li > li").hover(function(){
+        $(this).find("h3").css({border: 'none'})
+            .end().find("span").css({color: "#F40"});
+        classN = $(this).attr("class");
+        num = classN.substring(2, classN.length);
+
+        switch (scTop){
+            case 0: if(num > 14){ beginH += 120}else if(num >= 12){beginH += 41}; break;
+            case 100: if(num == 1){beginH -= 27}else if(num == 16){beginH += 7}; break;
+            case 200: num < 5 ? beginH -= 60 : beginH -= 30; break;
+            case 300: num < 8 ? beginH -= 60 : beginH -= 40; break;
+            case 400: num <= 11 ? beginH -= 50 : beginH += 10; break;
+            case 500: num < 14 ? beginH -= 50 : ''; break;
+            case 600: num <= 16 ? beginH -= 50 : ''; break;
+            default : beginH = 138;break;
+        }
+
+        $(".hiden-box").show()
+            .css({
+                left: ((wW - 1190)/2 + 149),
+                top:  205
+            }).animate({width: '729px'}, 300);
+        $(".hiden-box > li").hide();
+        $("#hiden-"+num).fadeIn(200);
+        beginH = 138;
+    }, function(){
+        $(this).find('h3').css({border: ''})
+            .end().find('span').css({color: ""});
+        $(".hiden-box").hide().css({width: '0'});
+    });
+    $(".hiden-box").hover(function(){
+        $(".s_"+num).css({
+            border: "1px solid #F40",
+            borderRight: '1px solid #fff'
+        }).find("h3").css({border: 'none'})
+            .end().find('span').css({color: "#F40"});
+        $(this).show().css({width: '729px'});
+    }, function(){
+        $(".s_"+num).css({
+            border: '',
+            "borderRight": "none"
+        }).find("h3").css({border: ''})
+            .end().find("span").css({color: ""});
+        $(this).animate({
+            width: 0
+        }, 200).hide(200);
+    });
+
+});
+

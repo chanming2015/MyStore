@@ -1,0 +1,288 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>来了！你就不会反悔</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<script type="text/javascript" src="/${projectName}/js/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" href="/${projectName}/css/user/style.css" />
+<script src="/${projectName}/js/user/main.js"></script>
+
+<script type="text/javascript">
+	 $(function() {
+                $("#webwidget_vertical_menu").webwidget_vertical_menu({
+                    menu_width: '145',
+                    menu_height: '29',
+                    menu_margin: '0',
+                    menu_text_size: '18',
+                    menu_text_color: '#707070',
+                    menu_background_color: '#fff',
+                    menu_border_size: '2',
+                    menu_border_color: '#eee',
+                    menu_border_style: 'solid',
+                    menu_background_hover_color: '#f40',
+                    directory: 'images'
+                });
+            });
+     
+</script>
+</head>
+
+<body>
+	<div style="min-height: 1000px;">
+		<my:toptag></my:toptag>
+		<div class="content">
+			<!--中间侧边栏模块-->
+			<div class="sidebar">
+				<h3>商品服务分类</h3>
+				<div class="sidebar-info">
+					<div id="webwidget_vertical_menu" class="webwidget_vertical_menu">
+						<ul style="position: relative;" class="side-li" id="daLei">
+							<c:forEach items="${categoryList}" var="cate" >
+								<!-- 添加大类 -->
+								<c:if test="${cate.cRoot==0}">							
+									<li>
+										<a href="#">${cate.cName }</a>
+										<!-- 添加小类 -->
+										<ul>
+											<c:forEach items="${categoryList}" var="scate">
+													<c:if test="${scate.cRoot>0}">
+															<c:if test="${scate.cRoot==cate.cId}">
+																	<li>	
+																			<a href="UserGoodsServlet?op=showlist&cateId=${scate.cId }">${scate.cName }</a>
+																	</li>
+															</c:if>
+													</c:if>
+											</c:forEach>
+										</ul>
+									</li>		
+								</c:if>
+							</c:forEach>	
+						</ul>
+					<div style="clear: both"></div>
+				</div>
+			</div>			
+		</div>
+
+			<!--中间右边下右模块-->
+			<div class="right-con">
+				<div class="nav">
+					<img style="width:1030px;height:40px;margin-left:1px"
+						src="/${projectName}/img/user/banner.gif" />
+				</div>
+				<!--show-box-->
+
+				<div style="width:100%;height:330px;">
+					<div style="width: 75%;height: 100%;float:left;">
+						
+						<div class="banner">
+							<div class="banner-btn">
+								<a href="javascript:;" class="prevBtn"><i></i></a>
+								<a href="javascript:;" class="nextBtn"><i></i></a>
+							</div>
+							<ul class="banner-img">
+								<li><a href="#"><img width="773px"height="330px"src="/${projectName}/img/user/1.jpg"></a></li>
+								<li><a href="#"><img width="773px"height="330px"src="/${projectName}/img/user/2.jpg"></a></li>
+								<li><a href="#"><img width="773px"height="330px"src="/${projectName}/img/user/3.jpg"></a></li>
+								<li><a href="#"><img width="773px"height="330px"src="/${projectName}/img/user/4.jpg"></a></li>
+								<li><a href="#"><img width="773px"height="330px"src="/${projectName}/img/user/5.jpg"></a></li>
+							</ul>
+							<ul class="banner-circle"></ul>
+						</div>
+						
+						
+						
+						<!-- <div
+							style="width:750px;position: relative;bottom: 30px;right: 40px;cursor: pointer;"
+							id="divAdCtrl"></div> -->
+					</div>
+					<div
+						style="width:24.5%;height:328px;border: 1px solid #bbb;float:right;">
+						<div style="position:relative;width:100%; height:150px;">
+							<img style="position:relative;width:100%;height:150px;"
+								src="/${projectName}/img/user/banner3.gif" />
+						</div>
+						<div style="height:178px;width:100%;border:1px black;"
+							class="width">
+							<div class="userback">
+								<div style="width:99%;height:49%;">
+									<div style="padding-top:20px;">
+										<label style="font-size: 30;margin:20px;margin-left: 20px;">
+										<c:if test="${user.uName!=null }">hi!${user.uName}</c:if><c:if test="${user.uName==null }">hi!你好</c:if>				
+										</label>
+									</div>
+
+								</div>
+								<div style="width:99%;height:50%;">
+									<c:if test="${user.uName!=null }">
+										<a style="margin-left: 15px;margin-top:20px;" class="login-btn"
+										href="/${projectName}/UserLogined/LoginedUserServlet?op=showuserinfo">我的信息</a>
+										<a
+										style="margin-left: 15px;margin-top:20px;" class="login-btn"
+										href="/${projectName}/UserLogined/LoginedCartServlet?op=lookcart">购物车</a>
+									</c:if>
+									<c:if test="${user.uName==null }"><a style="margin-left: 15px;margin-top:20px;" class="login-btn"
+										href="UserInfoServlet?op=usertologin">登录</a> <a
+										style="margin-left: 15px;margin-top:20px;" class="login-btn"
+										href="/${projectName}/UserInfoServlet?op=usertoregister">注册</a>
+									</c:if>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<div class="guanggao">
+			<div>
+				<h3 style="padding-top:20px;text-align: center;color: #F40;">热门</h3>
+			</div>
+			<div>
+				<div style="float:left;" class="div1">
+					<!-- 592*250 -->
+					<div
+						style="width:100%;height:30px;background-color:#f40;float:top;">
+						<img height="30px" width="100%"
+							src="/${projectName}/img/user/tiaofu1.png" />
+					</div>
+					<div style="width:100%;height:219px;float:bottom;">
+						<img height="219px" src="/${projectName}/img/user/inner1.png" />
+					</div>
+				</div>
+
+				<div style="float:right;" class="div1">
+					<div
+						style="width:100%;height:30px;background-color:#a0b959;float:top;">
+						<img height="30px" width="100%"
+							src="/${projectName}/img/user/tiaofu2.png" />
+					</div>
+					<div style="width:100%;height:219px;float:bottom;">
+						<img height="219px" src="/${projectName}/img/user/inner2.png" />
+					</div>
+				</div>
+			</div>
+			<div>
+				<div style="float:left;" class="div1">
+					<div
+						style="width:100%;height:30px;background-color:#df61ab;float:top;">
+						<img height="30px" width="100%"
+							src="/${projectName}/img/user/tiaofu3.png" />
+					</div>
+					<div style="width:100%;height:219px;float:bottom;">
+						<img height="219px" src="/${projectName}/img/user/inner3.png" />
+					</div>
+				</div>
+				<div style="float:right;" class="div1">
+					<div
+						style="width:100%;height:30px;background-color:#55a1e5;float:top;">
+						<img height="30px" width="100%"
+							src="/${projectName}/img/user/tiaofu4.png" />
+					</div>
+					<div style="width:100%;height:219px;float:bottom;">
+						<img height="219px" src="/${projectName}/img/user/show1.png" />
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>
+					<h3
+						style="padding-top:20px;text-align: center;border:1px;color: #F40;">女装精选</h3>
+					<hr style="height:5px;background-color:#F40;border-color: #f40;" />
+				</div>
+				<ul style="margin: 0;padding: 0;">
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div1.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div2.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div3.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div4.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div5.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div6.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div7.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div8.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div9.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div10.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div11.jpg" />
+					</li>
+					<li class="xiaotu"><img width="180px" height="180px"
+						src="/${projectName}/img/user/div12.jpg" />
+					</li>
+				</ul>
+
+			</div>
+			<div>
+				<div>
+					<h3
+						style="padding-top:20px;text-align: center;border:1px;color: #F40;border-color: #f40;">男士精选</h3>
+					<hr style="height:5px;background-color:#F40;" />
+				</div>
+				<div style="width:30%;height:400px;float:left;">
+					<img width="100%" height="100%"
+						src="/${projectName}/img/user/na.jpg" />
+					
+				</div>
+				<div
+					style="width:69%;height:400px;float:right;border-left: 3px solid #f40;border-right: 3px solid #f40;">
+					<ul>
+						<li class="xiaotu1"><img width="180px" height="180px"
+							src="/${projectName}/img/user/nan1.jpg" />
+						</li>
+						<li class="xiaotu1"><img width="180px" height="180px"
+							src="/${projectName}/img/user/nan2.jpg" />
+						</li>
+						<li class="xiaotu1"><img width="180px" height="180px"
+							src="/${projectName}/img/user/nan3.jpg" />
+						</li>
+						<li class="xiaotu1"><img width="180px" height="180px"
+							src="/${projectName}/img/user/nan4.jpg" />
+						</li>
+						<li class="xiaotu1"><img width="180px" height="180px"
+							src="/${projectName}/img/user/nan5.jpg" />
+						</li>
+						<li class="xiaotu1"><img width="180px" height="180px"
+							src="/${projectName}/img/user/nan6.jpg" />
+						</li>
+						<li class="xiaotu1"><img width="180px" height="180px"
+							src="/${projectName}/img/user/nan7.jpg" />
+						</li>
+						<li class="xiaotu1"><img width="180px" height="180px"
+							src="/${projectName}/img/user/nan8.jpg" />
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+		<my:bottomtag></my:bottomtag>
+	</div>
+
+</body>
+</html>

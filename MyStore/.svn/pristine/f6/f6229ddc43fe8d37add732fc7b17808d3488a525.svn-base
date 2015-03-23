@@ -1,0 +1,38 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao.service;
+
+import com.dyr.util.ServiceUtil;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao.service
+ * FileName:VipCartService.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-14 下午5:01:33
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class VipCartService {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午3:23:50
+	 * Description
+	 * @param getuName
+	 */
+	public int getCartIdByUserId(String userName) {
+		
+		return ServiceUtil.vipCartDao.selectCartIdByUserId(userName);
+	}
+
+}

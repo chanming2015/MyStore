@@ -1,0 +1,91 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import com.dyr.entity.Category;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:CategoryDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:21:38
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface CategoryDao {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午9:44:30
+	 * Description 插入新类别
+	 * @param category
+	 * @return
+	 */
+	@Insert("insert into Category values(#{cRoot},#{cName},#{cAbout})")
+    int insertCategory(Category category);
+	
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午9:44:35
+	 * Description 根据类别编号删除类别
+	 * @param cId
+	 * @return
+	 */
+	@Delete("delete from Category where CId=#{cId}")
+	int deleteCategoryById(int cId);
+	
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午9:44:35
+	 * Description 根据类别编号修改类别名称
+	 * @param cId
+	 * @return
+	 */
+	@Delete("update Category set CName=#{name} where CId=#{cId}")
+	int updateCategoryById(@Param("name")String name,@Param("cId")int cId);
+	
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午9:44:39
+	 * Description 根据上级ID查询所有类别
+	 * @param root
+	 * @return
+	 */
+	@Select("select * from Category where CRoot=#{root}")
+	List<Category> selectCategoryByRoot(int root);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 下午3:51:18
+	 * Description 根据类别编号查询类别
+	 * @param cateId
+	 * @return
+	 */
+	@Select("select * from Category where CId=#{cateId}")
+	Category selectCategoryByCateId(int cateId);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-13 下午2:05:38
+	 * Description
+	 * @return
+	 */
+	@Select("select * from Category")
+	List<Category> selectAllCategory();
+	
+}

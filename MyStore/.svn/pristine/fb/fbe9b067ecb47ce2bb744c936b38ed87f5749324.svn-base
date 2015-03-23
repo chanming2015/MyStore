@@ -1,0 +1,205 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.web;
+
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import com.dyr.dao.service.CategoryService;
+import com.dyr.dao.service.UserInfoService;
+import com.dyr.dao.service.VipCartService;
+import com.dyr.entity.Category;
+import com.dyr.entity.UserInfo;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.web
+ *FileName:UserInfoServlet.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-4 下午1:41:56
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+@SuppressWarnings("serial")
+public class UserInfoServlet extends HttpServlet {
+
+	private String op=null;
+	private UserInfoService userInfoService = new UserInfoService();
+	private CategoryService categoryService=new CategoryService();
+	private List<Category> categoryList=categoryService.getAllCategory();
+	private VipCartService vipCartService=new VipCartService();
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request,response);
+	}
+
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		op = request.getParameter("op");
+		if(op==null || "logout".equals(op)){
+			goMain(request,response);
+		}else if("usertologin".equals(op) || "admintologin".equals(op)){
+			toLogin(request,response);
+		}else if("userlogin".equals(op) || "adminlogin".equals(op)){
+			login(request,response);
+		}else if("usertoregister".equals(op)){
+			toregitser(request,response);
+		}else if("register".equals(op)){
+			register(request, response);
+		}
+	}
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-12 下午4:44:28
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void toregitser(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		if("usertoregister".equals(op)){
+			request.getRequestDispatcher("/WEB-INF/page/user/regiest.jsp").forward(request, response);
+		}
+	}
+
+
+	
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-12 上午10:06:06
+	 * Description
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void toLogin(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		if("usertologin".equals(op)){
+			request.getRequestDispatcher("/WEB-INF/page/user/login.jsp").forward(request, response);
+		}else if("admintologin".equals(op)){
+			request.getRequestDispatcher("/WEB-INF/page/admin/login.jsp").forward(request, response);
+		}
+	}
+
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-12 上午9:58:52
+	 * Description
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void goMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(op==null || "logout".equals(op)){
+			//获取所有类别
+			request.setAttribute("categoryList", categoryList);
+			request.getRequestDispatcher("/WEB-INF/page/user/main.jsp").forward(request, response);
+			//System.out.println(categoryList.size());
+		}
+	}
+
+
+	
+
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-4 下午2:14:46
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void register(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
+		String uname = request.getParameter("uName");
+		String upassword = request.getParameter("uPassword");
+		String usex = request.getParameter("uSex");
+		String uemail = request.getParameter("uEmail");
+		String usafeQuestion = request.getParameter("uSafeQuestion");
+		String usafeAnswer = request.getParameter("uSafeAnswer");
+		String urealName =  request.getParameter("uRealName");
+		String uidCard = request.getParameter("uIdCard");
+		UserInfo userInfo = new UserInfo(uname,upassword,usex,uemail,usafeQuestion,usafeAnswer,urealName,uidCard,2);
+		System.out.println(uname+upassword+usex+uemail+usafeQuestion+usafeAnswer+uidCard+urealName+2);
+		int row = userInfoService.register(userInfo);
+		if(row>0){
+			//分配购物车
+			row=vipCartService.userGetCart(uname);
+			if(row>0){
+				request.getRequestDispatcher("/WEB-INF/page/user/login.jsp").forward(request, response);
+			}
+		}else{
+			response.sendRedirect("register.jsp");
+		}
+	}
+
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-4 下午1:46:46
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		
+		String uname = request.getParameter("uName");
+		String upassword = request.getParameter("uPassword");
+		String code=request.getParameter("safeCode");
+		String code2 = (String) request.getSession().getAttribute("code");
+		if("userlogin".equals(op)){
+			UserInfo user = userInfoService.login(uname, upassword);
+			if(user==null){
+				request.getRequestDispatcher("UserInfoServlet?op=usertologin").forward(request, response);
+			}else{
+				HttpSession session = request.getSession();
+				session.setAttribute("user", user);	//将登录的用户信息放入Session中
+				//System.out.println(code+"AA"+code2);
+				if(code2.equals(code)){
+					request.setAttribute("categoryList", categoryList);
+					request.getRequestDispatcher("/WEB-INF/page/user/main.jsp").forward(request, response);
+				}
+			}
+		}else if("adminlogin".equals(op)){
+			UserInfo admin = userInfoService.adminLogin(uname, upassword);
+			
+			if (admin==null) {
+				request.getRequestDispatcher("UserInfoServlet?op=admintologin").forward(request, response);
+			}
+			else {
+				HttpSession session = request.getSession();
+				session.setAttribute("admin", admin);	//将登录的用户信息放入Session中
+				if(code2.equals(code)){
+					request.getRequestDispatcher("/WEB-INF/page/admin/main.jsp").forward(request, response);
+				}
+			}
+		}
+	}
+}

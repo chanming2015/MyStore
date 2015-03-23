@@ -1,0 +1,34 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao.service;
+
+import java.util.List;
+import com.dyr.entity.OrderUser;
+import com.dyr.util.ServiceUtil;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao.service
+ * FileName:OrderService.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:26:21
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class OrderService {
+	
+	public List<OrderUser>  selectOrderDetails(String oUname,String oState){
+		
+		return ServiceUtil.orderUserDao.selectOrderDetails(oUname, oState);
+		
+	}
+}

@@ -1,0 +1,63 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import com.dyr.entity.Discuss;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:DiscussDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-20 上午11:19:23
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface DiscussDao {
+	
+	@Select("Select * from discuss")
+	List<Discuss> getAllDiscuss();
+	
+	@Select("select top (#{rows}) * from Discuss where dId not in (select top ((#{page}-1)*#{rows}) dId from Discuss)")
+	@Results({
+		@Result(column="DGId",property="goods",one=@One(select="com.dyr.dao.GoodsDao.selectGoodsBygoodsId"))
+	})
+	List<Discuss> getAllDiscussbyPage(@Param("page") int page ,@Param("rows") int rows);
+	
+	@Select("select COUNT(dId) from Discuss")
+	int selectdiscussCount();
+	
+	@Select("select COUNT(*) from Discuss where DGId=#{dGId}")
+	int getCountBygId(int dGId);
+	
+	@Select("select COUNT(*) from Discuss where DGId=#{dGId} and Dsh=0")
+	int getCountByDsh(int dGId);
+	
+	@Select("select top (#{rows}) * from Discuss where dId not in (select top ((#{page}-1)*#{rows}) dId from Discuss where DGId=#{dGId}) and DGId=#{dGId} and Dsh=0")
+	@Results({
+		@Result(column="DGId",property="goods",one=@One(select="com.dyr.dao.GoodsDao.selectGoodsBygoodsId")),
+		@Result(column="DUName",property="userInfo",one=@One(select="com.dyr.dao.UserInfoDao.selectUserByuName"))
+	})
+	List<Discuss> getAllDiscussInfobyPage(@Param("dGId") int dGId, @Param("page") int page ,@Param("rows") int rows);
+	
+	@Update("update Discuss set Dsh=1 where dId=#{dId}")
+	int updateDsh(int dId);
+}

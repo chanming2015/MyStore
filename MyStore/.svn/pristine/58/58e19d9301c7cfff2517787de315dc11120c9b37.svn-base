@@ -1,0 +1,103 @@
+package com.dyr.web;
+
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.dyr.dao.service.GoodsService;
+import com.dyr.dao.service.ProductCartService;
+import com.dyr.dao.service.VipCartService;
+import com.dyr.entity.Goods;
+import com.dyr.entity.ProductCart;
+import com.dyr.entity.UserInfo;
+
+@SuppressWarnings("serial")
+public class CartServlet extends HttpServlet {
+
+	private GoodsService goodsService=new GoodsService();
+	private VipCartService vipCartService=new VipCartService();
+	private ProductCartService productCartService=new ProductCartService();
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String op=request.getParameter("op");
+		if("lookcart".equals(op)){
+			lookcart(request,response);
+		}else if ("deletegood".equals(op)) {
+			deletegood(request,response);
+		}else if ("addtocart".equals(op)) {
+			addToCart(request,response);
+		}
+	}
+
+
+	
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-20 下午1:55:27
+	 * Description
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void addToCart(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		
+		//取得用户信息
+		if(request.getSession().getAttribute("user")!=null){
+			UserInfo u=(UserInfo) request.getSession().getAttribute("user");
+			//根据用户名查询购物车ID
+			int cartId=vipCartService.getCartIdByUserName(u.getuName());
+			try {
+				int goodsId=Integer.parseInt(request.getParameter("goodsId"));
+				int num=Integer.parseInt(request.getParameter("num"));
+				//添加进购物车
+				int rows=productCartService.addToCart(cartId,goodsId,num);
+				if(rows==1){
+					//添加成功
+					request.getRequestDispatcher("/WEB-INF/page/user/main/goodInfo.jsp").forward(request, response);
+				}
+			} catch (NumberFormatException e) {
+			}
+		}
+		
+	}
+
+
+	private void lookcart(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		//获得用户
+		UserInfo u=(UserInfo)request.getSession().getAttribute("user");
+		//根据用户名查询购物车ID
+		int cartId=vipCartService.getCartIdByUserName(u.getuName());
+		//根据购物车ID查询购物车中的商品
+		double totalPrice=0;
+		List<ProductCart> productList=productCartService.getProductsListByCartId(cartId);
+		for (ProductCart productCart : productList) {
+			Goods goods=goodsService.getGoodsInfoByGoodsId(productCart.getGoods().getgId());
+			productCart.setGoods(goods);
+			totalPrice+=productCart.getpNum()*goods.getgMoney();
+		}
+//		System.out.println(productList.size());
+		request.setAttribute("totalPrice", totalPrice);
+		request.setAttribute("productList", productList);
+		request.getRequestDispatcher("/WEB-INF/page/user/main/cart.jsp").forward(request, response);
+	}
+
+
+	
+	private void deletegood(HttpServletRequest request,
+			HttpServletResponse response) {
+	}
+
+}

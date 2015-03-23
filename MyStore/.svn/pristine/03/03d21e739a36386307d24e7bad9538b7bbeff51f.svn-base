@@ -1,0 +1,72 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Select;
+
+import com.dyr.entity.Goods;
+import com.dyr.entity.InfoOrderGoods;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:InfoOrderGoodsDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:23:29
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface InfoOrderGoodsDao {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午3:29:58
+	 * Description
+	 * @param cartId
+	 * @return
+	 */
+	@Select("select * from ProductCart p inner join Goods g on p.PGId=g.GId where PVId=#{cartId}")
+	List<Goods> selectGoodsListByCartId(int cartId);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午4:45:33
+	 * Description
+	 * @param userName
+	 * @return
+	 */
+	@Select("select * from InfoOrderGoods i inner join OrderUser o on i.IOId=o.OId where OUName=#{userName}")
+	List<InfoOrderGoods> selectOrderListByUserName(String userName);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午5:23:12
+	 * Description
+	 * @param orderId
+	 * @return
+	 */
+	@Select("select * from InfoOrderGoods where IOId=#{orderId}")
+	InfoOrderGoods getOrderInfoByOrderId(int orderId);
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午5:53:43
+	 * Description
+	 * @param orderId
+	 * @return
+	 */
+	@Select("select * from InfoOrderGoods where IOId=#{orderId}")
+	List<InfoOrderGoods> selectOrderInfoListByOrderId(int orderId);
+	
+}

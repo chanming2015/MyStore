@@ -1,0 +1,148 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao.service;
+
+import java.util.List;
+import com.dyr.entity.Goods;
+import com.dyr.util.ServiceUtil;
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao.service
+ * FileName:GoodsService.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:26:11
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class GoodsService {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午10:48:32
+	 * Description  新增商品
+	 * @param goods
+	 */
+	public int addNewGoods(Goods goods) {
+		int rows=ServiceUtil.goodsDao.insertNewGoods(goods);
+		ServiceUtil.commit();
+		return rows;
+	}
+	/**
+	 * 
+	 * @author XuMaoSen
+	 * Create Time:2015-1-20 下午5:55:31
+	 * Description 根据类别分页查询商品集合
+	 * @param cateId
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	public List<Goods> getGoodsListByCateId(int cateId,int page,int rows){
+		return ServiceUtil.goodsDao.selectGoodsListByCateId(cateId,page,rows);
+	}
+	/**
+	 * 
+	 * @author XuMaoSen
+	 * Create Time:2015-1-20 下午5:55:49
+	 * Description 根据商品编号查询商品对象
+	 * @param GoodsId
+	 * @return
+	 */
+	public Goods getGoodsInfoByGoodsId(int GoodsId){
+		return ServiceUtil.goodsDao.selectGoodsInfoByGoodsId(GoodsId);
+	}
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 下午2:05:50
+	 * Description 根据关键字分页查询商品集合
+	 * @param keyWord
+	 * @return
+	 */
+	public List<Goods> getGoodsListByKeyWord(String keyWord,int page,int rows) {
+		
+		return ServiceUtil.goodsDao.selectGoodsListByKeyWord(keyWord,page,rows);
+	}
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-5 上午9:45:23
+	 * Description 根据类别查询商品总数
+	 * @param cateId
+	 * @return
+	 */
+	public int getGoodsCountByCateId(int cateId) {
+		
+		return ServiceUtil.goodsDao.selectGoodsCountByCateId(cateId);
+	}
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 上午9:57:46
+	 * Description 查询最大商品编号
+	 * @return
+	 */
+	public int getGoodsMaxNum() {
+		
+		return ServiceUtil.goodsDao.selectGoodsMaxNum();
+	}
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 下午3:45:48
+	 * Description 修改商品信息
+	 * @param goods
+	 * @return
+	 */
+	public int updateGoodsInfo(Goods goods) {
+		
+		int rows=ServiceUtil.goodsDao.updateGoodsInfo(goods);
+		ServiceUtil.commit();
+		return rows;
+	}
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 下午4:12:17
+	 * Description 下架商品
+	 * @param goodsId
+	 * @return
+	 */
+	public int deleteGoods(int goodsId) {
+		
+		int rows=ServiceUtil.goodsDao.deleteGoods(goodsId);
+		ServiceUtil.commit();
+		return rows;
+	}
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 下午4:43:06
+	 * Description 上架商品
+	 * @param goodsId
+	 * @return
+	 */
+	public int salesGoods(int goodsId) {
+		
+		int rows=ServiceUtil.goodsDao.salesGoods(goodsId);
+		ServiceUtil.commit();
+		return rows;
+	}
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-20 下午3:46:28
+	 * Description 根据关键字查询商品总数
+	 * @param keyWord
+	 * @return
+	 */
+	public int getGoodsCountByKeyWord(String keyWord) {
+		
+		int rows=ServiceUtil.goodsDao.selectGoodsCountByKeyWord(keyWord);
+		ServiceUtil.commit();
+		return rows;
+	}
+	
+}

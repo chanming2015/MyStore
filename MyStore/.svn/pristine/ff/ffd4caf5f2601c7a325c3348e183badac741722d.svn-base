@@ -1,0 +1,67 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.dao.service;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.dyr.dao.UserInfoDao;
+import com.dyr.entity.UserInfo;
+import com.dyr.util.SqlSessionUtil;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.dao.service
+ *FileName:UserInfoService.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-4 上午9:54:32
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+public class UserInfoService{
+	
+	SqlSession sqlSession=SqlSessionUtil.getSqlSession();
+	private UserInfoDao userInfoDao=sqlSession.getMapper(UserInfoDao.class);
+	private void commit(){
+		sqlSession.commit();
+	}
+	
+	public UserInfo login(String uname,String upassword) {
+		UserInfo userInfo = userInfoDao.userLogin(uname, upassword);
+		return userInfo;
+	}
+	
+	public int register(UserInfo userInfo){
+		int row = userInfoDao.register(userInfo);
+		commit();
+		return row;
+	}
+	public int modifyUpdate(String upassword,String uname){
+		int row = userInfoDao.modifyUpdate(upassword, uname);
+		commit();
+		return row;
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-12 上午10:28:59
+	 * Description
+	 * @param uname
+	 * @param upassword
+	 * @return
+	 */
+	public UserInfo adminLogin(String uname, String upassword) {
+		
+		UserInfo userInfo = userInfoDao.adminLogin(uname, upassword);
+		return userInfo;
+	}
+}

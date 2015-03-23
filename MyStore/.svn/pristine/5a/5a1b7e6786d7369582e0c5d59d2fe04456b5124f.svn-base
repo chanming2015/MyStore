@@ -1,0 +1,136 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.web;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.dyr.dao.service.GoodsService;
+import com.dyr.dao.service.InfoOrderGoodsService;
+import com.dyr.dao.service.OrderUserService;
+import com.dyr.entity.Goods;
+import com.dyr.entity.InfoOrderGoods;
+import com.dyr.entity.OrderUser;
+import com.dyr.entity.UserInfo;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.web
+ *FileName:OrderServlet.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-4 下午3:43:19
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+@SuppressWarnings("serial")
+public class OrderServlet extends HttpServlet {
+	
+	private OrderUserService orderUserService=new OrderUserService();
+	private InfoOrderGoodsService infoOrderGoodsService=new InfoOrderGoodsService();
+	private GoodsService goodsService=new GoodsService();
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request,response);
+		
+	}
+
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String op = request.getParameter("op");
+		if("showDetatil".equals(op)){
+			showOrderDetails(request,response);
+		}else if("showStatus".equals(op)){
+			showOrderStatus(request,response);
+		}else if("showOrderGoods".equals(op)){
+			showOrderGoods(request,response);
+		}
+	}
+
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午4:00:13
+	 * Description 显示某个订单的所有商品
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void showOrderGoods(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		//根据用户名查询订单集合
+		UserInfo u=(UserInfo)request.getSession().getAttribute("user");
+		//该用户名下的订单集合
+		List<OrderUser> orderUsersList=orderUserService.getOrderListByUserName(u.getuName());
+		List<List<InfoOrderGoods>> dataList=new ArrayList<List<InfoOrderGoods>>();
+		
+		for (OrderUser orderUser : orderUsersList) {
+			//根据订单ID查询订单详情集合
+			List<InfoOrderGoods> infoOrderGoodsList=infoOrderGoodsService.getOrderInfoListByOrderId(orderUser.getoId());
+			for (InfoOrderGoods infoOrderGoods : infoOrderGoodsList) {
+				//根据商品ID查询商品
+				Goods goods=goodsService.getGoodsInfoByGoodsId(infoOrderGoods.getiGid());
+				infoOrderGoods.setGoods(goods);
+			}
+			dataList.add(infoOrderGoodsList);
+		}
+		request.setAttribute("dataList",dataList);
+		//System.out.println(dataList.toString());
+		request.getRequestDispatcher("/WEB-INF/page/user/main/myorder.jsp").forward(request, response);
+	}
+
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-5 上午9:45:55
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 */
+	private void showOrderStatus(HttpServletRequest request,
+			HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		UserInfo user = (UserInfo) session.getAttribute("user");
+		
+		List<OrderUser> orderStatusList = orderUserService.selectOrderDetails(user.getuName(), "已付款");
+		request.setAttribute("orderStatusList", orderStatusList);
+		
+	}
+
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-4 下午3:47:46
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 */
+	private void showOrderDetails(HttpServletRequest request,
+			HttpServletResponse response) {
+		String oState = request.getParameter("oState");
+		HttpSession session = request.getSession();
+		UserInfo user = (UserInfo) session.getAttribute("user");
+		
+		List<OrderUser> orderUserList = orderUserService.selectOrderDetails(user.getuName(), oState);
+		request.setAttribute("orderUserList", orderUserList);
+	}
+}

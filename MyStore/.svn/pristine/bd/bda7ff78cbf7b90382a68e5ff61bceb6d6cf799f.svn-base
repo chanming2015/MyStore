@@ -1,0 +1,71 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.util;
+
+import com.dyr.dao.service.CategoryService;
+import com.dyr.dao.service.GoodsService;
+import com.dyr.dao.service.ImageGoodsService;
+import com.dyr.dao.service.InfoOrderGoodsService;
+import com.dyr.dao.service.OrderUserService;
+import com.dyr.dao.service.ProductCartService;
+import com.dyr.dao.service.StockService;
+import com.dyr.dao.service.UserInfoService;
+import com.dyr.dao.service.VipCartService;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.util
+ * FileName:ServletUtil.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-14 下午4:21:54
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class ServletUtil {
+	
+	/**
+	 * 获取CategoryService
+	 */
+	public static CategoryService categoryService=new CategoryService();
+	/**
+	 * 获取GoodsService
+	 */
+	public static GoodsService goodsService=new GoodsService();
+	/**
+	 * 获取ImageGoodsService
+	 */
+	public static ImageGoodsService imageGoodsService=new ImageGoodsService();
+	/**
+	 * 获取InfoOrderGoodsService
+	 */
+	public static InfoOrderGoodsService infoOrderGoodsService=new InfoOrderGoodsService();
+	/**
+	 * 获取OrderUserService
+	 */
+	public static OrderUserService orderUserService=new OrderUserService();
+	/**
+	 * 获取ProductCartService
+	 */
+	public static ProductCartService productCartService=new ProductCartService();
+	/**
+	 * 获取StockService
+	 */
+	public static StockService stockService=new StockService();
+	/**
+	 * 获取UserInfoService
+	 */
+	public static UserInfoService userInfoService=new UserInfoService();
+	/**
+	 * 获取VipCartService
+	 */
+	public static VipCartService vipCartService=new VipCartService();
+}

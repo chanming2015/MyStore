@@ -1,0 +1,71 @@
+package com.dyr.web;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.dyr.dao.service.InfoOrderGoodsService;
+import com.dyr.dao.service.VipCartService;
+import com.dyr.entity.Goods;
+import com.dyr.entity.UserInfo;
+import com.dyr.entity.VipCart;
+
+public class CartServlet extends HttpServlet {
+
+	private VipCartService vipCartService=new VipCartService();
+	private InfoOrderGoodsService infoOrderGoodsService=new InfoOrderGoodsService();
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String op=request.getParameter("op");
+		if("lookcart".equals(op)){
+			lookcart(request,response);
+		}else if ("deletegood".equals(op)) {
+			deletegood(request,response);
+		}
+	}
+
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午3:18:06
+	 * Description
+	 * @param request
+	 * @param response
+	 */
+	private void lookcart(HttpServletRequest request,
+			HttpServletResponse response) {
+		//获得用户
+		UserInfo u=(UserInfo)request.getSession().getAttribute("user");
+		//根据用户名查询购物车ID
+		int CartId=vipCartService.getCartIdByUserId(u.getuName());
+		//根据购物车ID查询购物车中的商品
+		List<Goods> goodsList=infoOrderGoodsService.getGoodsListByCartId(CartId);
+		
+	}
+
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午3:18:01
+	 * Description
+	 * @param request
+	 * @param response
+	 */
+	private void deletegood(HttpServletRequest request,
+			HttpServletResponse response) {
+	}
+
+}

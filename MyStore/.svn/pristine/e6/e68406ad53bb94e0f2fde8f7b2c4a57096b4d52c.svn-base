@@ -1,0 +1,74 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao.service;
+
+import java.util.List;
+import com.dyr.entity.Goods;
+import com.dyr.util.ServiceUtil;
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao.service
+ * FileName:GoodsService.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:26:11
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class GoodsService {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午10:48:32
+	 * Description
+	 * @param goods
+	 */
+	public int addNewGoods(Goods goods) {
+		int rows=ServiceUtil.goodsDao.insertNewGoods(goods);
+		ServiceUtil.commit();
+		return rows;
+	}
+	/**
+	 * 根据类别ID分页查询所有商品
+	 */
+	public List<Goods> getGoodsListByCateId(int cateId,int page,int rows){
+		return ServiceUtil.goodsDao.selectGoodsListByCateId(cateId,page,rows);
+	}
+	/**
+	 * 根据商品ID查询商品详情
+	 */
+	public Goods getGoodsInfoByGoodsId(int GoodsId){
+		return ServiceUtil.goodsDao.selectGoodsInfoByGoodsId(GoodsId);
+	}
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 下午2:05:50
+	 * Description
+	 * @param keyWord
+	 * @return
+	 */
+	public List<Goods> getGoodsListByKeyWord(String keyWord,int page,int rows) {
+		
+		return ServiceUtil.goodsDao.selectGoodsListByKeyWord(keyWord,page,rows);
+	}
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-5 上午9:45:23
+	 * Description 根据类别编号查询该类别下所有商品总数
+	 * @param cateId
+	 * @return
+	 */
+	public int getGoodsCount(int cateId) {
+		
+		return ServiceUtil.goodsDao.selectGoodsCount(cateId);
+	}
+	
+}

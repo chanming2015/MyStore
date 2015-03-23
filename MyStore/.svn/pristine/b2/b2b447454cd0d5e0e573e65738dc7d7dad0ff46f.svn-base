@@ -1,0 +1,219 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib tagdir="/WEB-INF/tags/admin" prefix="my"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<title>My JSP 'addnewgoods.jsp' starting page</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+
+	<link rel="stylesheet" type="text/css" href="/${projectName}/css/admin/main.css">
+	<script type="text/javascript" src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//获得大类别下拉框
+			var bigCate=$("#bigCate")[0];
+			//填充大类别下拉框
+			bigCate.add( new Option("--全部--", 0) );
+			<c:forEach items="${categoryList}" var="cate">
+				<c:if test="${cate.cRoot==0}">
+					var opts = new Option( '${cate.cName}', ${cate.cId});
+					bigCate.add(opts); 
+				</c:if>
+			</c:forEach>
+			
+			//创建小类别数组
+			var categoryArr = [];
+			<c:forEach items="${categoryList}" var="cate">
+				<c:if test="${cate.cRoot>0}">
+					categoryArr.push(
+						{
+							cateId: ${cate.cId},
+							cateName: '${cate.cName}',
+							pCateId: ${cate.cRoot}
+						}
+					);
+				</c:if>
+			</c:forEach>
+			
+			//填充小类的函数
+			function fillCate() {
+				var pCateId = $("#bigCate").val();	//得到大类的ID
+				var cate = $("#smallCate")[0];
+				cate.length = 0;
+					
+				cate.add( new Option("--全部--", -1) );
+					
+				for (var i=0; i<categoryArr.length; i++) {
+					if (pCateId==categoryArr[i].pCateId) {
+						var opt = new Option( categoryArr[i].cateName, categoryArr[i].cateId );
+						cate.add(opt);
+					}
+				} 		
+			}
+			
+			bigCate.onchange = fillCate;
+			fillCate();
+			
+			//检查商品名
+		    function checkgoodsname(){
+		        var name = $("#goodsName").val();
+		        var unameTd = $("#goodsNameTd");
+		        if (name == "") {
+		            unameTd.css({
+		                "color": "red"
+		            });
+		            unameTd.text("请输入商品名！");
+		            return false;
+		        }
+		        else {
+		            unameTd.text("");
+		            return true;
+		        }
+		    }
+		    
+		    //检查商品单价
+		    function checkgoodsprice(){
+		        var price = $("#price").val();
+		        var priceTd = $("#priceTd");
+		        if (price == "") {
+		            priceTd.css({
+		                "color": "red"
+		            });
+		            priceTd.text("请输入商品单价！");
+		            return false;
+		        }
+		        else {
+		            priceTd.text("");
+		            return true;
+		        }
+		    }
+		    
+		    //检查商品类别
+		    function checkgoodscate(){
+		        var bigcate = $("#bigCate").val();
+		        var smallcate = $("#smallCate").val();
+		        var cateTd=$("#goodsCateTd");
+		        if (bigcate==0||smallcate==-1) {
+		            cateTd.css({
+		                "color": "red"
+		            });
+		            cateTd.text("请选择商品类别！");
+		            return false;
+		        }
+		        else {
+		            unameTd.text("");
+		            return true;
+		        }
+		    }
+		    
+		     //检查商品净重
+		    function checkgoodsweight(){
+		        var weight = $("#weight").val();
+		        var weightTd = $("#weightTd");
+		        if (weight == "") {
+		            weightTd.css({
+		                "color": "red"
+		            });
+		            weightTd.text("请输入商品净重！");
+		            return false;
+		        }
+		        else {
+		            weightTd.text("");
+		            return true;
+		        }
+		    }
+		    
+		    function checkForm(){
+		        return checkgoodsname() && checkgoodscate() && checkgoodsprice() && checkgoodsweight();
+		    }
+		    $("#form_add").submit(checkForm);		
+	});
+	
+</script>
+</head>
+
+<body>
+	<div class="whole">
+		<input type="hidden" value="${projectName}" id="projectName">
+		<my:toptag></my:toptag>
+		<div style="width:1024px; height:618px;">
+			<div class="left">
+				<my:lefttag></my:lefttag>
+			</div>
+			<div class="right">
+				<div class="main_a">
+					<h3>添加新商品</h3>
+					<hr />
+					<form id="form_add" name="form_add" method="post"action="LoginedAdminGoodsServlet?op=addnewgoods">
+
+						<table align="center">
+							<tr>
+								<td id="t1">商品名称：</td>
+								<td><input id="goodsName" name="goodsName" type="text"/>
+								</td>
+								<td id="goodsNameTd" color="red"></td>
+							</tr>
+							<tr>
+								<td>商品类别：</td>
+								<td><select id="bigCate" name="bigCate" style="width: 80px;">
+								</select> <select id="smallCate" name="smallCate" style="width: 85px;">
+								</select>
+								</td>
+								<td id="goodsCateTd" color="red"></td>
+							</tr>
+							<tr>
+								<td>单价：</td>
+								<td><input type="text" placeholder="元" name="price" id="price"/>
+								</td>
+								<td id="priceTd" color="red"></td>
+							</tr>
+							<tr>
+								<td>是否上架：</td>
+								<td class="radio">
+								<input type="radio" name="buy" value="允许" checked="checked"/>允许
+								<input type="radio" name="buy" value="不允许"/>不允许
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>商品净重：</td>
+								<td><input type="text" placeholder="克" name="weight" id="weight"/>
+								</td>
+								<td id="weightTd" color="red"></td>
+							</tr>
+							<tr>
+								<td>商品简介：</td>
+								<td><textarea name="goodsInfo"></textarea>
+								</td>
+								<td></td>
+							</tr>
+							<!--<tr>
+								<td>上传图片：</td>
+								<td><input type="file" name="file" style="width:170px;" />
+								</td>
+								<td></td>
+							</tr>-->
+							<tr>
+								<td></td>
+								<td><input type="submit" value="下一步" />
+								</td>
+								<td></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+		<my:bottomtag></my:bottomtag>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my"%>
+<%@ taglib	uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>爱商城</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="" type="image/x-icon" />
+<link href="/${projectName}/css/user/style.css" type="text/css"rel="stylesheet" />
+	<script src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+	<script src="/${projectName}/js/user/main.js"></script>
+
+</head>
+
+<body>
+	<my:toptag></my:toptag>
+	<div style="margin-top:185px;">
+		<div class="box">
+			<c:if test="${num==0||num1==0}">
+				<div style="float:left;">
+					<div style="padding-bottom: 20px;min-height: 600px;width: 1190px;margin:auto;">						
+						<div style="margin: 0;padding: 0;width:1190px;">									
+							<div><h4 style="color:#8B8B8B"></h4></div>
+							<div style="height:600px;">
+								<div style="height:250px;background-color: #fff;border: 1px solid #ffffff;height:100%">
+									<img style="float:left;margin-top: 100px;padding-left: 220px;width:150px;height:160px"src="/${projectName}/img/user/ym.jpg" />
+									<h2 style="float:right;line-height: 300px;padding-right: 420px;color:#f40;">对不起！没有找到你需要的宝贝^_^</h2>												
+								</div>							
+							</div>								
+						</div>
+		            </div>		
+				</div>
+			</c:if>
+			<c:if test="${num!=0}">		
+				<div style="margin-left: 10px;margin-right: 10px;">			
+					<c:forEach items="${pageBean.dateList}" var="good">						
+						<div class="border_animation">
+							<div class="border_top"></div>
+								<div class="border_right"></div>
+								<div class="border_bottom"></div>
+								<div class="border_left"></div>
+								<div class="width" style="height:220px;float:top">
+									<a  href="UserGoodsServlet?op=showinfo&goodsId=${good.gId}"> <img width="220" height="220"
+										alt="" src="/${projectName}/img/user/div3.jpg"> </a>
+								</div>
+								<div class="width" style="height:60px;float:bottom;">
+								<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥${good.gMoney }</font></label><br/>
+								<h3 class="zt">
+									<a  href="UserGoodsServlet?op=showinfo&goodsId=${good.gId}"class="spm biaoqian">
+									${good.gName}</a>
+								</h3>
+							</div>
+						</div>
+					</c:forEach>		
+				</div>
+			</c:if>
+			<c:if test="${num1!=0}">		
+				<div style="margin-left: 10px;margin-right: 10px;">			
+					<c:forEach items="${goodsList}" var="good">						
+						<div class="border_animation">
+							<div class="border_top"></div>
+								<div class="border_right"></div>
+								<div class="border_bottom"></div>
+								<div class="border_left"></div>
+								<div class="width" style="height:220px;float:top">
+									<a  href="UserGoodsServlet?op=showinfo&goodsId=${good.gId}"> <img width="220" height="220"
+										alt="" src="/${projectName}/img/user/div3.jpg"> </a>
+								</div>
+								<div class="width" style="height:60px;float:bottom;">
+								<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥${good.gMoney }</font></label><br/>
+								<h3 class="zt">
+									<a  href="UserGoodsServlet?op=showinfo&goodsId=${good.gId}"class="spm biaoqian">
+									${good.gName}</a>
+								</h3>
+							</div>
+						</div>
+					</c:forEach>		
+				</div>
+			</c:if>
+		</div>
+		<my:bottomtag></my:bottomtag>
+	</div>
+</body>
+</html>

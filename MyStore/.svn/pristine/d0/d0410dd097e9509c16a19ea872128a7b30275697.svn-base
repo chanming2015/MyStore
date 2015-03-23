@@ -1,0 +1,149 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>购物车</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<link rel="stylesheet" href="/${projectName}/css/user/style.css"/>
+	<script src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+    <script src="/${projectName}/js/user/main.js"></script>
+    <link type="text/css" rel="stylesheet" href="/${projectName}/css/user/regest.css"/>
+    <link type="text/css" rel="stylesheet" href="/${projectName}/css/user/regiest.css"/>
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+  </head>
+  
+  <body>
+  <my:toptag></my:toptag>
+    <!-- cart主体-->
+        <div style="margin-top:30px; width: 1190px;height: 150px;margin: 0 auto;">
+            <div style="margin-top:30px;"id="logo">
+                
+                <ul style="width: 600px;float:right;padding-top: 50px;overflow: hidden;height: 23px;margin-left:200px;">
+                    <span style="color: #aaaaaa;">1.我的购物车 >>>></span>
+                    <span style="color: #00FF00;">2.填写核对订单信息 >>>></span>
+                    <span style="color: #aaaaaa;">3.成功提交订单 </span>
+                </ul>
+            </div>
+        </div>
+		
+		<div class="w" id="regist">
+            <div class="mt">
+                <ul class="tab">
+                    <li class="curr">
+                       	收货详情
+                    </li>
+                    
+                   
+                </ul>
+                <div class="extra">
+                    <span style="text-align: right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  
+                </div>
+            </div>
+            <div class="mc">
+                <form id="personRegForm" method="POST" ">
+                    <input type="hidden" name="regType" id="regType" value="person"/><input type="hidden" name="uuid" id="uuid" value="${uuid}"/><input type="hidden" name="verifymc" id="verifymc" value=""/><input type="hidden" name="emailMg" id="emailMg"/><input type="hidden" name="authcodeMg" id="authcodeMg"/><input type="hidden" name="state" id="state" value=""/><input type="hidden" name="tgKey" id="tgKey" value=""/>
+                    <div class="form" onselectstart="return false;">
+                    	
+						
+						<!--用户名 -->
+                        <div class="item" id="select-regName">
+                            <span class="label"><b class="ftx04">*</b>收货人：</span>
+                            <div class="fl item-ifo">
+                                <div class="o-intelligent-regName">
+                                    <input type="text" id="uName" name="uName" placeholder="请输入用户名" maxlength="20" class="text" tabindex="1" autoComplete="off" onpaste="return false;" value="">
+                                    <ul id="intelligent-regName" class="hide">
+                                    </ul>
+                                    <label id="regName_succeed" class="blank">
+                                    </label>
+                                    <label id="regName_error" class="hide">
+                                    </label>
+                                </div>
+                                <div class="intelligent-error hide" id="morePinDiv">
+                                    <h5>推荐您使用：</h5>
+                                    <div class="groom" id="morePinGroom">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="SwpUkFekrO" value="HlnFm"/><input type="hidden" value="-1" id="hnschool" class="hide"/><input type="hidden" id="schoolid" name="schoolid" class="hide"/><input type="hidden" id="hnseli" class="hide"/>
+                            </div>
+                        </div>
+						
+						<!-- 设置密码-->
+                        <div id="capslock">
+                            <i></i>
+                            <s>
+                            </s>键盘大写锁定已打开，请注意大小写
+                        </div>
+                        <div id="o-password">
+                            <div class="item">
+                                <span class="label"><b class="ftx04">*</b>收获地址：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uPassword" name="uPassword" placeholder="请设置密码" maxlength="20" class="text" tabindex="2" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwd_succeed" class="blank">
+                                    </label>
+                                    <label id="pwd_error">
+                                    </label>
+                                    <span class="clr"></span>
+                                    <label class="hide" id="pwdstrength">
+                                        <span class="fl">安全程度：</span>
+                                        <b></b>
+                                    </label>
+                                </div>
+                            </div>
+							
+							<!--确认密码 -->
+                            <div class="item">
+                                <span class="label"><b class="ftx04">*</b>联系电话：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="pwdRepeat" name="pwdRepeat" placeholder="请输入密码" maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+                                </div>
+                            </div>
+							
+							
+							
+							<!--邮箱 -->
+							 <div class="item">
+                                <span class="label"><b class="ftx04">*</b>邮箱：</span>
+                                <div class="fl item-ifo">
+                                    <input type="password" id="uEmail" name="uEmail" placeholder="请输入邮箱"  maxlength="20" class="text" tabindex="3" onpaste="return  false" autocomplete="off"/><i class="i-pass"></i>
+                                    <label id="pwdRepeat_succeed" class="blank">
+                                    </label>
+                                    <label id="pwdRepeat_error">
+                                    </label>
+                                </div>
+                            </div>
+							
+							 <div class="item">
+                                <a href="">确认付款</a>
+                            </div>
+							
+							
+                             
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+        <my:bottomtag></my:bottomtag>
+  </body>
+</html>

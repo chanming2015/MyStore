@@ -1,0 +1,116 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.entity;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.entity
+ *FileName:InfoOrderGoods.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2014-12-31 上午11:32:14
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+public class InfoOrderGoods {
+	//详情表编号
+	private int iId;
+	//订单编号
+	private int iOid;
+	//商品编号
+	private int iGid;
+	//购买数量
+	private int iNum;
+	//订单表
+	private OrderUser orderUser;
+	//商品表
+	private Goods goods;
+	/**
+	 * @return the iId
+	 */
+	public int getiId() {
+		return iId;
+	}
+	/**
+	 * @param iId the iId to set
+	 */
+	public void setiId(int iId) {
+		this.iId = iId;
+	}
+	/**
+	 * @return the iOid
+	 */
+	public int getiOid() {
+		return iOid;
+	}
+	/**
+	 * @param iOid the iOid to set
+	 */
+	public void setiOid(int iOid) {
+		this.iOid = iOid;
+	}
+	/**
+	 * @return the iGid
+	 */
+	public int getiGid() {
+		return iGid;
+	}
+	/**
+	 * @param iGid the iGid to set
+	 */
+	public void setiGid(int iGid) {
+		this.iGid = iGid;
+	}
+	/**
+	 * @return the iNum
+	 */
+	public int getiNum() {
+		return iNum;
+	}
+	/**
+	 * @param iNum the iNum to set
+	 */
+	public void setiNum(int iNum) {
+		this.iNum = iNum;
+	}
+	/**
+	 * @return the orderUser
+	 */
+	public OrderUser getOrderUser() {
+		return orderUser;
+	}
+	/**
+	 * @param orderUser the orderUser to set
+	 */
+	public void setOrderUser(OrderUser orderUser) {
+		this.orderUser = orderUser;
+	}
+	/**
+	 * @return the goods
+	 */
+	public Goods getGoods() {
+		return goods;
+	}
+	/**
+	 * @param goods the goods to set
+	 */
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+	/**
+	 * 
+	 */
+	public InfoOrderGoods() {
+	}
+	
+	
+}

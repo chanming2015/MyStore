@@ -1,0 +1,41 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Select;
+
+import com.dyr.entity.Goods;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:InfoOrderGoodsDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:23:29
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface InfoOrderGoodsDao {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午3:29:58
+	 * Description
+	 * @param cartId
+	 * @return
+	 */
+	@Select("select * from ProductCart p inner join Goods g on p.PGId=g.GId where PVId=#{cartId}")
+	List<Goods> selectGoodsListByCartId(int cartId);
+	
+}

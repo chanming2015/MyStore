@@ -1,0 +1,67 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>My JSP 'paysuccessed.jsp' starting page</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+
+<link rel="stylesheet" href="/${projectName}/css/user/style.css"/>
+	<script src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+    <script src="/${projectName}/js/user/main.js"></script>
+<!--
+
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+</head>
+
+<body>
+	<div style="margin-top: 185px;">
+		<my:toptag></my:toptag>
+		   
+                    <span style="color: #aaaaaa;margin-left:700px;">1.我的购物车 >>>></span>
+                    <span style="color: #aaaaaa;">2.填写核对订单信息 >>>></span>
+                    <span style="color: #f40;">3.成功提交订单 </span>
+       
+		<div
+			style="padding-bottom: 20px;min-height: 600px;width: 1190px;margin:auto;">
+			<div style="height: 40px;">
+				<h3 style="width: 120px;float: left;height:98%;color:#f40;">提交订单状态</h3>
+
+			</div>
+
+
+			<!-- 商品展示区域-->
+			<div style="margin: 0;padding: 0;width:1190px;">
+				<hr
+					style="height:5px;width:1190px;background-color:#f40;border-color: #f40;" />
+					<div><h4 style="color:#8B8B8B">收银台</h4></div>
+			<div style="height:450px;">
+				<div style="height:250px;background-color: #EDFED2;border: 1px solid #ffffff;">
+					<h2 style="line-height: 100px;padding-left: 100px;">购买成功^_^！！您可以进入我的订单<a class="biaoqian" href="/${projectName}/test/myorder.jsp">查看详情</a></h2>	
+					<a style="padding-left: 100px;"class="biaoqian"href="/${projectName}/UserLogined/UserInfoServlet">返回首页</a>			
+				</div>
+			
+			</div>
+				
+			</div>
+            </div>
+		<my:bottomtag></my:bottomtag>
+	</div>
+</body>
+</html>

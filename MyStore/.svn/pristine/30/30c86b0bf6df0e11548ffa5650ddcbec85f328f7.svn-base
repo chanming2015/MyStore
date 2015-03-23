@@ -1,0 +1,198 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.web;
+
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.dyr.dao.DiscussDao;
+import com.dyr.dao.service.DiscussService;
+import com.dyr.dao.service.GoodsService;
+import com.dyr.entity.Discuss;
+import com.dyr.entity.Goods;
+import com.dyr.entity.PageBean;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.web
+ * FileName:UserGoodsServlet.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-19 上午10:32:49
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+@SuppressWarnings("serial")
+public class UserGoodsServlet extends HttpServlet {
+
+	private GoodsService goodsService=new GoodsService();
+	private DiscussService discussService=new DiscussService();
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doPost(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String op=request.getParameter("op");
+		if("showlist".equals(op)){
+			//前台分页显示商品列表
+			showGoodsListByPageAndCateId(request,response);
+		}else if ("showinfo".equals(op)) {
+			//显示单个商品详情
+			showGoodsInfo(request,response);
+		}else if ("search".equals(op)) {
+			//根据关键字搜索商品
+			searchGoodsByKeyWord(request,response);
+		}else if ("comments".equals(op)) {
+			//评论商品
+			commentsGoods(request,response);
+		}
+	}
+	
+	/**
+	 * 
+	 * @author XuMaoSen
+	 * Create Time:2015-1-21 上午11:59:17
+	 * Description 评论商品
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void commentsGoods(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			//获取商品ID
+			int goodsId=Integer.parseInt(request.getParameter("goodsId"));
+			//根据商品ID查询商品详情
+			Goods goods=goodsService.getGoodsInfoByGoodsId(goodsId);
+			request.setAttribute("goods", goods);
+			request.getRequestDispatcher("/WEB-INF/page/user/main/comments.jsp").forward(request, response);
+		} catch (NumberFormatException e) {
+		}
+		
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 上午10:36:57
+	 * Description 根据关键字搜索商品
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void searchGoodsByKeyWord(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		PageBean pageBean=new PageBean();
+		try {
+			int page=Integer.parseInt(request.getParameter("page"));
+			pageBean.setPage(page);
+		} catch (NumberFormatException e) {
+			
+		}
+		//模糊查询商品
+		//取得关键字
+		String keyWord=request.getParameter("keyWord");
+		
+		if(keyWord==null || keyWord.equals("")){
+			return;
+		}
+		keyWord=new StringBuffer("%").append(keyWord).append("%").toString();
+		List<Goods> goodsList=goodsService.getGoodsListByKeyWord(keyWord,pageBean.getPage(),pageBean.getRows());
+		int rowsCount=goodsService.getGoodsCountListByKeyWord(keyWord);
+		pageBean.setRowsCount(rowsCount);
+		pageBean.setPagesCount();
+		pageBean.setDataList(goodsList);
+		request.setAttribute("pageBean", pageBean);
+		request.getRequestDispatcher("/WEB-INF/page/user/main/goodShow.jsp").forward(request, response);		
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 上午10:36:55
+	 * Description 显示单个商品详情
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void showGoodsInfo(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			//获取商品ID
+			int goodsId=Integer.parseInt(request.getParameter("goodsId"));
+			//根据商品ID查询商品详情
+			Goods goods=goodsService.getGoodsInfoByGoodsId(goodsId);
+			request.setAttribute("goods", goods);
+			//根据商品ID查询商品评价
+			List<Discuss> discusseList=discussService.getDiscussList(goodsId);
+			request.setAttribute("discusseList", discusseList);
+			request.getRequestDispatcher("/WEB-INF/page/user/main/goodInfo.jsp").forward(request, response);
+		} catch (NumberFormatException e) {
+		}
+		
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 上午10:36:52
+	 * Description 	前台分页显示商品列表
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void showGoodsListByPageAndCateId(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		PageBean pageBean=new PageBean();
+		//获取商品类别ID,默认显示外套,10为外套类别
+		int cateId=10;
+		try {
+			//获取要显示的商品类别
+			cateId=Integer.parseInt(request.getParameter("cateId"));
+			//获取页数
+			int page=Integer.parseInt(request.getParameter("page"));
+			pageBean.setPage(page);
+		} catch (NumberFormatException e) {
+		}		
+		//获取该类别下所有商品的总数
+		int rowsCount=goodsService.getGoodsCountByCateId(cateId);
+		//根据商品类别ID查询商品集合
+		List<Goods> goodsList=goodsService.getGoodsListByCateId(cateId,pageBean.getPage(),pageBean.getRows());
+		setPageBean(rowsCount, goodsList,pageBean);
+		request.setAttribute("pageBean", pageBean);
+		request.getRequestDispatcher("/WEB-INF/page/user/main/goodShow.jsp").forward(request, response);
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-20 下午3:30:19
+	 * Description
+	 * @param rowsCount
+	 * @param goodsList
+	 */
+	private void setPageBean(int rowsCount, List<Goods> goodsList,PageBean pageBean) {
+		
+		pageBean.setRowsCount(rowsCount);
+		pageBean.setPagesCount();
+		pageBean.setDataList(goodsList);
+	}
+
+}

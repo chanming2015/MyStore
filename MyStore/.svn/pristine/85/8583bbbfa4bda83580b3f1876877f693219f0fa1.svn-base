@@ -1,0 +1,50 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao.service;
+import java.util.List;
+import org.apache.ibatis.session.SqlSession;
+import com.dyr.dao.OrderUserDao;
+import com.dyr.entity.OrderUser;
+import com.dyr.util.SqlSessionUtil;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao.service
+ * FileName:OrderService.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:26:21
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class OrderService {
+	/**
+	 * 获取SqlSession
+	 */
+	private SqlSession sqlSession=SqlSessionUtil.getSqlSession();
+	/**
+	 * 获取OrderUserDao
+	 */
+	private OrderUserDao orderUserDao=sqlSession.getMapper(OrderUserDao.class);
+	
+	/**
+	 * 增加、删除、修改后执行
+	 */
+	private void commit(){
+		sqlSession.commit();
+	}
+	
+	public List<OrderUser>  selectOrderDetails(String oUname,String oState){
+		
+		return orderUserDao.selectOrderDetails(oUname, oState);
+		
+	}
+}

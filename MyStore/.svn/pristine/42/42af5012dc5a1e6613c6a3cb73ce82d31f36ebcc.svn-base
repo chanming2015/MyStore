@@ -1,0 +1,89 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/admin" prefix="my"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<title>My JSP 'showcategoryinfo.jsp' starting page</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<link rel="stylesheet" type="text/css"
+	href="/${projectName}/css/admin/main.css">
+
+</head>
+
+<body>
+	<div class="whole">
+		<input type="hidden" value="${projectName}" id="projectName">
+		<my:toptag></my:toptag>
+		<div style="width:1024px; height:618px;">
+			<div class="left">
+				<my:lefttag></my:lefttag>
+			</div>
+			<div class="right">
+				<div class="main_b">
+					<h3>商品类别列表</h3>
+					<hr />
+					<div class="search">
+						<input type="text" placeholder="类别名称" style="width:165px;" /><input
+							type="button" value="搜索" />
+					</div>
+					<table cellpadding=0; cellspacing=0; border=1px;>
+						<tr>
+							<th>类别编号</th>
+							<th>类别名称</th>
+							<th>类别简介</th>
+							<th>上级类别</th>
+							<th>操作</th>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>上衣</td>
+							<td>就是上身穿的衣服</td>
+							<td>服装</td>
+							<td><a href="updatecategory.html">编辑</a>&nbsp;&nbsp;<a
+								href="deleteuserinfo.html">删除</a>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>上衣</td>
+							<td>就是上身穿的衣服</td>
+							<td>服装</td>
+							<td><a href="updatecategory.html">编辑</a>&nbsp;&nbsp;<a
+								href="deleteuserinfo.html">删除</a>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>上衣</td>
+							<td>就是上身穿的衣服</td>
+							<td>服装</td>
+							<td><a href="updatecategory.html">编辑</a>&nbsp;&nbsp;<a
+								href="deleteuserinfo.html">删除</a>
+							</td>
+						</tr>
+
+					</table>
+					<div class="page">
+						<a href="javascript:jumpPage('first')">首页</a> <a
+							href="javascript:jumpPage('prev')">上一页</a> <a
+							href="javascript:jumpPage('next')">下一页</a> <a
+							href="javascript:jumpPage('last')">尾页</a> 当前页码： 总记录数： <input
+							style="text-align:center;border:none;border-bottom:1px solid black;"
+							type="text" size="1" value="" id="goPage" /> <input type="button"
+							id="goPageBtn" value="GO" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<my:bottomtag></my:bottomtag>
+	</div>
+
+</body>
+</html>

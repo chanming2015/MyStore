@@ -1,0 +1,45 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao.service;
+
+import java.util.List;
+import com.dyr.entity.OrderUser;
+import com.dyr.util.ServiceUtil;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao.service
+ * FileName:OrderUserService.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-14 下午5:00:41
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class OrderUserService {
+
+	public List<OrderUser>  selectOrderDetails(String oUname,String oState){
+		
+		return ServiceUtil.orderUserDao.selectOrderDetailsByNameAndState(oUname, oState);
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午4:17:29
+	 * Description 根据用户名查询该用户的所有订单
+	 * @param getuName
+	 * @return
+	 */
+	public List<OrderUser> getOrderListByUserName(String userName) {
+		
+		return ServiceUtil.orderUserDao.selectOrderListByUserName(userName);
+	}
+}

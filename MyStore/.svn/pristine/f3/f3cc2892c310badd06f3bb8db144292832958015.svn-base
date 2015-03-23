@@ -1,0 +1,187 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.web.logined;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.dyr.dao.service.DiscussService;
+import com.dyr.dao.service.GoodsService;
+import com.dyr.dao.service.ResponseService;
+import com.dyr.entity.DisGoods;
+import com.dyr.entity.Discuss;
+import com.dyr.entity.Goods;
+import com.dyr.entity.InfoOrderGoods;
+import com.dyr.entity.OrderUser;
+import com.dyr.entity.PageBean;
+import com.dyr.entity.Response;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.web.logined
+ *FileName:LoginedReplyServlet.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-22 上午9:23:37
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+public class LoginedReplyServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String op =  null;
+	private DiscussService discussService = new DiscussService();
+	private GoodsService goodsService = new GoodsService();
+	private ResponseService responseService = new ResponseService();
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request,response);
+	
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		op = request.getParameter("op");
+		if("showreply".equals(op)){
+			showreply(request,response);
+		}else if("toreply".equals(op)){
+			toreply(request,response);
+		}else if("passed".equals(op)){
+			passed(request,response);
+		}else if("nopassed".equals(op)){
+			nopassed(request,response);
+		}
+	}
+	
+	/**
+	 *@author linlin
+	 *Create Time:2015-1-23 下午3:31:10
+	 *Description: 不通过审核
+	 *@param request
+	 *@param response    
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void nopassed(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String dIdStr = request.getParameter("dId");
+		int dId = Integer.parseInt(dIdStr);
+		int row = discussService.deleteDiscuss(dId);
+		if(row>0){
+		request.getRequestDispatcher("LoginedReplyServlet?op=showreply").forward(request, response);
+		}
+	}
+	/**
+	 *@author linlin
+	 *Create Time:2015-1-22 下午6:35:25
+	 *Description: 通过审核
+	 *@param request
+	 *@param response    
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void passed(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String dIdStr = request.getParameter("dId");
+		int dId = Integer.parseInt(dIdStr);
+		String rBody = request.getParameter("rBody");
+		int row = discussService.updateDsh(dId);
+		int row2 = responseService.addResponse(dId,rBody);
+		if(row>0 && row2>0){
+			request.getRequestDispatcher("LoginedReplyServlet?op=showreply").forward(request, response);
+		}
+	}
+
+	/**
+	 *@author linlin
+	 *Create Time:2015-1-22 下午2:25:29
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void toreply(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		PageBean pageBean = new  PageBean();
+		String dGIdStr = request.getParameter("dGId");
+		int dGId = Integer.parseInt(dGIdStr);
+		Goods goods = goodsService.getGoodsBygId(dGId);
+		request.setAttribute("goods", goods);
+		try {
+			int page = Integer.parseInt(request.getParameter("page"));
+			pageBean.setPage(page);
+		} catch (NumberFormatException e) {
+		}
+		pageBean.setRows(3);
+		List<Discuss> discussList = discussService.getAllDiscussInfoBydGId(
+				dGId,pageBean.getPage(), pageBean.getRows());
+		
+		pageBean.setRowsCount(discussService.getCountByDsh(dGId));
+		pageBean.setPagesCount(pageBean.getRowsCount() % pageBean.getRows() == 0 ? pageBean
+				.getRowsCount() / pageBean.getRows()
+				: pageBean.getRowsCount() / pageBean.getRows() + 1);
+		
+		pageBean.setDateList(discussList);
+		request.setAttribute("discussList", discussList);
+		request.setAttribute("pageBean", pageBean);
+		request.setAttribute("dGId", dGId);
+		request.getRequestDispatcher("/WEB-INF/page/admin/main/showreply.jsp").forward(request, response);
+	}
+	/**
+	 *@author linlin
+	 *Create Time:2015-1-22 上午9:35:46
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void showreply(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		PageBean pageBean = new  PageBean();
+		try {
+			int page = Integer.parseInt(request.getParameter("page"));
+			pageBean.setPage(page);
+		} catch (NumberFormatException e) {
+		}
+		
+		List<Integer> intlist = discussService.getdGIdgroupBydGId(pageBean.getPage(), pageBean.getRows());
+		pageBean.setRowsCount(intlist.size());
+		pageBean.setPagesCount(pageBean.getRowsCount() % pageBean.getRows() == 0 ? pageBean
+				.getRowsCount() / pageBean.getRows()
+				: pageBean.getRowsCount() / pageBean.getRows() + 1);
+		List<DisGoods> disGoodslist = new ArrayList<DisGoods>();
+		for (Integer integer : intlist) {
+			DisGoods disGoods = new DisGoods();
+			int disCount = discussService.getCountBygId(integer);
+			int dshCount = discussService.getCountByDsh(integer);
+			Goods goods = goodsService.getGoodsInfoByGoodsId(integer);
+			disGoods.setDisCount(disCount);
+			disGoods.setDshCount(dshCount);
+			disGoods.setuName(goods.getgName());
+			disGoods.setGoodsId(integer);
+			disGoodslist.add(disGoods);
+		}
+		pageBean.setDateList(disGoodslist);
+		request.setAttribute("pageBean", pageBean);
+		request.getRequestDispatcher("/WEB-INF/page/admin/main/reply.jsp").forward(request, response);
+	}
+}

@@ -1,0 +1,553 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>商品详情</title>
+<link rel="stylesheet" type="text/css"
+	href="/${projectName }/css/user/goodInfo.css" />
+<link rel="stylesheet" type="text/css"
+	href="/${projectName }/css/user/style.css" />
+<link rel="stylesheet" type="text/css"
+	href="/${projectName }/css/user/bootstrap.css" />
+
+<script type="text/javascript"
+	src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="/${projectName}/js/user/bootstrap.js"></script>
+<script type="text/javascript"
+	src="/${projectName}/js/user/goodsInfo.js"></script>	
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link rel="shortcut icon" href="/static/common/img/favicon.ico" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta HTTP-EQUIV="Cache-Control"
+	CONTENT="no-cache, no-store, must-revalidate">
+<!--[if IE 6]>
+        <![endif]-->
+        <script type="text/javascript">
+        
+        	function add() {
+				$("#goodsId").val(${goodsIamge.goods.gId});
+				$("#add").submit();
+			}
+        </script>
+</head>
+<body>
+	<my:toptag></my:toptag>
+	<div style="margin-top:185px;">
+		<div id="j-go-top" alog-alias="bainuo-detail-go-top-and-add-favorite"
+			alog-group="bainuo-detail-go-top-and-add-favorite">
+			
+			 
+		</div>
+		<div class="mobile-upload-entry " id="mobile-upload-entry"
+			mon="area=layerAds&element_type=nav">
+			<span class="close-btn"></span> <span class="erweima detail"> </span></span>
+		</div>
+		
+	</div>
+	<div class="p-detail">
+		<div data-huodong="有多少人购买？"></div>
+		<div class="p-bread-crumb" mon="deal_id=1472205"
+			alog-alias="bainuo-detail-bread-crumb"
+			alog-group="bainuo-detail-bread-crumb">
+
+			<div class="p-item-info" mon="deal_id=1472205">
+				<div class="w-item-info clearfix">
+					<h2>${goodsIamge.goods.gName }</h2>
+					<div class="item-title">
+						${goodsIamge.goods.gName }只卖${goodsIamge.goods.gMoney }啦！！<span class="hot hide"></span>
+					</div>
+					<div class="ii-images clearfix">
+						<div class="w-item-images">
+
+							<div id="j-images-board" class="images-board">
+								<c:if test="${goodsIamge.imagePathList.size()!=0 }">
+									<img class="Divimg" width="220" height="220" src="/${projectName }/img/user/${goodsIamge.imagePathList.get(0)}"/>
+									<!--<img width="220" height="220" alt="" src="/${projectName}/img/user/${goodsIamgeList.imagePathList.get(0)}"/>  -->
+								</c:if>
+								<c:if test="${goodsIamge.imagePathList.size()==0 }">
+									<img class="Divimg" width="220" height="220" alt="" src="/${projectName}/img/user/div1.jpg"/>
+								</c:if>
+							</div>
+
+						</div>
+					</div>
+					
+					<div class="ii-intro">
+						<div class="w-item-intro">
+							<div class="promotion-area"></div>
+							<div class="price-area clearfix">
+								<div class="match-price-area">
+									<span class="unit">&yen;</span>${goodsIamge.goods.gMoney }
+								</div>
+								<div class="market-price-area">
+									<div class="price">&yen;${fn:split(goodsIamge.goods.gMoney*100/84+"", ".")[0]}</div>
+									<div class="name">价值</div>
+								</div>
+								<div class="current-price-area discount">
+									<div class="price">8.4折</div>
+									<div class="name">折扣</div>
+								</div>
+							</div>
+							<ul class="ugc-strategy-area clearfix "
+								mon="area=promoteBuy&element_type=function"
+								alog-alias="bainuo-detail-item-intro-more"
+								alog-group="bainuo-detail-item-intro-more">
+								<li id="j-ugc-grade" class="ugc-grade">
+									<div class="ugc-star clearfix" mon="element=findComment">
+										<div class="us-star">
+											<div class="star ugc-star-wrap ">
+												<div class="star ugc-star-grade" style="width:62.9524px;">
+												</div>
+											</div>
+										</div>
+										<div class="us-grade"><b class="ys-name"></b></div>
+									</div>
+									<div class="ug-num">
+										<span class="intro-strong"></span><b class="yan-color">选择颜色</b>
+									</div>
+								</li>
+							
+								<li id="j-ugc-grade" class="ugc-grade">
+									<div class="ugc-star clearfix" mon="element=findComment">
+										<div class="us-star">
+											<div class="star ugc-star-wrap ">
+												<div class="star ugc-star-grade" style="width:62.9524px;">
+												</div>
+											</div>
+										</div>
+										<div class="us-grade"><b class="cc-name"></b></div>
+									</div>
+									<div class="ug-num">
+										<span class="intro-strong"></span><b class="yan-size">选择尺寸</b>
+									</div>
+								</li>
+								<li class="item-strategy"><a href="" target="_blank"
+									class="refund-all" mon="element=refund">查看评论</a>
+								</li>
+							</ul>
+							<form action="" name="y-add" id="y-add">
+							<div class="yanse" style="display: none;">
+								<div class="y-name"><span class="y-title">颜色:</span></div>
+									<div class="y-bag"> 	 	
+									<ul class="y-ul">
+										<li class="y-li"><input type="checkbox"/><b>白色</b></li>
+										<li class="y-li"><input type="checkbox"/><b>红色</b></li>
+										<li class="y-li"><input type="checkbox"/><b>黑色</b></li>
+										<li class="y-li"><input type="checkbox"/><b>蓝色</b></li>
+										<li class="y-li"><input type="checkbox"/><b>灰色</b></li>
+									</ul>
+									</div>
+								<div class="y-dutten"><input type="button" class="y-btnOK" value="确定" style="display: none;">
+													<input type="button" class="y-btnNO" value="取消"/>				
+								</div>	
+							</div>
+							</form>
+							<form action="" name="c-add" id="c-add">
+							<div class="yanse" style="display: none;">
+								<div class="y-name"><span  class="y-title">尺寸:</span></div>
+									<div class="y-bag">
+									<ul class="y-ul">
+										<li class="y-lil"><input type="checkbox"/><b>L</b></li>
+										<li class="y-lil"><input type="checkbox"/><b>M</b></li>
+										<li class="y-lil"><input type="checkbox"/><b>S</b></li>
+										<li class="y-lil"><input type="checkbox"/><b>XL</b></li>
+										<li class="y-lil"><input type="checkbox"/><b>XXL</b></li>
+									</ul>
+									</div>
+								<div class="y-dutten"><input type="button" class="y-btnOK" value="确定" style="display: none;">
+													<input type="button" class="y-btnNO" value="取消"/>				
+								</div>	
+							</div>
+							</form>
+							<form action="/${projectName}/UserLogined/LoginedCartServlet?op=addtocart" name="add" id="add">
+							<input type="hidden" name="op" id="op" value="addtocart"/>
+							<input type="hidden" name="goodsId" id="goodsId"/>
+							<div class="validdate-buycount-area">
+								<div class="item-countdown-row clearfix">
+									<span class="name">打折时限</span> <span class="value">2015-01-15</span>
+								</div>
+								<div class="item-buycount-row j-item-buycount-row clearfix"
+									data-stock="20000" data-personmax="50" data-min="1"
+									data-max="50">
+									<div class="name">数量</div>
+									<div class="buycount-ctrl">
+
+										<input type="button" class="jian" style="width: 23px;height: 20px;margin-right:0PX;" value="-"/>
+										 <input type="text" value="1" id="num" name="num" maxlength="10">
+										 <input type="button" class="jia" value="+">
+
+										
+
+									</div>
+									<span class="err-wrap j-err-wrap"></span>
+								</div>
+							</div>
+							<div class="item-buy-area clearfix">
+								<a href="javascript:add()" class="btn-buy btn-buy-l j-btn-buy" 
+									mon="area=buy&element=buyTop&element_type=nav" >添加购物车</a>
+								<ul class="item-option clearfix"
+									mon="area=dealCollect&element_type=nav"
+									alog-alias="bainuo-detail-item-option"
+									alog-group="bainuo-detail-item-option">
+									<li><a href="###" id="j-item-collect"
+										class="item-collect " mon="element=collect">收藏</a>
+										<div id="j-collect-success" class="collect-success">
+											<p>收藏成功！</p>
+											<a href="">去看看我的收藏</a>
+										</div></li>
+								</ul>
+								
+							</div>
+							
+							</form>
+						</div>
+					</div>
+					<div class="s-imges">
+						<ul>
+							<c:forEach items="${goodsIamge.imagePathList}" var="goodsimg">
+							<li class="i-li"><img class="img-size" src="/${projectName }/img/user/${goodsimg}"/></li>
+							</c:forEach>
+							
+						</ul>
+						
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="p-item-info-more" mon="deal_id=1472205">
+				<div class="iim-wrapper clearfix">
+					<div class="info-detail">
+						<div class="w-shop-groupon">
+							<div class="w-shop-groupon">
+								<div class="sg-header">
+									<h3>商品其他热卖中</h3>
+								</div>
+
+							</div>
+						</div>
+						<div class="w-buy-2-buy-list"
+							mon="area=recomBottom&s=c1ed60903a2f48a77833e48a6d563b85"
+							bn_box="recomBottom&position" alog-alias="bainuo-detail-bye2bye"
+							alog-group="bainuo-detail-bye2bye">
+							<div id="j-cellingRecent" class="clearfix">
+								<div class="rcmd-title clearfix">
+									<h3>看一看</h3>
+									<a href="javascript:;" mon="element=Buy2BuyChange"
+										id="j-change-btn" class="change-btn">换一换<span>&nbsp;</span><span
+										class="icon"></span> </a>
+								</div>
+								<div>
+									<div class="j-buy2buy-page buy2buy-page show" index="0">
+										<div class="buy2buy-item first"></div>
+										<div class="buy2buy-item ">
+											<div class="w-goods-item-b2b">
+												<a mon="element=1344273&position=2&element_type=item"
+													href=""
+													data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'
+													target="_blank"><img class="goods-img" src=""
+													alt="卡丁车！"> </a><a
+													mon="element=1344273&position=2&element_type=item"
+													class="title" href=""
+													data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'>卡丁车</a>
+												<div class="price-sold clearfix">
+													<div class="price">
+														<span class="current">&yen;89</span>
+													</div>
+													<div class="sold">
+														<span class="name">已售</span> <span class="current">0</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="buy2buy-item ">
+											<div class="w-goods-item-b2b">
+												<a mon="element=1344273&position=2&element_type=item"
+													href=""
+													data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'
+													target="_blank"><img class="goods-img" src=""
+													alt="卡丁车！"> </a><a
+													mon="element=1344273&position=2&element_type=item"
+													class="title" href="http://cq.nuomi.com/deal/p3ghpgbg.html"
+													data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'>卡丁车</a>
+												<div class="price-sold clearfix">
+													<div class="price">
+														<span class="current">&yen;118</span>
+													</div>
+													<div class="sold">
+														<span class="name">已售</span> <span class="current">0</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="buy2buy-item ">
+											<div class="w-goods-item-b2b">
+												<a mon="element=1074651&position=4&element_type=item"
+													href=""
+													data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'
+													target="_blank"><img class="goods-img" src=""
+													alt="帝豪KTV下午场"> </a><a
+													mon="element=1074651&position=4&element_type=item"
+													class="title" href=""
+													data-item-st='{"s":"c1ed60903a2f48a77833e48a6d563b85"}'>哈哈哈哈！</a>
+												<div class="price-sold clearfix">
+													<div class="price">
+														<span class="current">&yen;39</span>
+													</div>
+													<div class="sold">
+														<span class="name">已售</span> <span class="current">0</span>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+						<div class="user-score">
+							<div class="w-user-score">
+								<div class="title clearfix">
+									
+								</div>
+								<div class="detail clearfix">
+									<div class="score fl">0</div>
+									<div class="score-star fl">
+										<div class="star ugc-star-wrap ">
+											<div class="star ugc-star-grade" style="width:62.9524px;">
+											</div>
+										</div>
+									</div>
+									<div class="text fl">
+										有很多人评论<span>0%</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="spec-nav">
+							<div id="nav-bar" class="nav-bar"></div>
+							<div id="j-sn-ceiling" class="w-spec-nav clearfix">
+								<ul id="j-sn-list" class="nav nav-tabs sn-list">
+									<li role="presentation"><a href="#j-info-all"
+										data-toggle="tab" data-rel-content="all"
+										class="spec-nav-current" mon="element=本单详情"><span>本单详情</span>
+									</a>
+									</li>
+									<li role="presentation"><a href="#j-info-intro"
+										data-toggle="tab" data-rel-content="intro" class="spec-nav-current" mon="element=商家介绍"><span>商家介绍</span>
+									</a>
+									</li>
+									<li role="presentation"><a href="#j-info-ugc" 
+									data-toggle="tab" data-rel-content="ugc"
+										class="spec-nav-current" mon="element=会员评价"><span>会员评价</span>
+									</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="j-info-all">
+								<li class="item-info-detail j-item-content">
+
+									<div class="info-buy-content">
+										<div class="w-rich-text">
+											<h3 class="w-section-header">本单详情</h3>
+											<div class="rt-content">
+												<p class='wrap-img'>
+												<c:forEach items="${goodsIamge.imagePathList}" var="goodsimg">
+													<img src="/${projectName }/img/user/${goodsimg}"
+													style="float:none;border:0px solid #000" title="图片"
+														border="0" />
+													</c:forEach>
+													
+														
+												</p>
+												<br />
+												
+												<ul>
+													<li
+														style='list-style: square outside none;margin-left:15px'>
+														消费者买才卖</li>
+													<li
+														style='list-style: square outside none;margin-left:15px'>
+														可以打折</li>
+													<li
+														style='list-style: square outside none;margin-left:15px'>
+														前20名购买者才可以打折哦！ <br>
+													</li>
+													<b>其他补充:</b>
+													<br />
+													<li
+														style='list-style: square outside none;margin-left:15px'>
+														速度来买</li>
+													<li
+														style='list-style: square outside none;margin-left:15px'>
+														请以实物为准！不要买到次货哦！</li>
+												</ul>
+												穿起来会让人经不住诱惑哦！ <br />
+											</div>
+										</div>
+									</div>
+								</li>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="j-info-intro">
+								<li id="j-info-intro" class="item-info-detail j-item-content">
+									<div class="info-buy-content">
+										<div class="w-rich-text">
+											<h3 class="w-section-header">商家介绍</h3>
+											<div class="rt-content">
+
+											千年品牌，你值得拥有 <br />
+											千年品牌，你值得拥有 <br />
+											千年品牌，你值得拥有 <br />
+											千年品牌，你值得拥有 <br />
+											前20名购买者才可以打折哦！ <br>
+											 <c:if test="${goodsIamge.imagePathList.size()!=0 }">
+												<img class="Divimg" width="220" height="220" src="/${projectName }/img/user/${goodsIamge.imagePathList.get(0)}"/>
+												<!--<img width="220" height="220" alt="" src="/${projectName}/img/user/${goodsIamgeList.imagePathList.get(0)}"/>  -->
+											</c:if>
+											<c:if test="${goodsIamge.imagePathList.size()==0 }">
+												<img class="Divimg" width="220" height="220" alt="" src="/${projectName}/img/user/div1.jpg"/>
+											</c:if>
+											</div>
+											<dl>
+												<dt>商品价值：</dt>
+													<dd>不错，很好，可以穿出好身材</dd>
+													<dd>纯天然制作，良心价格</dd>
+													<dd>不错，很好，可以穿出好身材</dd>
+													<dd>纯天然制作，良心价格</dd>
+													<dd>不错，很好，可以穿出好身材</dd>
+													<dd>纯天然制作，良心价格</dd>
+													<dd>不错，很好，可以穿出好身材</dd>
+													<dd>纯天然制作，良心价格</dd>
+											</dl>
+										</div>
+									</div>
+								</li>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="j-info-ugc">
+							<div id="shop-ugc" class="info-bar"></div>
+								<div class="user-comment">
+									<div class="w-user-comment" id="j-user-comment">
+										<div class="title">会员评分</div>
+										<div class="detail clearfix">
+											<div class="score clearfix">
+												<div class="number">4.5</div>
+												<div class="list clearfix">
+													<div class="star ugc-star-wrap-19 ">
+														<div class="star ugc-star-grade" style="width:85.4354px;">
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="status">
+												<div class="mt20 mb10">我在xxx店买的此商品</div>
+												<a class="button" href="/${projectName }/UserLogined/LoginedDiscussServlet?op=tocomments&goodsId=${goods.gId}" id="j-add-comment">我要评价</a>
+											</div>
+										</div>
+										<div class="impression-area">
+											<div class="w-impression">
+												<div class="impression-title">大家都在说：</div>
+												<div class="label-container">
+
+													<a class="more-label open-status hide-arrow"
+														id="j-more-label" href="###"></a>
+												</div>
+											</div>
+										</div>
+										<div class="all-comment-area">
+											<div class="w-comment-content" id="nextComment">
+												<div class="header clearfix">
+													
+												</div>
+											</div>
+											</div>
+										<!-- 评论 -->	
+										<c:forEach items="${pageBean.dataList }" var="dlist">
+									<div class="plDiv">
+										<div class="bigDiv">
+										
+											<div class="userDiv">
+												<div class="iocDiv">
+													<span class="imgDiv"><img style="width: 122px;height: 122px;margin:11" src="/${projectName }/img/user/user.png">
+													</span>
+												<div class="nameDiv">${dlist.userInfo.uName }</div>
+												</div>
+											</div>
+											
+											<div class="textDiv" >
+											
+												<div class="topDiv">
+													<span>
+														<b class="titleDiv" title="评论时间">${dlist.dTime}</b>
+													</span>
+												</div>
+												
+												<div class="itemDiv">
+													<dl>
+														<dt>商品评价:</dt>
+															<dd>${dlist.dBody}</dd>
+													</dl>
+												</div>
+												
+											
+			
+												<div class="comment-area" id="j-comment-list">
+
+													<div class="paging"></div>
+												</div>
+											</div>
+										</div>
+										<div style="width: 721px;height:1px;border: 1px solid #aaaaaa;float: left;margin-top: 25px;"></div>
+									</div>
+										</c:forEach>
+										
+									</div>
+						</div>
+						
+					</div>
+					
+						
+						
+					</div>
+				</div>
+			</div>
+		
+		</div>
+		<div></div>
+
+		<my:bottomtag></my:bottomtag>
+
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$(".btn-buy").click(function(){
+			if(${rows==1}){
+				alert("添加成功！")			
+			}
+		});
+	});						
+</script>
+							
+
+
+
+</html>
+

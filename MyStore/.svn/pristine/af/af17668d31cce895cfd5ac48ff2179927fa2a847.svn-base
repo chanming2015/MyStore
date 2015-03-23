@@ -1,0 +1,58 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.entity;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.entity
+ * FileName:AttributeValue.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-23 下午3:31:15
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public class AttributeValue {
+
+	/**
+	 * 属性值ID
+	 */
+	private int valueId;
+
+	/**
+	 * 属性ID
+	 */
+	private AttributeCategory attribute;
+	/**
+	 * 属性值
+	 */
+	private String value;
+	
+	public int getValueId() {
+		return valueId;
+	}
+	public void setValueId(int valueId) {
+		this.valueId = valueId;
+	}
+	public AttributeCategory getAttribute() {
+		return attribute;
+	}
+	public void setAttribute(AttributeCategory attribute) {
+		this.attribute = attribute;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
+}

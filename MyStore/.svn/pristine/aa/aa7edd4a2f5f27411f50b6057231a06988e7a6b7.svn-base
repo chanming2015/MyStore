@@ -1,0 +1,227 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.web.logined;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.dyr.dao.service.GoodsService;
+import com.dyr.dao.service.InfoOrderGoodsService;
+import com.dyr.dao.service.OrderUserService;
+import com.dyr.dao.service.ProductCartService;
+import com.dyr.dao.service.VipCartService;
+import com.dyr.entity.Goods;
+import com.dyr.entity.InfoOrderGoods;
+import com.dyr.entity.OrderUser;
+import com.dyr.entity.PageBean;
+import com.dyr.entity.ProductCart;
+import com.dyr.entity.UserInfo;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.web
+ *FileName:OrderServlet.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-4 下午3:43:19
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+@SuppressWarnings("serial")
+public class LoginedOrderServlet extends HttpServlet {
+	
+	private OrderUserService orderUserService=new OrderUserService();
+	private InfoOrderGoodsService infoOrderGoodsService=new InfoOrderGoodsService();
+	private GoodsService goodsService=new GoodsService();
+	private VipCartService vipCartService=new VipCartService();
+	private ProductCartService productCartService=new ProductCartService();
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request,response);
+	}
+
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String op = request.getParameter("op");
+		if("showDetatil".equals(op)){
+			//根据用户名和订单状态查询订单
+			showOrderDetails(request,response);
+		}else if("showStatus".equals(op)){
+			//根据用户名查询已付款订单
+			showOrderStatus(request,response);
+		}else if("showOrderGoods".equals(op)){
+			//显示所有订单的所有商品
+			showOrderGoodsByPage(request,response);
+		}else if ("addtoorder".equals(op)) {
+			//用户添加订单
+			addToOrder(request,response);
+		}
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-22 下午1:51:17
+	 * Description 用户添加订单
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void addToOrder(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		//取得用户信息
+		if(request.getSession().getAttribute("user")!=null){
+			UserInfo u=(UserInfo) request.getSession().getAttribute("user");
+			//取得总价、联系方式、省、市、地区、详细地址
+			double total=Double.parseDouble(request.getParameter("total"));
+			String shouji=request.getParameter("shouji");
+			String sheng=request.getParameter("sheng");
+			String shi=request.getParameter("shi");
+			String qu=request.getParameter("qu");
+			String address=request.getParameter("xiangxidiqu");
+			String post="500000";
+			if(!request.getParameter("post").equals("")){
+				post = request.getParameter("post");
+			}
+			
+			//查询数据库中最大订单ＩＤ
+			int maxId=orderUserService.getMaxId()+1;
+			
+			OrderUser orderUser=new OrderUser();
+			orderUser.setoId(maxId);
+			orderUser.setUserName(u.getuName());
+			orderUser.setoPrice(total);
+			orderUser.setoPhone(shouji);
+			orderUser.setProvince(sheng);
+			orderUser.setCity(shi);
+			orderUser.setArea(qu);
+			orderUser.setoAddress(address);
+			orderUser.setoPostcode(post);
+			//新增订单
+			int rows=orderUserService.addNewOrder(orderUser);
+			if(rows>0){
+				//根据用户名查询购物车ID
+				int cartId=vipCartService.getCartIdByUserName(u.getuName());
+				//查询该购物车下的商品和数量
+				List<ProductCart> productList=productCartService.getProductsListByCartId(cartId);
+				for (ProductCart productCart : productList) {
+					//向订单详情表插入数据
+					rows=infoOrderGoodsService.addInfo(maxId,productCart.getGoods().getgId(),productCart.getpNum());
+				}
+				//删除该用户购物车所有商品
+				rows=productCartService.removeAllGoodsFromCartByCartId(cartId);
+				request.getRequestDispatcher("/WEB-INF/page/user/main/paysuccessed.jsp").forward(request, response);
+			}
+		}
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午4:00:13
+	 * Description 显示某个订单的所有商品
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void showOrderGoodsByPage(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		PageBean pageBean=new PageBean();
+		try {
+			int page=Integer.parseInt(request.getParameter("page"));
+			pageBean.setPage(page);
+			pageBean.setRows(3);
+		} catch (NumberFormatException e) {
+		}
+		//根据用户名查询订单集合
+		UserInfo u=(UserInfo)request.getSession().getAttribute("user");
+		String state=request.getParameter("state");
+		//该用户名下的某种订单状态下的订单集合
+		List<OrderUser> orderUsersList=null;
+		int rowsCount=0;
+		if("1".equals(state)){
+			orderUsersList=orderUserService.getOrderListByUserNameAndState(pageBean.getPage(),u.getuName(),"待付款");
+			rowsCount=orderUserService.getOrderCountByUserNameAndState(u.getuName(),"待付款");
+		}else if ("2".equals(state)) {
+			orderUsersList=orderUserService.getOrderListByUserNameAndState(pageBean.getPage(),u.getuName(),"已付款");
+			rowsCount=orderUserService.getOrderCountByUserNameAndState(u.getuName(),"已付款");
+		}else if ("3".equals(state)) {
+			orderUsersList=orderUserService.getOrderListByUserNameAndState(pageBean.getPage(),u.getuName(),"待评价");
+			rowsCount=orderUserService.getOrderCountByUserNameAndState(u.getuName(),"待评价");
+		}
+		
+		List<List<InfoOrderGoods>> dataList=new ArrayList<List<InfoOrderGoods>>();
+		
+		for (OrderUser orderUser : orderUsersList) {
+			//根据订单ID查询订单详情集合
+			List<InfoOrderGoods> infoOrderGoodsList=infoOrderGoodsService.getOrderInfoListByOrderId(orderUser.getoId());
+			for (InfoOrderGoods infoOrderGoods : infoOrderGoodsList) {
+				//根据商品ID查询商品
+				Goods goods=goodsService.getGoodsInfoByGoodsId(infoOrderGoods.getGoods().getgId());
+				infoOrderGoods.setGoods(goods);
+				
+			}
+			dataList.add(infoOrderGoodsList);
+		}
+		pageBean.setRowsCount(rowsCount);
+		pageBean.setPagesCount();
+		pageBean.setDataList(dataList);
+		request.setAttribute("state", state);
+		request.setAttribute("pageBean",pageBean);
+		request.getRequestDispatcher("/WEB-INF/page/user/main/myorder.jsp").forward(request, response);
+	}
+
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-5 上午9:45:55
+	 *Description:  根据用户名查询已付款订单
+	 *@param request
+	 *@param response    
+	 */
+	private void showOrderStatus(HttpServletRequest request,
+			HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		UserInfo user = (UserInfo) session.getAttribute("user");
+		
+		List<OrderUser> orderStatusList = orderUserService.getOrderListByUserNameAndState(1,user.getuName(), "已付款");
+		request.setAttribute("orderStatusList", orderStatusList);
+		
+	}
+
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-4 下午3:47:46
+	 *Description: 根据用户名和订单状态查询订单
+	 *@param request
+	 *@param response    
+	 */
+	private void showOrderDetails(HttpServletRequest request,
+			HttpServletResponse response) {
+		String oState = request.getParameter("oState");
+		HttpSession session = request.getSession();
+		UserInfo user = (UserInfo) session.getAttribute("user");
+		List<OrderUser> orderUserList = orderUserService.getOrderListByUserNameAndState(1,user.getuName(), oState);
+		request.setAttribute("orderUserList", orderUserList);
+	}
+	
+}

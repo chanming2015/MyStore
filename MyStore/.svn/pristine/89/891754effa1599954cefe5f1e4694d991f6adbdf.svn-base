@@ -1,0 +1,31 @@
+/商品数量增减控制/
+
+$(document).ready(function(){
+	$(".jian").click(function(){
+		if($("#num").val()==1){
+			return;
+		}
+		if($("#num").val()<1){
+			$("#num").val(1) ;
+		}
+		$("#num").val($("#num").val()-1);
+		
+			
+	});
+
+	$(".jia").click(function(){
+		if($("#num").val()<1){
+			
+		}
+		$("#num").val(parseInt($("#num").val())+1);
+	});
+
+});
+/输入字母或者数字的时候，直接显示1/
+ $(document).ready(function(){
+ 	$("#num").blur(function(){
+		if(isNaN($("#num").val()) || $("#num").val()<1){
+			$("#num").val(1);
+		}
+	});
+ });

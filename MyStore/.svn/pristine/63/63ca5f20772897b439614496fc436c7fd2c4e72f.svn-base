@@ -1,0 +1,316 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+       <link rel="shortcut icon" href="" type="image/x-icon" />
+	<link rel="stylesheet" href="/${projectName}/css/user/goodsShow.css" />
+	<link rel="stylesheet" type="text/css"
+	href="/${projectName }/css/user/bootstrap.css" />
+	<script type="text/javascript"
+	src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript"
+	src="/${projectName}/js/user/bootstrap.js"></script>
+	<link href="/${projectName}/css/user/style.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <my:toptag></my:toptag>
+    
+    <body id="index" class="">
+        <div style="margin-top:185px;">
+        <input name='_tb_token_' type='hidden' value='HT8RCIAFI1o'><input type="hidden" id="J_hidden_pvid" value="200_10.103.34.79_370_1420598753224" /><input type="hidden" id="J_hidden_hname" value="ys10.mm.et2" />
+
+        <div id="J_SiteNav" class="site-nav">
+            <div id="J_SiteNavBd" class="site-nav-bd">
+                <ul id="J_SiteNavBdL" class="site-nav-bd-l">
+                </ul>
+                <ul id="J_SiteNavBdR" class="site-nav-bd-r">
+                </ul>
+            </div>
+        </div>
+        
+        <div>
+        </div>
+      
+       
+        <div class="page-search" bx-name="page-search">
+            <div class="con-wrap">
+                <!--当前筛选条件-->
+                <!--筛选词列表-->
+                <div class="search-filter-list" trace="sntrace">
+                    <div class="search-filter-group filter-group-top clearfix">
+                        <div class="filter-group-right">
+                            <div class="group-right-inner  clearfix">
+                                <div class="tags-wrap clearfix">
+                                	<span style="color: #aaaaaa;font-size: 12px;">相关搜索：</span>
+                                    <a href="#">衣服</a>
+                                    <a href="#">裤子</a>
+                                    <a href="#">鞋子</a>
+                                    <a href="#">办公</a>
+                                    <a href="#">户外</a>
+                                    <a href="#">体育</a>
+                                    <a href="#">零食</a>
+                                    <a href="#">耗材</a>
+                                    <a href="#">数码</a>
+                                    <a href="#">家电</a>
+                                    <a href="#">通讯</a>
+                                    <a href="#">电脑</a>
+                                    <a href="#">宠物</a>
+                                    <a href="#">女人专用</a>
+                                    <a href="#">内衣</a>
+                                    <a href="#">内裤</a>
+                                </div>
+                                <div class="pingpai">
+                                <ul>
+                                	<li><span class="test">品牌：</span></li>
+                                	
+                                	<li><a href="#">雕牌</a>	</li>
+                                	<li><a href="#">超人</a>	</li>
+                                	
+                                	<li><a href="#">三星</a></li>	
+                                	<li><a href="#">耐克</a>	</li>
+                                	<li><a href="#">李宁</a>	</li>
+                                	
+                                	<li><a href="#">超人</a>	</li>
+                                	<li><a href="#">三星</a>	</li>
+                                	<li><a href="#">耐克</a>	</li>
+                                	<li><a href="#">李宁</a>	</li>
+                                	</ul>
+                                	<span class="genduo">更多</span>
+                                	<div class="duoxuankuang"><span class="duoxuan">多选</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-group-left ">
+                        	<ul>
+                           		<li> <span class="lab">商品颜色：</span></li>
+                           		
+                           			<li><a href="#">黄色</a>	</li>
+                                	<li><a href="#">白色</a>	</li>
+                                	
+                                	<li><a href="#">红色</a></li>	
+                                	<li><a href="#">黑色</a>	</li>
+                                	<li><a href="#">蓝色</a>	</li>
+                                	
+                                	<li><a href="#">绿色</a>	</li>
+                                	<li><a href="#">橙色</a>	</li>
+                                	<li><a href="#">酒红色</a></li>
+                                	<li><a href="#">灰色</a>	</li>
+                            </ul>
+                            	<span class="genduo">更多</span>
+                            	<div class="duoxuankuang"><span class="duoxuan">多选</span></div>
+                        </div>
+                        <div class="filter-group-left">
+                        	<ul>
+                        		<li> <span class="lab">商品尺寸：</span></li>
+                        			<li><a href="#">M</a>	</li>
+                                	<li><a href="#">L</a>	</li>
+                                	
+                                	<li><a href="#">S</a></li>	
+                                	<li><a href="#">XL</a>	</li>
+                                	<li><a href="#">XXL</a>	</li>
+                                	
+                                	<li><a href="#">ML</a>	</li>
+                                	<li><a href="#">SL</a>	</li>
+                                	
+                        	</ul>
+                        	<span class="genduo">更多</span>
+                        	<div class="duoxuankuang"><span class="duoxuan">多选</span></div>
+                        </div>
+                        <div class="filter-group-rigth">
+                        	<ul>
+                        		<li> <span class="lab">商品价格：</span></li>
+                        			<li><a href="#">0-99</a>	</li>
+                                	<li><a href="#">100-199</a>	</li>
+                                	
+                                	<li><a href="#">200-499</a></li>	
+                                	<li><a href="#">500-999</a>	</li>
+                                	<li><a href="#">1000-9999</a>	</li>
+                                	
+                                	<li><a href="#">1万以上</a>	</li>  	
+                        	</ul>
+                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="waterfall-bg">
+                <div class="con-wrap">
+                    <!--筛选工具条：过滤工具-->
+                    <div class="search-filter-bar clearfix filter-bar-tools" >
+                        <div class="bar-group">
+                            <!-- <div class="nav nav-tabs sn-list" id="j-sn-list"> -->
+                            <div id="j-sn-ceiling" class="w-spec-nav clearfix">
+                           	 <ul id="j-sn-list" class="nav nav-tabs sn-list">
+                            	<li role="presentation"><a href="#j-info-all" class="spec-nav-current" 
+										data-toggle="tab" data-rel-content="all" mon="element=所有商品"><span>综合排序</span></a></li>
+                            	<li role="presentation" ><a href="#j-info-intro"
+										data-toggle="tab" data-rel-content="intro" mon="element=销量"><span>销量</span></a></li>
+                            	<li role="presentation"><a href="#j-info-ugc" 
+									data-toggle="tab" data-rel-content="ugc"
+										class="spec-nav-last" mon="element=价格"><span>价格</span>
+									</a>
+								</li>
+								</ul>
+								</div>
+                        </div>
+                        <div class="bar-group clearfix price-bar">
+                            <span class="price-input" id="J_priceInput">
+                            <input type="text" class="txt" placeholder="￥"/><span class="">-</span><input type="text" class="txt" placeholder="￥"/></span>
+                            <span class="price-submit clearfix" id="J_priceSubmit"><input type="button" value="查询" class="price-btn" index="1"></span>
+                        </div>
+                        <div class="kbai"></div>
+                        
+                        <!--地区筛选-->
+                        
+                    </div>
+			
+					<div class="tab-content">
+					<!-- 综合排序 -->
+					<div class="tab-pane active" id="j-info-all" role="tabpanel">
+						<table border=red>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div8.jpg"></a>
+							<div style="width: 100%;height:36px; ">
+								<label style="font-family:'bold';font-size: 20px;"><a href="#">${projectName}</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; background: #f40; ">
+								<label style="color: white;font-size: 24px;padding-left: 100px;">￥$gCid</label>
+							</div>
+						</td>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div2.jpg"></a>
+							<div style="width: 100%;height:36px;">
+								<label style="font-family:'bold';font-size:20px;"><a href="#">${projectName}</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; background: #f40;  ">
+								<label style="color: white;font-size: 24px;padding-left: 100px;">￥$gCid</label>
+							</div>
+						</td>
+						<td width=297px height="400px" >
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div10.jpg"></a>
+							<div style="width: 100%;height:36px;">
+								<label style="font-family:'bold';font-size: 20px;"><a href="#">${projectName}</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; background: #f40;  ">
+								<label style="color: white;font-size: 24px;padding-left: 100px;">￥$gCid</label>
+							</div>
+						</td>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div9.jpg"></a>
+							<div style="width: 100%;height:36px;background: #f6f6f6; ">
+								<label style="font-family:'bold';font-size: 20px;"><a href="#" >${projectName}</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; background: #f40; ">
+								<label style="color:white;font-size: 24px;padding-left: 100px;">￥：175</label>
+							</div>
+						</td>
+						</tr>
+						</table>
+					</div>
+					
+					<!-- 销量排序 -->
+					<div class="tab-pane" id="j-info-intro" role="tabpanel">
+						<table border=red>
+						<tr width=61%>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div2.jpg"></a>
+							<div style="width: 100%;height:36px; ">
+								<label style="font-family:'bold';font-size: 12px;"><a href="#">$gName</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; ">
+								<label style="color: #f40;font-size: 14px;">￥$gCid</label>
+							</div>
+						</td>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div1.jpg"></a>
+							<div style="width: 100%;height:36px; ">
+								<label style="font-family:'bold';font-size: 12px;"><a href="#">$gName</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; ">
+								<label style="color: #f40;font-size: 14px;">￥$gCid</label>
+							</div>
+						</td>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div6.jpg"></a>
+							<div style="width: 100%;height:36px; ">
+								<label style="font-family:'bold';font-size: 12px;"><a href="#">$gName</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; ">
+								<label style="color: #f40;font-size: 14px;">￥$gCid</label>
+							</div>
+						</td>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div3.jpg"></a>
+							<div style="width: 100%;height:36px;background: #f6f6f6; ">
+								<label style="font-family:'bold';font-size: 20px;"><a href="#" >$gName</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; background: #f40; ">
+								<label style="color:white;font-size: 24px;padding-left: 100px;">￥：175</label>
+							</div>
+						</td>
+						</tr>
+						</table>
+					</div>
+					
+					<!-- 价格排序 -->
+					<div class="tab-pane" id="j-info-ugc" role="tabpanel">
+						<table border=red>
+						<tr width=61%>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div3.jpg"></a>
+							<div style="width: 100%;height:36px; ">
+								<label style="font-family:'bold';font-size: 12px;"><a href="#">$gName</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; ">
+								<label style="color: #f40;font-size: 14px;">￥$gCid</label>
+							</div>
+						</td>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div4.jpg"></a>
+							<div style="width: 100%;height:36px; ">
+								<label style="font-family:'bold';font-size: 12px;"><a href="#">$gName</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; ">
+								<label style="color: #f40;font-size: 14px;">￥$gCid</label>
+							</div>
+						</td>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div5.jpg"></a>
+							<div style="width: 100%;height:36px; ">
+								<label style="font-family:'bold';font-size: 12px;"><a href="#">$gName</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; ">
+								<label style="color: #f40;font-size: 14px;">￥$gCid</label>
+							</div>
+						</td>
+						<td width=297px height="400px">
+							<a href="goodInfo.jsp"><img height="325px" width="100%" src="/${projectName}/img/user/div6.jpg"></a>
+							<div style="width: 100%;height:36px;background: #f6f6f6; ">
+								<label style="font-family:'bold';font-size: 20px;"><a href="#" >$gName</a></label>
+							</div>
+							<div  style="width: 100%;height:36px; background: #f40; ">
+								<label style="color:white;font-size: 24px;padding-left: 100px;">￥：175</label>
+							</div>
+						</td>
+						</tr>
+						</table>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	<my:bottomtag></my:bottomtag>
+	</div>                     
+    </body>
+
+</html>

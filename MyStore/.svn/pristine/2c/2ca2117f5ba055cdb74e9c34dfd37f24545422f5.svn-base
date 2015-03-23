@@ -1,0 +1,198 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>爱商城</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="" type="image/x-icon" />
+<link href="/${projectName}/css/user/style.css" type="text/css"rel="stylesheet" />
+	<script src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+	<script src="/${projectName}/js/user/main.js"></script>
+
+</head>
+
+
+
+
+
+<body>
+	<my:toptag></my:toptag>
+	<div style="margin-top:185px;">
+		<div class="box">
+			<div style="margin-left: 10px;margin-right: 10px;">
+			<div class="border_animation">
+				<div class="border_top"></div>
+				<div class="border_right"></div>
+				<div class="border_bottom"></div>
+				<div class="border_left"></div>
+				<div class="width" style="height:220px;float:top">
+					<a  href="#"> <img width="220" height="220"
+						alt="" src="/${projectName}/img/user/div1.jpg"> </a>
+				</div>
+				<div class="width" style="height:60px;float:bottom;">
+				<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥$price</font></label><br/>
+				<h3 class="zt">
+					<a class="spm biaoqian">
+					发发发放哈弗哈弗哈发挥发挥发放大大啊发发阿发发</a>
+				</h3>
+				</div>
+			</div>
+			<div class="border_animation">
+				<div class="border_top"></div>
+				<div class="border_right"></div>
+				<div class="border_bottom"></div>
+				<div class="border_left"></div>
+				<div class="width" style="height:220px;float:top">
+					<a  href="#"> <img width="220" height="220"
+						alt="" src="/${projectName}/img/user/div2.jpg"> </a>
+				</div>
+				<div class="width" style="height:60px;float:bottom;">
+					<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥$price</font></label><br/>
+				<h3 class="zt">
+					<a class="spm biaoqian">
+					发发发放哈弗哈弗哈发挥发挥发放大大啊发发阿发发</a>
+				</h3>
+				</div>
+			</div>
+			<div class="border_animation">
+				<div class="border_top"></div>
+				<div class="border_right"></div>
+				<div class="border_bottom"></div>
+				<div class="border_left"></div>
+				<div class="width" style="height:220px;float:top">
+					<a  href="#"> <img width="220" height="220"
+						alt="" src="/${projectName}/img/user/div3.jpg"> </a>
+				</div>
+				<div class="width" style="height:60px;float:bottom;">
+					<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥$price</font></label><br/>
+				<h3 class="zt">
+					<a class="spm biaoqian">
+					发发发放哈弗哈弗哈发挥发挥发放大大啊发发阿发发</a>
+				</h3>
+				</div>
+			</div>
+			<div class="border_animation">
+				<div class="border_top"></div>
+				<div class="border_right"></div>
+				<div class="border_bottom"></div>
+				<div class="border_left"></div>
+				<div class="width" style="height:220px;float:top">
+					<a  href="#"> <img width="220" height="220"
+						alt="" src="/${projectName}/img/user/div4.jpg"> </a>
+				</div>
+				<div class="width" style="height:60px;float:bottom;">
+					<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥$price</font></label><br/>
+				<h3 class="zt">
+					<a class="spm biaoqian">
+					发发发放哈弗哈弗哈发挥发挥发放大大啊发发阿发发</a>
+				</h3>
+				</div>
+			</div>
+			<div class="border_animation">
+				<div class="border_top"></div>
+				<div class="border_right"></div>
+				<div class="border_bottom"></div>
+				<div class="border_left"></div>
+				<div class="width" style="height:220px;float:top">
+					<a  href="#"> <img width="220" height="220"
+						alt="" src="/${projectName}/img/user/div5.jpg"> </a>
+				</div>
+				<div class="width" style="height:60px;float:bottom;">
+					<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥$price</font></label><br/>
+				<h3 class="zt">
+					<a class="spm biaoqian">
+					发发发放哈弗哈弗哈发挥发挥发放大大啊发发阿发发</a>
+				</h3>
+				</div>
+			</div>
+			<div class="border_animation">
+				<div class="border_top"></div>
+				<div class="border_right"></div>
+				<div class="border_bottom"></div>
+				<div class="border_left"></div>
+				<div class="width" style="height:220px;float:top">
+					<a  href="#"> <img width="220" height="220"
+						alt="" src="/${projectName}/img/user/div1.jpg"> </a>
+				</div>
+				<div class="width" style="height:60px;float:bottom;">
+				<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥$price</font></label><br/>
+				<h3 class="zt">
+					<a class="spm biaoqian">
+					发发发放哈弗哈弗哈发挥发挥发放大大啊发发阿发发</a>
+				</h3>
+				</div>
+			</div>
+			
+			<div class="border_animation">
+				<div class="border_top"></div>
+				<div class="border_right"></div>
+				<div class="border_bottom"></div>
+				<div class="border_left"></div>
+				<div class="width" style="height:220px;float:top">
+					<a  href="#"> <img width="220" height="220"
+						alt="" src="/${projectName}/img/user/div1.jpg"> </a>
+				</div>
+				<div class="width" style="height:60px;float:bottom;">
+				<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥$price</font></label><br/>
+				<h3 class="zt">
+					<a class="spm biaoqian">
+					发发发放哈弗哈弗哈发挥发挥发放大大啊发发阿发发</a>
+				</h3>
+				</div>
+			</div>
+			
+			<div class="border_animation">
+				<div class="border_top"></div>
+				<div class="border_right"></div>
+				<div class="border_bottom"></div>
+				<div class="border_left"></div>
+				<div class="width" style="height:220px;float:top">
+					<a  href="#"> <img width="220" height="220"
+						alt="" src="/${projectName}/img/user/div1.jpg"> </a>
+				</div>
+				<div class="width" style="height:60px;float:bottom;">
+				<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥$price</font></label><br/>
+				<h3 class="zt">
+					<a class="spm biaoqian">
+					发发发放哈弗哈弗哈发挥发挥发放大大啊发发阿发发</a>
+				</h3>
+				</div>
+			</div>
+			
+			<div class="border_animation">
+				<div class="border_top"></div>
+				<div class="border_right"></div>
+				<div class="border_bottom"></div>
+				<div class="border_left"></div>
+				<div class="width" style="height:220px;float:top">
+					<a  href="#"> <img width="220" height="220"
+						alt="" src="/${projectName}/img/user/div1.jpg"> </a>
+				</div>
+				<div class="width" style="height:60px;float:bottom;">
+				<label style="font: 700 18px Verdana,Arial;"><font color="#f40">￥$price</font></label><br/>
+				<h3 class="zt">
+					<a class="spm biaoqian">
+					发发发放哈弗哈弗哈发挥发挥发放大大啊发发阿发发</a>
+				</h3>
+				</div>
+			</div>
+			
+			</div>
+		</div>
+
+
+		<my:bottomtag></my:bottomtag>
+	</div>
+</body>
+</html>

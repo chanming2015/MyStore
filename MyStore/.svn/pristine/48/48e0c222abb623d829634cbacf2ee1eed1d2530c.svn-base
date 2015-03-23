@@ -1,0 +1,141 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>购物车</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<link rel="stylesheet" href="/${projectName}/css/user/style.css"/>
+	<script src="/${projectName}/js/jquery-1.11.1.min.js"></script>
+    <script src="/${projectName}/js/user/main.js"></script>
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+  </head>
+  
+  <body>
+  <my:toptag></my:toptag>
+    <!-- cart主体-->
+        <div style="margin-top:30px; width: 1190px;height: 150px;margin: 0 auto;">
+
+            
+        </div>
+                
+        <div style="padding-bottom: 20px;width: 1190px;height:500px;margin: 0 auto;">
+            <div style="height: 50px;">
+                <h3 style="width: 100px;float: left;height:98%;">我的订单</h3>
+            </div>
+            <!-- 商品展示区域-->
+            <div style="margin: 0;padding: 0;">
+                <div>
+                    <table style="border:1px;border-color:green;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    	商品名称
+                                </th>
+                                <th>
+                                    	价格
+                                </th>
+                                <th>
+                                    	数量
+                                </th>
+                                <th>
+                                    	操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    01/04/2012
+                                </td>
+                                <td>
+                                    Default
+                                </td>
+                            </tr>
+                            <tr >
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    01/04/2012
+                                </td>
+                                <td>
+                                    Approved
+                                </td>
+                            </tr>
+                            <tr >
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    02/04/2012
+                                </td>
+                                <td>
+                                    Declined
+                                </td>
+                            </tr>
+                            <tr >
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    03/04/2012
+                                </td>
+                                <td>
+                                    Pending
+                                </td>
+                            </tr>
+                            <tr >
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    04/04/2012
+                                </td>
+                                <td>
+                                    Call in to confirm
+                                </td>
+                            </tr>
+							
+                        </tbody>
+                    </table>
+					<div style="width:1190px;margin-top:30px;height:30px;"><a style="color:#00FF00;"href="" target="_parent">返回首页</a></div>
+                </div>
+            </div>
+        </div>
+        <my:bottomtag></my:bottomtag>
+  </body>
+</html>

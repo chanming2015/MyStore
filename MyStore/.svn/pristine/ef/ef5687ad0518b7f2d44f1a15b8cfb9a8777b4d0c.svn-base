@@ -1,0 +1,55 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+
+import com.dyr.entity.VipCart;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:VipCartDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:24:01
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface VipCartDao {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-15 下午3:25:10
+	 * Description
+	 * @param userName
+	 * @return 
+	 */
+	@Select("select VId from VipCart where VUName=#{userName}")
+	int selectCartIdByUserName(String userName);
+	
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-20 下午3:25:10
+	 * Description
+	 * @param userName
+	 * @return 
+	 */
+	@Select("select * from VipCart where VId=#{cartId}")
+	@Results({
+		@Result(column="VUName",property="userInfo",one=@One(select="com.dyr.dao.UserInfoDao.selectUserInfoByuName"))
+	})
+	VipCart selectCartByCartId(int cartId);
+
+}

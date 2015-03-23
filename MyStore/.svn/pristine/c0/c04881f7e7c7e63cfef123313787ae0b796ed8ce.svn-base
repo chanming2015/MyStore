@@ -1,0 +1,182 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.web;
+
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.dyr.dao.service.GoodsService;
+import com.dyr.entity.Category;
+import com.dyr.entity.Goods;
+import com.dyr.entity.ImageGoods;
+import com.dyr.entity.PageBean;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.web
+ * FileName:ShowGoodsListServlet.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午10:00:21
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+@SuppressWarnings("serial")
+public class GoodsServlet extends HttpServlet {
+	
+	/**
+	 * 获取GoodsService服务类
+	 */
+	private GoodsService goodsService=new GoodsService();
+	/**
+	 * 分页实体类
+	 */
+	private PageBean pageBean=new PageBean();
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String op=request.getParameter("op");
+		if("show".equals(op)){
+			String param=request.getParameter("param");
+			if("list".equals(param)){
+				showGoodsListByPage(request,response);
+			}else if ("info".equals(param)) {
+				showGoodsInfo(request,response);
+			}
+		}else if ("add".equals(op)) {
+			addNewGoods(request,response);
+		}else if ("search".equals(op)) {
+			searchGoods(request,response);
+		}
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 下午1:56:17
+	 * Description 模糊查询商品
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void searchGoods(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		//模糊查询商品
+		//取得关键字
+		String keyWord=request.getParameter("keyWord");
+		if(keyWord.equals("")){
+			return;
+		}
+		List<Goods> goodsList=goodsService.getGoodsListByKeyWord(new StringBuffer("%").append(keyWord).append("%").toString(),pageBean.getPage(),pageBean.getRows());
+		request.setAttribute("goodsList", goodsList);
+		request.getRequestDispatcher("MyJsp.jsp").forward(request, response);
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午10:36:18
+	 * Description 新增商品
+	 * @param request
+	 * @param response
+	 */
+	private void addNewGoods(HttpServletRequest request,
+			HttpServletResponse response) {
+		Goods goods=new Goods();
+		int rows=goodsService.addNewGoods(goods);
+		if(rows==1){
+			//添加成功
+		}
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午10:14:47
+	 * Description 根据商品ID查询商品详情
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void showGoodsInfo(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			//获取商品ID
+			int goodsId=Integer.parseInt(request.getParameter("goodsId"));
+			//根据商品ID查询商品详情
+			Goods goods=goodsService.getGoodsInfoByGoodsId(goodsId);
+			Category category=goodsService.getCategoryByCateId(goods.getgCid());
+			goods.setCate(category);
+			List<ImageGoods> imageGoods=goodsService.getImageListByGoodsId(goods.getgId());
+			goods.setImageGoods(imageGoods);
+			request.setAttribute("goods", goods);
+			request.getRequestDispatcher("MyJsp.jsp").forward(request, response);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 上午10:02:23
+	 * Description 根据商品类别ID分页查询商品集合
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void showGoodsListByPage(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			//获取商品类别ID
+			int cateId=Integer.parseInt(request.getParameter("cateId"));
+			//根据版块ID查询所有主贴信息
+			pageBean.setRowsCount(goodsService.getGoodsCount(cateId));
+			pageBean.setPagesCount(pageBean.getPagesCount() % pageBean.getRows() == 0 ? pageBean.getPagesCount() / pageBean.getRows() : pageBean.getPagesCount()/ pageBean.getRows() + 1); 
+			//翻页操作字符串
+			String pageop = request.getParameter("page");
+			if (pageop == null) {
+
+			} else if ("firstPage".equals(pageop)) {
+				pageBean.setPage(1);
+			} else if ("endPage".equals(pageop)) {
+				pageBean.setPage(pageBean.getPagesCount());
+			} else if ("downPage".equals(pageop)) {
+				if (pageBean.getPage() < pageBean.getPagesCount()) {
+					pageBean.setPage(pageBean.getPage()+1);
+				}
+			} else if ("upPage".equals(pageop)) {
+				if (pageBean.getPage() > 1) {
+					pageBean.setPage(pageBean.getPage()-1);
+				}
+			} else if ("go".equals(pageop)) {
+				int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+				if (pageNum > 1 && pageNum < pageBean.getPagesCount()) {
+					pageBean.setPage(pageNum);
+				}
+			}
+			//根据商品类别ID查询商品集合
+			List<Goods> goodsList=goodsService.getGoodsListByCateId(cateId,pageBean.getPage(),pageBean.getRows());
+			request.setAttribute("goodsList", goodsList);
+			request.getRequestDispatcher("MyJsp.jsp").forward(request, response);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

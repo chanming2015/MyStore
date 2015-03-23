@@ -1,0 +1,86 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.entity;
+
+import java.util.List;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.entity
+ * FileName:PageBean.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-12 下午3:08:41
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Description:分页实体类
+ * Version:
+ */
+public class PageBean {
+	
+	/**
+	 * 每页行数
+	 */
+	private int rows=10;
+	/**
+	 * 当前页码
+	 */
+	private int page=1;
+	/**
+	 * 记录总行数
+	 */
+	private int rowsCount;
+	/**
+	 * 总页数
+	 */
+	private int pagesCount;
+	/**
+	 * 
+	 * @author XuMaoSen
+	 * Create Time:2015-1-12 下午3:10:14
+	 * Description
+	 * @return
+	 */
+	private List<?> dataList;
+	
+	public int getRows() {
+		return rows;
+	}
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public int getRowsCount() {
+		return rowsCount;
+	}
+	public void setRowsCount(int rowsCount) {
+		this.rowsCount = rowsCount;
+	}
+	public int getPagesCount() {
+		return pagesCount;
+	}
+	public void setPagesCount() {
+		this.pagesCount = rowsCount%rows==0?rowsCount/rows:rowsCount/rows+1;
+	}
+	public List<?> getDataList() {
+		return dataList;
+	}
+	public void setDataList(List<?> dataList) {
+		this.dataList = dataList;
+	}
+	public PageBean() {
+	}
+	
+}

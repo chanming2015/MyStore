@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name></display-name>
+  <listener>
+  <listener-class>com.dyr.listener.MyListener</listener-class>
+  </listener>
+  
+  <filter>
+  <filter-name>EncodingFilter</filter-name>
+  <filter-class>com.dyr.filter.EncodingFilter</filter-class>
+  </filter>
+  
+  <filter>
+  <filter-name>UserLoginedFilter</filter-name>
+  <filter-class>com.dyr.filter.UserLoginedFilter</filter-class>
+  </filter>
+  
+  <filter>
+  <filter-name>AdminLoginedFilter</filter-name>
+  <filter-class>com.dyr.filter.AdminLoginedFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  <filter-name>EncodingFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  <filter-name>UserLoginedFilter</filter-name>
+  <url-pattern>/UserLogined/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  <filter-name>AdminLoginedFilter</filter-name>
+  <url-pattern>/AdminLogined/*</url-pattern>
+  </filter-mapping>
+  
+  <servlet>
+    <servlet-name>GoodsServlet</servlet-name>
+    <servlet-class>com.dyr.web.GoodsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserInfoServlet</servlet-name>
+    <servlet-class>com.dyr.web.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ImageServlet</servlet-name>
+    <servlet-class>com.dyr.web.ImageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>com.dyr.web.OrderServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CategoryServlet</servlet-name>
+    <servlet-class>com.dyr.web.CategoryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CartServlet</servlet-name>
+    <servlet-class>com.dyr.web.CartServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ManagerServlet</servlet-name>
+    <servlet-class>com.dyr.web.logined.ManagerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserGoodsServlet</servlet-name>
+    <servlet-class>com.dyr.web.UserGoodsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminGoodsServlet</servlet-name>
+    <servlet-class>com.dyr.web.AdminGoodsServlet</servlet-class>
+  </servlet>
+
+
+
+  <servlet-mapping>
+    <servlet-name>GoodsServlet</servlet-name>
+    <url-pattern>/GoodsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserInfoServlet</servlet-name>
+    <url-pattern>/UserInfoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ImageServlet</servlet-name>
+    <url-pattern>/ImageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/OrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CategoryServlet</servlet-name>
+    <url-pattern>/CategoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CartServlet</servlet-name>
+    <url-pattern>/CartServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ManagerServlet</servlet-name>
+    <url-pattern>/AdminLogined/ManagerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserGoodsServlet</servlet-name>
+    <url-pattern>/UserGoodsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminGoodsServlet</servlet-name>
+    <url-pattern>/AdminGoodsServlet</url-pattern>
+  </servlet-mapping>	
+  <welcome-file-list>
+    <welcome-file>UserInfoServlet</welcome-file>
+  </welcome-file-list>
+</web-app>

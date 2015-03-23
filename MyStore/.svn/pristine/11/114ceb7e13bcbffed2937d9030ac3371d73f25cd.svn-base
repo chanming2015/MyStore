@@ -1,0 +1,69 @@
+<%@ tag pageEncoding="UTF-8"%>
+<%@ attribute name="form" required="true" type="java.lang.String" description="要提交的分页表单的名字"%>
+<%@ attribute name="pageBean" required="true" type="com.dyr.entity.PageBean" description="分页实体对象"%>
+<div class="page">
+	<script type="text/javascript">
+		//这个函数负责改变隐藏表单中的页码和每页条数，然后提交表单给Servlet进行分页查询处理
+		function jumpPage(page, rows) {
+		
+			var pageNum=${pageBean.page };
+			
+			if (page=='first') {
+				pageNum = 1;
+			}
+			else if(page=='last') {
+				pageNum = ${pageBean.pagesCount};
+			}
+			else if(page=='prev') {
+				if(pageNum>1){
+					pageNum = pageNum - 1;
+				}
+			}
+			else if(page=='next') {
+				if(${pageBean.page < pageBean.pagesCount}){
+					pageNum = pageNum + 1;
+				}
+			}else {
+				if(page > 1 && page < pageBean.pagesCount){
+					pageNum=page;
+				}
+			}
+			$("form[name='${form}']")[0].page.value=pageNum;
+			$("form[name='${form}']").submit();
+		}
+
+		$(function() {
+			if ($("form[name='${form}'] :hidden[name=rows]").size() == 0) {
+				$("form[name='${form}']")
+						.append(
+								"<input type='hidden' name='rows' value='${pageBean.rows }' />");
+			}
+
+			if ($("form[name='${form}'] :hidden[name=page]").size() == 0) {
+				$("form[name='${form}']")
+						.append(
+								"<input type='hidden' name='page' value='${pageBean.page }' />");
+			}
+
+			$("#goPageBtn").click(function() {
+				var goPage = $("#goPage").val();
+				jumpPage(goPage);
+			});
+
+			$("#goPage").keydown(function() {
+				if (event.keyCode == 13) {
+					var goPage = $("#goPage").val();
+					jumpPage(goPage);
+				}
+			});
+		});
+	</script>
+
+	<a href="javascript:jumpPage('first')">首页</a> 
+	<a href="javascript:jumpPage('prev')">上一页</a> 
+	<a href="javascript:jumpPage('next')">下一页</a> 
+	<a href="javascript:jumpPage('last')">尾页</a> 当前页码：${pageBean.page } /	${pageBean.pagesCount } 总记录数：${pageBean.rowsCount }
+ 	<input style="text-align:center;border:none;border-bottom:1px solid black;"	type="text" size="1" value="${pageBean.page }" id="goPage" /> 
+	<input type="button" id="goPageBtn" value="GO" /> 
+
+</div>

@@ -1,0 +1,193 @@
+package com.dyr.web.logined;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.dyr.dao.service.GoodsService;
+import com.dyr.dao.service.ProductCartService;
+import com.dyr.dao.service.VipCartService;
+import com.dyr.entity.Goods;
+import com.dyr.entity.ProductCart;
+import com.dyr.entity.UserInfo;
+
+@SuppressWarnings("serial")
+public class LoginedCartServlet extends HttpServlet {
+
+	private GoodsService goodsService=new GoodsService();
+	private VipCartService vipCartService=new VipCartService();
+	private ProductCartService productCartService=new ProductCartService();
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String op=request.getParameter("op");
+		if("lookcart".equals(op)){
+			//用户查看购物车
+			lookCart(request,response);
+		}else if ("deletegood".equals(op)) {
+			//用户从购物车删除商品
+			deleteGoodsFromCart(request,response);
+		}else if ("addtocart".equals(op)) {
+			//用户添加商品到购物车
+			addToCart(request,response);
+		}else if ("updatecart".equals(op)) {
+			//用户修改购物车
+			updateCart(request,response);
+		}
+	}
+	
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-21 下午5:32:59
+	 * Description 修改购物车商品信息
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void updateCart(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		
+		//取得用户信息
+		if(request.getSession().getAttribute("user")!=null){
+			UserInfo u=(UserInfo) request.getSession().getAttribute("user");
+			//根据用户名查询购物车ID
+			int cartId=vipCartService.getCartIdByUserName(u.getuName());
+			ArrayList<Integer> goodsIdArray=new ArrayList<Integer>();
+			for (String str : request.getParameterValues("goodsId")) {
+				goodsIdArray.add(Integer.parseInt(str));
+			}
+			
+			ArrayList<Integer> goodsNumArray=new ArrayList<Integer>();
+			for (String str : request.getParameterValues("num")) {
+				goodsNumArray.add(Integer.parseInt(str));
+			}
+			//删除该用户购物车所有商品
+			int rows=productCartService.removeAllGoodsFromCartByCartId(cartId);
+			if(rows>1){
+				//添加进购物车
+				for (int i = 0; i < goodsIdArray.size(); i++) {
+					rows=productCartService.addToCart(cartId,goodsIdArray.get(i),goodsNumArray.get(i));
+				}
+			}
+			//根据购物车ID查询购物车中的商品
+			double totalPrice=0;
+			List<ProductCart> productList=productCartService.getProductsListByCartId(cartId);
+			for (ProductCart productCart : productList) {
+				Goods goods=goodsService.getGoodsInfoByGoodsId(productCart.getGoods().getgId());
+				productCart.setGoods(goods);
+				//计算总价
+				totalPrice+=productCart.getpNum()*goods.getgMoney();
+			}
+			request.setAttribute("totalPrice", totalPrice);
+			request.setAttribute("productList", productList);
+			request.getRequestDispatcher("/WEB-INF/page/user/main/order.jsp").forward(request, response);
+		}
+		
+	}
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-20 下午1:55:27
+	 * Description 用户添加商品到购物车
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void addToCart(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		
+		//取得用户信息
+		if(request.getSession().getAttribute("user")!=null){
+			UserInfo u=(UserInfo) request.getSession().getAttribute("user");
+			//根据用户名查询购物车ID
+			int cartId=vipCartService.getCartIdByUserName(u.getuName());
+			int goodsId=Integer.parseInt(request.getParameter("goodsId"));
+			int num=Integer.parseInt(request.getParameter("num"));
+			int rows=productCartService.addToCart(cartId,goodsId,num);
+			//添加进购物车
+			if(rows==1){
+				//添加成功
+				Goods goods=goodsService.getGoodsInfoByGoodsId(goodsId);
+				request.setAttribute("goods", goods);
+				request.getRequestDispatcher("/WEB-INF/page/user/main/goodInfo.jsp").forward(request, response);
+			}
+		}
+		
+	}
+	
+	private void toOrder(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		
+		//获得用户
+			UserInfo u=(UserInfo)request.getSession().getAttribute("user");
+			//根据用户名查询购物车ID
+			int cartId=vipCartService.getCartIdByUserName(u.getuName());
+			//根据购物车ID查询购物车中的商品
+			double totalPrice=0;
+			List<ProductCart> productList=productCartService.getProductsListByCartId(cartId);
+			for (ProductCart productCart : productList) {
+				Goods goods=goodsService.getGoodsInfoByGoodsId(productCart.getGoods().getgId());
+				productCart.setGoods(goods);
+				//计算总价
+				totalPrice+=productCart.getpNum()*goods.getgMoney();
+			}
+			request.setAttribute("totalPrice", totalPrice);
+			request.setAttribute("productList", productList);
+			request.getRequestDispatcher("/WEB-INF/page/user/main/order.jsp").forward(request, response);
+	}
+
+	/**
+	 * 
+	 * @author XuMaoSen
+	 * Create Time:2015-1-21 上午9:29:17
+	 * Description 用户查看购物车
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void lookCart(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		//获得用户
+		UserInfo u=(UserInfo)request.getSession().getAttribute("user");
+		//根据用户名查询购物车ID
+		int cartId=vipCartService.getCartIdByUserName(u.getuName());
+		//根据购物车ID查询购物车中的商品
+		double totalPrice=0;
+		List<ProductCart> productList=productCartService.getProductsListByCartId(cartId);
+		for (ProductCart productCart : productList) {
+			Goods goods=goodsService.getGoodsInfoByGoodsId(productCart.getGoods().getgId());
+			productCart.setGoods(goods);
+			//计算总价
+			totalPrice+=productCart.getpNum()*goods.getgMoney();
+		}
+		request.setAttribute("totalPrice", totalPrice);
+		request.setAttribute("productList", productList);
+		request.getRequestDispatcher("/WEB-INF/page/user/main/cart.jsp").forward(request, response);
+	}
+
+
+	/**
+	 * 
+	 * @author XuMaoSen
+	 * Create Time:2015-1-21 上午9:31:19
+	 * Description 用户从购物车删除商品
+	 * @param request
+	 * @param response
+	 */
+	private void deleteGoodsFromCart(HttpServletRequest request,
+			HttpServletResponse response) {
+	}
+
+}

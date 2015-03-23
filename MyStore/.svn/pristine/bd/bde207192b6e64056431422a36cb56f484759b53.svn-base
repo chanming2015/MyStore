@@ -1,0 +1,167 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib tagdir="/WEB-INF/tags/user" prefix="my" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="default">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>用户基本资料</title>
+        <meta name="keywords" content="用户基本资料" />
+        <meta name="description" content="" />
+        <link type="image/x-icon" rel="shortcut icon" href="" media="screen"/>
+        <link href="/${projectName}/css/user/userPonseDate.css" type="text/css" rel="stylesheet"/>
+        <link href="/${projectName}/css/user/style.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="#">
+        </script>
+    </head>
+    <body>
+    <div class="Allbody">
+    <my:toptag></my:toptag>
+        <div class="clear">
+        </div>
+     
+        <div class="head_nav">
+            <div class="head_nav_c area">
+                <div class="fl nav_list">
+                    <a class="fl " href="main.jsp">首页<i></i></a>
+                    <a class="fl " href="goodShow.jsp">服饰<i></i></a>
+                    <a class="fl " href="goodShow.jsp">办公用品<i></i></a>
+                    <a class="fl " href="goodShow.jsp">折扣商品<i></i></a>
+                    <a class="fl " href="goodShow.jsp">热卖商品<i></i></a>
+                    <a class="fl " href="goodShow.jsp">我的购物车<i></i></a>
+                    <a class="fl " href="goodShow.jsp" target="_blank">去淘宝贝<i></i></a>
+                </div>
+                
+            </div>
+        </div>
+
+        <link href="" type="text/css" rel="stylesheet"/>
+
+        <div class="area baockP">
+            <div class="fl leftb">
+                <dl>
+                    <dt>
+                        用户中心
+                    </dt>
+                    <dd>
+                        <a href="#" class="on">基本资料</a>
+                    </dd>
+                    
+                    
+                 </dl> 
+                <dl>
+                    <dt>
+                        选购商品信息
+                    </dt>
+                    <dd>
+                        <a href="#">我的购物车</a>
+                    </dd>
+                    <dd>
+                        <a href="h#">购买记录</a>
+                    </dd>
+
+                </dl>
+                <dl>
+                    <dd>
+                        <a href="#">我的收藏</a>
+                    </dd>
+                 
+                </dl>
+            </div>
+            <div class="fr rightb">
+                <div class="bp">
+                    <div class="usermain">
+                        <div class="profile_info">
+                            <form action="" method="POST" onsubmit="return setnick();">
+                            	  <div class="userImg" >
+                                    <label class="fLabel">更改头像：</label>
+									<div class="bigImg">
+										<img alt class="normal" src="../../../../img/user/user.png">
+									</div>
+                                </div>
+                                <div class="item">
+                                    <label class="fl">
+                                        用户名：
+                                    </label>
+                                    xxoo
+                                </div>
+								  <div class="item">
+                                    <label class="fl">
+                                        新密码：
+                                    </label>
+                                   <input type="text" name="uPassword" class="input_text" value=""/>
+                                </div>
+								   <div class="item">
+                                    <label class="fl">
+                                        确认新密码：
+                                    </label>
+                                    <input type="text" name="uPassword" class="input_text" value=""/>
+                                </div>
+                                <div class="item">
+                                    <label class="fl">
+                                        性别：
+                                    </label>
+                                    <p class="sexradio">
+                                        <input type="radio" name="userinfo[sex]" value="1" checked class="" id="">
+                                        <label for="">
+                                            男
+                                        </label>
+                                        <input type="radio" name="userinfo[sex]" value="-1" class="" id="">
+                                        <label for="">
+                                            女
+                                        </label>
+                                    </p>
+                                </div>
+                                <div class="item birthday">
+                                    <label class="fl">
+                                        生日：
+                                    </label>
+                                    <select name="userinfo[year]">
+                                    </select>
+                                    <select name="userinfo[month]">
+                                    </select>
+                                    <select name="userinfo[day]">
+                                    </select>
+                                </div>
+                                <script>
+                                    new YMDselect('userinfo[year]', 'userinfo[month]', 'userinfo[day]', '0', '0', '0');
+                                </script>
+                                <div class="item address">
+                                    <label class="fl">
+                                        所在地：
+                                    </label>
+                                    <select id="s_province" name="userinfo[province]">
+                                    </select>
+                                    <select id="s_city" name="userinfo[city]">
+                                    </select>
+                                    <select id="s_county" name="userinfo[county]">
+                                    </select>
+                                </div>
+                                
+                             
+                                <script type="text/javascript">
+                                    _init_area('', '', '');
+                                </script>
+                                <div class="item">
+                                    <label class="fl">
+                                        &nbsp;
+                                    </label>
+                                    <input type="hidden" name="gourl" value="提交地址"><input type="submit" value="保存" class="save btn"/>
+                                </div>
+                            </form>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <my:bottomtag></my:bottomtag>
+    	</div>
+    </body>
+</html>
+
+
+

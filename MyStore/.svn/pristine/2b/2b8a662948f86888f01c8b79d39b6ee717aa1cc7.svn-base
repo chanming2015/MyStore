@@ -1,0 +1,190 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import com.dyr.entity.Discuss;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:DiscussDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-20 上午11:19:23
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface DiscussDao {
+	
+	@Select("Select * from discuss where dGId=#{dGId}")
+	List<Discuss> getAllDiscuss(int dGId);
+	
+	@Select("select top  (#{rows}) * from Discuss where dId not in (select top ((#{page}-1)*#{rows}) dId from Discuss) and Dsh=0")
+	@Results({
+		@Result(column="DGId",property="goods",one=@One(select="com.dyr.dao.GoodsDao.selectGoodsBygoodsId"))
+	})
+	List<Discuss> getAllDiscussbyPage(@Param("page") int page ,@Param("rows") int rows);
+	
+	
+	@Select("select COUNT(dId) from Discuss group by dGId")
+	int selectdiscussCount();
+	
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:15:25
+	 *Description: 总评论条数
+	 *@param dGId
+	 *@return
+	 */
+	@Select("select COUNT(*) from Discuss where DGId=#{dGId}")
+	int getCountBygId(int dGId);
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 下午2:08:53
+	 *Description:根据订单编号查订单 
+	 *@param dId
+	 *@return
+	 */
+	@Select("select * from Discuss where dId = #{dId}")
+	Discuss selectDiscussBydId(int dId);
+	
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:14:29
+	 *Description: 带审核条数
+	 *@param dGId
+	 *@return
+	 */
+	@Select("select COUNT(*) from Discuss where DGId=#{dGId} and Dsh=0")
+	int getCountByDsh(int dGId);
+	
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:14:29
+	 *Description: 通过审核条数
+	 *@param dGId
+	 *@return
+	 */
+	@Select("select COUNT(*) from Discuss where DGId=#{dGId} and Dsh=1")
+	int getPassCountByDsh(int dGId);
+	
+	
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:15:55
+	 *Description: 显示未审核的评论内容
+	 *@param dGId
+	 *@param page
+	 *@param rows
+	 *@return
+	 */
+	@Select("select top (#{rows}) * from Discuss where dGId=#{dGId} and dsh=0 and dId not in (select top ((#{page}-1)*#{rows}) dId from Discuss where  DGId=#{dGId} and Dsh=0)")
+	@Results({
+		@Result(column="DGId",property="goods",one=@One(select="com.dyr.dao.GoodsDao.selectGoodsInfoByGoodsId")),
+		@Result(column="DUName",property="userInfo",one=@One(select="com.dyr.dao.UserInfoDao.selectUserByuName"))
+	})
+	List<Discuss> getAllDiscussInfobyPage(@Param("dGId") int dGId, @Param("page") int page ,@Param("rows") int rows);
+	
+	
+	
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:15:55
+	 *Description: 显示通过审核的评论内容
+	 *@param dGId
+	 *@param page
+	 *@param rows
+	 *@return
+	 */
+	@Select("select top (#{rows}) * from Discuss where dGId=#{dGId} and dsh=1 and dId not in (select top ((#{page}-1)*#{rows}) dId from Discuss where  DGId=#{dGId} and Dsh=1)")
+	@Results({
+		@Result(column="DGId",property="goods",one=@One(select="com.dyr.dao.GoodsDao.selectGoodsInfoByGoodsId")),
+		@Result(column="DUName",property="userInfo",one=@One(select="com.dyr.dao.UserInfoDao.selectUserByuName"))
+	})
+	List<Discuss> getPassDiscussInfo(@Param("dGId") int dGId, @Param("page") int page ,@Param("rows") int rows);
+	
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:16:14
+	 *Description: 通过审核
+	 *@param dId
+	 *@return
+	 */
+	@Update("update Discuss set Dsh=1 where dId=#{dId}")
+	int updateDsh(int dId);
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 上午10:27:51
+	 *Description: 根据商品ID分组显示分页
+	 *@return
+	 */
+	@Select("select top (#{rows}) dGId from Discuss where DGId not in(select top ((#{page}-1)*#{rows}) DGId from discuss group by DGId) group by DGId")
+	List<Integer> getdGIdgroupBydGId(@Param("page") int page ,@Param("rows") int rows);
+	
+	@Select("select * from discuss where dGId = #{dGId}")
+	List<Discuss>	getDiscussList(int dGId);
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-23 下午3:33:52
+	 *Description: 通过评论编号删除评论
+	 *@param dId
+	 *@return
+	 */
+	@Delete("delete from discuss where dId = #{dId}")
+	int deleteDiscuss(int dId);
+	
+	/**
+	 * 
+	 *@author linlin
+	 *Create Time:2015-1-27 下午2:52:37
+	 *Description: 添加评价
+	 *@param discuss
+	 *@return
+	 */
+	@Insert("insert into discuss values(#{dGId},#{dUName},#{dBody},default,#{dLevel},0)")
+	int addNewdiscuss(Discuss discuss);
+
+	/**
+	 *@author linlin
+	 *Create Time:2015-1-27 下午2:55:07
+	 *Description: 
+	 *@param discuss
+	 *@return    
+	 */
+}

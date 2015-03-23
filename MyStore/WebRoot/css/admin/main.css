@@ -1,0 +1,249 @@
+body {
+	margin: 0 auto;
+	background-color: #ADD1D1;
+	font-size: 16px;
+}
+body a{
+	text-decoration:none;
+}
+
+.whole {
+	margin: 0 auto;
+	border: 1px solid;
+	height: 768px;
+	width: 1024px;
+}
+
+.top {
+	background-color: #054784;
+	height: 150px;
+	padding-top: 0px;
+	width: 1024px;
+	float: top;
+}
+
+.top span {
+	color: white;
+}
+
+.top_2 {
+	background-color: #78A8C4;
+	height: 30px;
+	font-weight: bold;
+	font-size: 16px;
+	padding-top: 0px;
+	width: 1024px;
+	float: bottom;
+}
+
+.top_2 span {
+	float: right;
+	padding-right: 50px;
+	display: block;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.top_2 span a {
+	color: white;
+}
+
+.top_right {
+	width: 1024px;
+	height: 120px;
+	text-align: center;
+}
+
+.top_right a {
+	color: #CCCCCC;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.top_right_2 {
+	width: 150px;
+	height: 40px;
+	float: right;
+}
+
+.left {
+	width: 200px;
+	float: left;
+	height: 618px;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.right {
+	float: right;
+	width: 824px;
+	height: 618px;
+}
+
+.main_a {
+	border: 1px solid black;
+	height: 618px;
+	font-weight: bold;
+	font-size: 16px;
+	background-color: #ADD1D1;
+	width: 823px;
+	margin-top: -4px;
+	
+}
+.table{
+	margin-left:200px;
+}
+.main_a h3 {
+	text-align: center;
+}
+
+.main_a tr {
+	
+	line-height: 50px;
+}
+.title{
+	text-align: right;
+}
+.main_a select {
+	width: 165px;
+}
+
+.main_a input[type='button'] {
+	width: 10px;
+	height: 10px;
+}
+
+.radio {
+	text-align: left;
+}
+
+.main_a input[type='text'] {
+	width: 165px;
+	height: 20px;
+}
+
+.main_a input[type='password'] {
+	width: 165px;
+	height: 20px;
+}
+
+.main_a textarea {
+	width: 165px;
+	height: 70px;
+}
+
+.main_b {
+	width: 823px;
+	border: 1px solid black;
+	height: 618px;
+	font-weight: bold;
+	font-size: 16px;
+	background-color: #ADD1D1;
+	margin-top: -4px;
+}
+
+.main_b table {
+	margin: 0 auto;
+	width: 800px;
+	border-color:#78A8C4;
+}
+
+.main_b h3 {
+	text-align: center;
+}
+
+.main_b tr {
+	text-align: center;
+	line-height: 2;
+}
+
+.main_b input[type='button'] {
+	width: 40px;
+}
+
+iframe {
+	border: 0px;
+}
+
+.search {
+	margin-left: 595px;
+	padding-bottom: 10px;
+}
+
+.time_search {
+	margin-left: 598px;
+	padding-bottom: 10px;
+}
+
+.page {
+	padding-top: 70px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.logintable tr {
+	line-height: 50px;
+}
+
+.logintable {
+	width: 1024px;
+	margin: 350px auto;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.logintable table {
+	margin: 0 auto;
+	border: 1px;
+}
+
+.logintable input[type="text"],input[type="password"],input[type="img"]
+	{
+	width: 307px;
+	height: 34px;
+}
+
+.submit {
+	width: 310px;
+	height: 34px;
+}
+
+.main_c {
+	border: 1px solid black;
+	height: 618px;
+	font-weight: bold;
+	font-size: 16px;
+	background-color: #ADD1D1;
+	width: 823px;
+	margin-top: -4px;
+}
+
+.main_c table {
+	margin: 0 auto;
+	width: 800px;
+	border-color:#78A8C4;
+}
+
+.main_c h3 {
+	text-align: center;
+}
+
+.main_c tr {
+	text-align: right;
+	line-height: 10px;
+}
+
+.main_c select {
+	width: 165px;
+}
+
+.imagediv ul {
+	display: inline-flex;
+}
+
+input.error {
+	border: 1px red solid;
+}
+label.error{
+	color: red;
+}

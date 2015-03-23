@@ -1,0 +1,245 @@
+//登录的JS
+
+/*$(function() {
+ // 跳回首页
+ $("#loginsubmit").click(function() {
+ location.href = "UserInfoServlet?op=userlogin";
+ });
+ });
+
+ // 注册的JS
+ $(function() {
+ // 跳回首页
+ $("#registsubmit").click(function() {
+ location.href = "main.html";
+ });
+ });
+ */
+/*// 搜索的JS
+ $(function() {
+ $("#sousuo").click(function() {
+ $("#mainFrame").parent.location.href = "mainframe/goodShow.html";
+ //		$("#mainFrame").src = "mainframe/goodShow.html";
+ window.parent.location.href = "mainframe/goodShow.html";
+ window.target = "mainFrame";
+
+ });
+ });*/
+ $(function() {
+                $("#webwidget_vertical_menu").webwidget_vertical_menu({
+                    menu_width: '145',
+                    menu_height: '29',
+                    menu_margin: '0',
+                    menu_text_size: '18',
+                    menu_text_color: '#707070',
+                    menu_background_color: '#fff',
+                    menu_border_size: '2',
+                    menu_border_color: '#eee',
+                    menu_border_style: 'solid',
+                    menu_background_hover_color: '#f40',
+                    directory: 'images'
+                });
+            });
+
+(function(a){
+    a.fn.webwidget_vertical_menu=function(p){
+        var p=p||{};
+
+        var f=p&&p.menu_text_size?p.menu_text_size:"12";
+        var g=p&&p.menu_text_color?p.menu_text_color:"blue";
+        var h=p&&p.menu_border_size?p.menu_border_size:"1";
+        var i=p&&p.menu_background_color?p.menu_background_color:"#FFF";
+        var j=p&&p.menu_border_color?p.menu_border_color:"blue";
+        var k=p&&p.menu_border_style?p.menu_border_style:"solid";
+        var l=p&&p.menu_width?p.menu_width:"250";
+        var n=p&&p.menu_height?p.menu_height:"30";
+        var r=p&&p.menu_margin?p.menu_margin:"5";
+        var v=p&&p.menu_background_hover_color?p.menu_background_hover_color:"red";
+        var m=p&&p.directory?p.directory:"../../../img/user";
+        var w=a(this);
+        f += 'px';
+        h += 'px';
+        l += 'px';
+        n += 'px';
+        r += 'px';
+        if(w.children("ul").length==0||w.find("li").length==0){
+            dom.append("Require menu content");
+            return null;
+        }
+        init();
+        function init(){
+            w.children("ul").find("a").css("color",g).css("font-size",f).css("line-height",n).css("display","block");
+            w.children("ul").children("li").css("border",h+" "+k+" "+j).css("margin-bottom",r).css("background-color",i);
+            w.find("li").children("ul").css("border",h+" "+k+" "+j).css("background-color",i);
+            w.find("li").css("width",l).css("height",n);
+            w.find("li:has(ul)").addClass("webwidget_vertical_menu_down_drop");
+         //   w.find("li:has(ul)").css("background-image","url("+m+"/down_drop_icon.gif)");
+            w.children("ul").children("li").find("ul").css("left",l).css("top","0px");
+        }
+//        s_sub_l(w.find("ul").children("li").children("ul").children("li").children("ul"),h);
+        w.find("li").hover(function(){
+            $(this).css("background-color",v);
+            $(this).children("ul").show();
+            },function(){
+            $(this).css("background-color",i);
+            $(this).children("ul").hide();
+            });
+
+
+
+            function s_u_t(a){
+            l_t_b_s=a.outerHeight(true)-a.css("border-top-width").replace("px","")*2+"px";
+            a.children("ul").css("top",l_t_b_s);
+            a.children("ul").css("left","-"+a.css("border-top-width"));
+            li_hieght = w.children("ul").children("li").outerHeight(true);
+            a.children("ul").find("a").css("line-height",li_hieght+"px");
+            }
+            function s_sub_l(a,b){
+            boder_width=b.replace("px","");
+            a.css("left",a.parent("li").parent("ul").outerWidth(true)-boder_width*2);
+            a.css("top","-"+b);
+            }
+        };
+})(jQuery);
+
+
+
+// 滚动出现导航
+(function() {
+	$(window)
+			.scroll(
+					function() {
+						var scTop = $(window).scrollTop(), $scS = $(".scroll-search"), $frS = $(".fix-right-sub"), rW;
+						rW = ($(window).width() - 1190) / 2;
+
+						scTop >= 200 ? $scS.slideDown(200) : $scS.slideUp(200);
+						if (scTop >= 2700 && scTop < 4400) {
+							$frS.css({
+								position : 'fixed',
+								top : '-541px',
+								right : rW,
+								marginTop : ''
+							});
+						} else if (scTop >= 4400) {
+							$frS.css({
+								position : '',
+								marginTop : 1728
+							});
+						} else {
+							$frS.css({
+								position : ''
+							});
+						}
+					});
+})(jQuery);
+// 侧边栏展开效果
+$(function() {
+	var  beginH = 138, wW = $(window).width(), classN, num;
+	
+	$(".side-li > li").hover(function() {
+		$(this).find("h3").css({
+			border : 'none'
+		}).end().find("span").css({
+			color : "#F40"
+		});
+		classN = $(this).attr("class");
+		num = classN.substring(2, classN.length);
+
+	
+
+		$(".hiden-box").show().css({
+			left : ((wW - 1190) / 2 + 149),
+			top : 205
+		}).animate({
+			width : '729px'
+		}, 300);
+		$(".hiden-box > li").hide();
+		$("#hiden-" + num).fadeIn(200);
+		beginH = 138;
+	}, function() {
+		$(this).find('h3').css({
+			border : ''
+		}).end().find('span').css({
+			color : ""
+		});
+		$(".hiden-box").hide().css({
+			width : '0'
+		});
+	});
+	$(".hiden-box").hover(function() {
+		$(".s_" + num).css({
+			border : "1px solid #F40",
+			borderRight : '1px solid #fff'
+		}).find("h3").css({
+			border : 'none'
+		}).end().find('span').css({
+			color : "#F40"
+		});
+		$(this).show().css({
+			width : '729px'
+		});
+	}, function() {
+		$(".s_" + num).css({
+			border : '',
+			"borderRight" : "none"
+		}).find("h3").css({
+			border : ''
+		}).end().find("span").css({
+			color : ""
+		});
+		$(this).animate({
+			width : 0
+		}, 200).hide(200);
+	});
+
+});
+
+/* 数字加减 */
+$(function(){ 
+	$(".add").click(function(){ 
+	var t=$(this).parent().find('input[class=text_box]'); 
+
+	if(isNaN(parseInt(t.val()))){
+		t.val(0);
+	}
+	t.val(parseInt(t.val())+1) ;
+//	var j=$(this).parent().find('span[class*=price]');
+//	alert(j.val());
+	setTotal(); 
+	}) ;
+	$(".min").click(function(){ 
+	var t=$(this).parent().find('input[class=text_box]');
+	if(parseInt(t.val())==1){
+		t.val(1);
+		return;
+	}
+	if(isNaN(parseInt(t.val()))){
+		t.val(2);
+	}
+	if(parseInt(t.val())<0){ 
+	t.val(1); 
+	} 
+	t.val(parseInt(t.val())-1) ;
+	setTotal(); 	
+}) ;
+	function setTotal(){ 
+		var s=0; 
+		$("#tab td").each(function(){ 
+		s+=parseInt($(this).find('input[class=text_box]').val())*parseFloat($(this).find('span[class=price]').text()); 
+		
+		}); 
+		$("#total").html(s.toFixed(2));  
+		} 
+		setTotal(); 
+
+		}) ;
+
+/*图片边框*/
+$(function() {
+	$(".border_animation").mouseenter(function() {
+		$(this).addClass("hover");
+	});
+	$(".border_animation").mouseleave(function() {
+		$(this).removeClass("hover");
+	});
+});

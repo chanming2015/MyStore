@@ -1,0 +1,151 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.web.logined;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.dyr.dao.service.DiscussService;
+import com.dyr.dao.service.GoodsService;
+import com.dyr.entity.Discuss;
+import com.dyr.entity.Goods;
+import com.dyr.entity.PageBean;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.web.logined
+ *FileName:LoginedReplyServlet.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-22 上午9:23:37
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+public class LoginedReplyServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String op =  null;
+	private DiscussService discussService = new DiscussService();
+	private GoodsService goodsService = new GoodsService();
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request,response);
+	
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		op = request.getParameter("op");
+		if("showreply".equals(op)){
+			showreply(request,response);
+		}else if("toreply".equals(op)){
+			toreply(request,response);
+		}else if("passed".equals(op)){
+			passed(request,response);
+		}
+		
+	}
+	
+	/**
+	 *@author linlin
+	 *Create Time:2015-1-22 下午6:35:25
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 */
+	private void passed(HttpServletRequest request, HttpServletResponse response) {
+		String dIdStr = request.getParameter("dId");
+		int dId = Integer.parseInt(dIdStr);
+		int row = discussService.updateDsh(dId);
+		if(row>0){
+			
+		}
+	}
+
+	/**
+	 *@author linlin
+	 *Create Time:2015-1-22 下午2:25:29
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void toreply(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		PageBean pageBean = new  PageBean();
+		String dGIdStr = request.getParameter("dGId");
+		int dGId = Integer.parseInt(dGIdStr);
+		Goods goods = goodsService.getGoodsBygId(dGId);
+		request.setAttribute("goods", goods);
+		try {
+			int page = Integer.parseInt(request.getParameter("page"));
+			pageBean.setPage(page);
+		} catch (NumberFormatException e) {
+		}
+		pageBean.setRows(3);
+		pageBean.setRowsCount(discussService.getCountBygId(dGId));
+		pageBean.setPagesCount(pageBean.getRowsCount() % pageBean.getRows() == 0 ? pageBean
+				.getRowsCount() / pageBean.getRows()
+				: pageBean.getRowsCount() / pageBean.getRows() + 1);
+		List<Discuss> discussList = discussService.getAllDiscussInfoBydGId(
+				dGId,pageBean.getPage(), pageBean.getRows());
+		pageBean.setDateList(discussList);
+		request.setAttribute("discussList", discussList);
+		request.setAttribute("pageBean", pageBean);
+		request.setAttribute("dGId", dGId);
+		request.getRequestDispatcher("/WEB-INF/page/admin/main/showreply.jsp").forward(request, response);
+	}
+	/**
+	 *@author linlin
+	 *Create Time:2015-1-22 上午9:35:46
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void showreply(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		PageBean pageBean = new  PageBean();
+		try {
+			int page = Integer.parseInt(request.getParameter("page"));
+			pageBean.setPage(page);
+		} catch (NumberFormatException e) {
+		}
+		pageBean.setRowsCount(discussService.getdiscussCount());
+		pageBean.setPagesCount(pageBean.getRowsCount() % pageBean.getRows() == 0 ? pageBean
+				.getRowsCount() / pageBean.getRows()
+				: pageBean.getRowsCount() / pageBean.getRows() + 1);
+		List<Discuss> discusslist = discussService.getAllDiscussByPage(
+				pageBean.getPage(), pageBean.getRows());
+		pageBean.setDateList(discusslist);
+		request.setAttribute("discusslist", discusslist);
+		request.setAttribute("pageBean", pageBean);
+		for (Discuss discuss : discusslist) {
+			int gIdCount = discussService.getCountBygId(discuss.getGoods().getgId());
+			int DshCount = discussService.getCountByDsh(discuss.getGoods().getgId());
+			request.setAttribute("gIdCount", gIdCount);
+			request.setAttribute("DshCount", DshCount);
+		}
+		request.getRequestDispatcher("/WEB-INF/page/admin/main/reply.jsp").forward(request, response);
+	}
+}

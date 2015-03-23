@@ -1,0 +1,96 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.web;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.dyr.dao.service.CategoryService;
+import com.dyr.entity.Category;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.web
+ *FileName:CategoryServlet.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2015-1-13 上午10:38:41
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+public class CategoryServlet extends HttpServlet {
+	
+	private CategoryService categoryService = new CategoryService();
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doPost(request,response);
+	}
+
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String op = request.getParameter("op");
+		if("showCategory".equals(op)){
+			showCategory(request,response);
+		}else if("addnewCategory".equals(op)){
+			addnewCategory(request,response);
+		}else if("updateCategory".equals(op)){
+			updateCategory(request,response);
+		}
+	}
+
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-13 上午11:14:51
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 */
+	private void updateCategory(HttpServletRequest request,
+			HttpServletResponse response) {
+	}
+
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-13 上午11:12:23
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 */
+	private void addnewCategory(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+	}
+
+
+	/**
+	 *@author Casper
+	 *Create Time:2015-1-13 上午11:00:55
+	 *Description: 
+	 *@param request
+	 *@param response    
+	 */
+	private void showCategory(HttpServletRequest request,
+			HttpServletResponse response) {
+		List<Category> categorylist = categoryService.showCategory();
+		request.setAttribute("categorylist", categorylist);
+	}
+}

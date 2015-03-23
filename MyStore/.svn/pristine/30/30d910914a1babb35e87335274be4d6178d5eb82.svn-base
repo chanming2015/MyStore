@@ -1,0 +1,47 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+
+import com.dyr.entity.ImageGoods;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:ImageGoodsDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 下午4:01:48
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface ImageGoodsDao {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-4 下午4:04:53
+	 * Description 根据商品编号查询图片-商品集合
+	 * @param goodsId
+	 * @return
+	 */
+	@Select("select * from ImageGoods where ImageGId=#{goodsId}")
+	@Results({
+		@Result(column="ImageGId",property="goods",one=@One(select="com.dyr.dao.GoodsDao.selectGoodsInfoByGoodsId"))
+	})
+	List<ImageGoods> selectImageListByGoodsId(int goodsId);
+
+}

@@ -1,0 +1,145 @@
+/*
+*www.dyr.com
+*Copyright (c) 2014 All Rights Reserved.
+*/
+/**
+ * 
+ */
+package com.dyr.entity;
+
+import java.sql.Date;
+
+/**
+ *NewBlush
+ *Project:MyStore
+ *Package:com.dyr.entity
+ *FileName:Discuss.java
+ *Comments:
+ *JDK Version:
+ *Author:林林
+ *Create Date:2014-12-31 上午10:17:22
+ *Modified By:林林
+ *Modified Time:
+ *What is Modified:
+ *Version
+ */
+public class Discuss {
+	//留言id
+	private int dId;
+	//商品id
+	private int dGid;
+	//留言者姓名
+	private String dUname;
+	//留言内容
+	private String dBody;
+	//留言时间
+	private Date dTime;
+	//0未审核，1已审核
+	private int dSh;
+	//商品
+	private Goods goods;
+	//用户表
+	private UserInfo userInfo;
+	/**
+	 * @return the userInfo
+	 */
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+	/**
+	 * @param userInfo the userInfo to set
+	 */
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+	/**
+	 * @return the goods
+	 */
+	public Goods getGoods() {
+		return goods;
+	}
+	/**
+	 * @param goods the goods to set
+	 */
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+	/**
+	 * @return the dId
+	 */
+	public int getdId() {
+		return dId;
+	}
+	/**
+	 * @param dId the dId to set
+	 */
+	public void setdId(int dId) {
+		this.dId = dId;
+	}
+	/**
+	 * @return the dGid
+	 */
+	public int getdGid() {
+		return dGid;
+	}
+	/**
+	 * @param dGid the dGid to set
+	 */
+	public void setdGid(int dGid) {
+		this.dGid = dGid;
+	}
+	/**
+	 * @return the dUname
+	 */
+	public String getdUname() {
+		return dUname;
+	}
+	/**
+	 * @param dUname the dUname to set
+	 */
+	public void setdUname(String dUname) {
+		this.dUname = dUname;
+	}
+	/**
+	 * @return the dBody
+	 */
+	public String getdBody() {
+		return dBody;
+	}
+	/**
+	 * @param dBody the dBody to set
+	 */
+	public void setdBody(String dBody) {
+		this.dBody = dBody;
+	}
+	/**
+	 * @return the dTime
+	 */
+	public Date getdTime() {
+		return dTime;
+	}
+	/**
+	 * @param dTime the dTime to set
+	 */
+	public void setdTime(Date dTime) {
+		this.dTime = dTime;
+	}
+	/**
+	 * @return the dSh
+	 */
+	public int getdSh() {
+		return dSh;
+	}
+	/**
+	 * @param dSh the dSh to set
+	 */
+	public void setdSh(int dSh) {
+		this.dSh = dSh;
+	}
+	/**
+	 * 
+	 */
+	public Discuss() {
+	}
+	
+}

@@ -1,0 +1,55 @@
+#registDiv{
+	width: 1190px;
+	margin:0 auto;
+}
+.personRegForm{
+	margin:0 auto;
+}
+.registTitleDiv{
+	text-align: right;
+}
+.table{
+
+	width:800px;
+	margin:0 auto;
+}
+.xing{
+	color: #f40;
+}
+.title{
+	height: 36px;
+	width: 150px;
+	text-align:right;
+	line-height: 10px;
+	color: #aaaaaa;
+}
+.inputDiv{
+	height: 36px;
+	width: 282px;
+	line-height: 20px;
+	padding: 1px 20px
+}
+.trDiv{
+	padding: 0px 25px;
+}
+.dryiv{
+	height: 20px;
+}
+.botteotd{
+padding:0px 150px;
+}
+.tdbutton{
+	width: 282px;
+	height: 36px;
+	font-size:20px;
+	font-family:"Î¢ÈíºÚÌå";
+	background-color: #f40;
+}
+
+input.error {
+	border: 1px red solid;
+}
+label.error{
+	color: red;
+}
+

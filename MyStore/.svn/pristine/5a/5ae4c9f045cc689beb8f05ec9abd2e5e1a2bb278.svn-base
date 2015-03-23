@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name></display-name>
+  <listener>
+  <listener-class>com.dyr.listener.MyListener</listener-class>
+  </listener>
+  
+  <filter>
+  <filter-name>EncodingFilter</filter-name>
+  <filter-class>com.dyr.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter>
+  <filter-name>UserLoginedFilter</filter-name>
+  <filter-class>com.dyr.filter.UserLoginedFilter</filter-class>
+  </filter>
+  <filter>
+  <filter-name>AdminLoginedFilter</filter-name>
+  <filter-class>com.dyr.filter.AdminLoginedFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  <filter-name>EncodingFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  <filter-name>UserLoginedFilter</filter-name>
+  <url-pattern>/UserLogined/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  <filter-name>AdminLoginedFilter</filter-name>
+  <url-pattern>/AdminLogined/*</url-pattern>
+  </filter-mapping>
+  
+   <servlet>
+    <servlet-name>ImageServlet</servlet-name>
+    <servlet-class>com.dyr.web.ImageServlet</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>ImageServlet</servlet-name>
+    <url-pattern>/ImageServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoginedOrderServlet</servlet-name>
+    <servlet-class>com.dyr.web.LoginedOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginedOrderServlet</servlet-name>
+    <url-pattern>/UserLogined/LoginedOrderServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>UserGoodsServlet</servlet-name>
+    <servlet-class>com.dyr.web.UserGoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserGoodsServlet</servlet-name>
+    <url-pattern>/UserGoodsServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>UserInfoServlet</servlet-name>
+    <servlet-class>com.dyr.web.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserInfoServlet</servlet-name>
+    <url-pattern>/UserInfoServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoginedAdminGoodsServlet</servlet-name>
+    <servlet-class>com.dyr.web.logined.LoginedAdminGoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginedAdminGoodsServlet</servlet-name>
+    <url-pattern>/AdminLogined/LoginedAdminGoodsServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoginedCartServlet</servlet-name>
+    <servlet-class>com.dyr.web.logined.LoginedCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>LoginedCartServlet</servlet-name>
+    <url-pattern>/UserLogined/LoginedCartServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoginedCategoryServlet</servlet-name>
+    <servlet-class>com.dyr.web.logined.LoginedCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginedCategoryServlet</servlet-name>
+    <url-pattern>/AdminLogined/LoginedCategoryServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoginedUserServlet</servlet-name>
+    <servlet-class>com.dyr.web.logined.LoginedUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LoginedadminServlet</servlet-name>
+    <servlet-class>com.dyr.web.logined.LoginedadminServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>LoginedUserServlet</servlet-name>
+    <url-pattern>/UserLogined/LoginedUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginedadminServlet</servlet-name>
+    <url-pattern>/AdminLogined/LoginedadminServlet</url-pattern>
+  </servlet-mapping>	
+  
+  
+  <welcome-file-list>
+    <welcome-file>UserInfoServlet</welcome-file>
+  </welcome-file-list>
+</web-app>

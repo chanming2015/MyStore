@@ -1,0 +1,88 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.entity
+ * FileName:GoodsIamgeList.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-27 上午10:10:46
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Description: 商品-图片集前台显示实体
+ * Version:
+ */
+public class GoodsIamgeList {
+	
+	/**
+	 * 图片所属商品对象
+	 */
+	private Goods goods;
+	/**
+	 * 图片编号集合
+	 */
+	private List<Integer> imageIdList;
+	/**
+	 * 图片名称集合
+	 */
+	private List<String> imageNameList;
+	/**
+	 * 图片路径集合
+	 */
+	private List<String> imagePathList;
+	/**
+	 * Project:MyStore
+	 * Package:com.dyr.entity
+	 * FileName:GoodsIamgeList.java
+	 * Comments:
+	 * JDK Version:
+	 * Author XuMaoSen
+	 * Create Date:2015-1-27 上午10:16:10
+	 * Modified By:XuMaoSen
+	 * Modified Time:
+	 * What is Modified:
+	 * Version:
+	 */
+	public GoodsIamgeList(Goods goods) {
+		this.goods=goods;
+		this.imageIdList=new ArrayList<Integer>();
+		this.imageNameList=new ArrayList<String>();
+		this.imagePathList=new ArrayList<String>();
+	}
+	public Goods getGoods() {
+		return goods;
+	}
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+	public List<Integer> getImageIdList() {
+		return imageIdList;
+	}
+	public void setImageIdList(List<Integer> imageIdList) {
+		this.imageIdList = imageIdList;
+	}
+	public List<String> getImageNameList() {
+		return imageNameList;
+	}
+	public void setImageNameList(List<String> imageNameList) {
+		this.imageNameList = imageNameList;
+	}
+	public List<String> getImagePathList() {
+		return imagePathList;
+	}
+	public void setImagePathList(List<String> imagePathList) {
+		this.imagePathList = imagePathList;
+	}
+}

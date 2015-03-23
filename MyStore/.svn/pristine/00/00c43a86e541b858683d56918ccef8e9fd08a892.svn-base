@@ -1,0 +1,49 @@
+/*
+ *www.dyr.com
+ *Copyright (c) 2014 All Rights Reserved
+ */
+/**
+ * Author XuMaoSen
+ */
+package com.dyr.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+
+import com.dyr.entity.ProductCart;
+
+/**
+ * Project:MyStore
+ * Package:com.dyr.dao
+ * FileName:ProductCartDao.java
+ * Comments:
+ * JDK Version:
+ * Author XuMaoSen
+ * Create Date:2015-1-4 上午9:23:44
+ * Modified By:XuMaoSen
+ * Modified Time:
+ * What is Modified:
+ * Version:
+ */
+public interface ProductCartDao {
+
+	/**
+	 * @author XuMaoSen
+	 * Create Time:2015-1-19 下午4:17:46
+	 * Description
+	 * @param cartId
+	 * @return
+	 */
+	@Select("select * from ProductCart where PVId =#{cartId}")
+	@Results({
+		@Result(column="PVId",property="vipCart",one=@One(select="com.dyr.dao.VipCartDao.selectCartByCartId")),
+		@Result(column="PGId",property="goods",one=@One(select="com.dyr.dao.GoodsDao.selectGoodsInfoByGoodsId"))
+	})
+	List<ProductCart> selectProductsListByCartId(int cartId);
+	
+	
+}
